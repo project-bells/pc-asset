@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950 text-slate-100">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Enterprise IT Asset Management & PM Portal</title>
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- HTML5 QR Code Scanner Library -->
+  <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    .sig-canvas { touch-action: none; }
+  </style>
+</head>
+<body class="h-full flex flex-col font-sans antialiased overflow-x-hidden">
+
+  <!-- ========================================================================= -->
+  <!-- Top Navigation Header                                                     -->
+  <!-- ========================================================================= -->
+  <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Brand & Title -->
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+            <i data-lucide="shield-check" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <h1 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
+              IT Asset Portal
+              <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">v1.0.0</span>
+            </h1>
+            <p class="text-xs text-slate-400 hidden sm:block">Annual Stocktake, Telemetry & Preventive Maintenance</p>
+          </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="flex space-x-1 sm:space-x-2">
+          <button onclick="switchTab('dashboard')" id="tab-btn-dashboard" class="nav-tab px-3 py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-colors bg-indigo-600 text-white">
+            <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+            <span class="hidden md:inline">Dashboard</span>
+          </button>
+          <button onclick="switchTab('assets')" id="tab-btn-assets" class="nav-tab px-3 py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-colors text-slate-400 hover:text-white hover:bg-slate-800">
+            <i data-lucide="server" class="w-4 h-4"></i>
+            <span class="hidden md:inline">Assets</span>
+          </button>
+          <button onclick="switchTab('audit')" id="tab-btn-audit" class="nav-tab px-3 py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-colors text-slate-400 hover:text-white hover:bg-slate-800">
+            <i data-lucide="qr-code" class="w-4 h-4"></i>
+            <span class="hidden md:inline">QR Audit Scan</span>
+          </button>
+          <button onclick="switchTab('pm')" id="tab-btn-pm" class="nav-tab px-3 py-2 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-colors text-slate-400 hover:text-white hover:bg-slate-800">
+            <i data-lucide="wrench" class="w-4 h-4"></i>
+            <span class="hidden md:inline">PM Form</span>
+          </button>
+        </nav>
+
+        <!-- Role Badge & Session Indicator -->
+        <div class="hidden sm:flex items-center space-x-3 text-xs">
+          <div class="flex items-center space-x-1.5 px-2.5 py-1 rounded-md bg-slate-800 border border-slate-700 text-slate-300">
+            <i data-lucide="user-check" class="w-3.5 h-3.5 text-indigo-400"></i>
+            <span>Role: <strong class="text-white">IT Administrator</strong></span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- Main Content Container                                                    -->
+  <!-- ========================================================================= -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+    <!-- TAB 1: EXECUTIVE DASHBOARD & PRIORITY REPORTS -->
+    <div id="tab-dashboard" class="tab-pane space-y-6">
+      
+      <!-- KPI Metric Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+          <div class="flex items-center justify-between text-slate-400 text-xs font-medium">
+            <span>Total Endpoints</span>
+            <i data-lucide="cpu" class="w-4 h-4 text-slate-500"></i>
+          </div>
+          <div class="mt-2 text-2xl font-bold text-white" id="kpi-total-assets">-</div>
+          <div class="text-[11px] text-slate-400 mt-1 flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+            Active Agent Monitoring
+          </div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+          <div class="flex items-center justify-between text-amber-400 text-xs font-medium">
+            <span>PM Priority Queue</span>
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+          </div>
+          <div class="mt-2 text-2xl font-bold text-amber-400" id="kpi-pm-queue">-</div>
+          <div class="text-[11px] text-slate-400 mt-1">SMART degraded / Disk &lt; 15%</div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+          <div class="flex items-center justify-between text-rose-400 text-xs font-medium">
+            <span>Critical Hardware Tamper</span>
+            <i data-lucide="shield-alert" class="w-4 h-4 text-rose-400"></i>
+          </div>
+          <div class="mt-2 text-2xl font-bold text-rose-400" id="kpi-tamper-count">-</div>
+          <div class="text-[11px] text-slate-400 mt-1">RAM/Monitor/Serial drift</div>
+        </div>
+
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-sm">
+          <div class="flex items-center justify-between text-indigo-400 text-xs font-medium">
+            <span>Audit Unverified</span>
+            <i data-lucide="clipboard-check" class="w-4 h-4 text-indigo-400"></i>
+          </div>
+          <div class="mt-2 text-2xl font-bold text-indigo-400" id="kpi-unverified-audit">-</div>
+          <div class="text-[11px] text-slate-400 mt-1">Pending physical QR scan</div>
+        </div>
+      </div>
+
+      <!-- Critical Tamper Alerts Table -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="shield-alert" class="w-4 h-4 text-rose-400"></i>
+            <h2 class="text-sm font-semibold text-white">Critical Hardware & Tamper Detection Trail</h2>
+          </div>
+          <span class="text-xs text-slate-400">Real-time anti-theft & swap logs</span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/60 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3">Detected At</th>
+                <th class="px-4 py-3">Severity</th>
+                <th class="px-4 py-3">Change Event</th>
+                <th class="px-4 py-3">Hostname / Asset</th>
+                <th class="px-4 py-3">Old Specification</th>
+                <th class="px-4 py-3">New Specification</th>
+                <th class="px-4 py-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tamper-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+              <tr><td colspan="7" class="px-4 py-6 text-center text-slate-500">Loading tamper change logs...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Preventive Maintenance Priority Queue Table -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+          <div class="flex items-center space-x-2">
+            <i data-lucide="wrench" class="w-4 h-4 text-amber-400"></i>
+            <h2 class="text-sm font-semibold text-white">Preventive Maintenance (PM) Priority Queue</h2>
+          </div>
+          <span class="text-xs text-slate-400">Generated from <code>vw_pm_priority_queue</code></span>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/60 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3">Hostname / Tag</th>
+                <th class="px-4 py-3">Location</th>
+                <th class="px-4 py-3">Assigned User</th>
+                <th class="px-4 py-3">IP Address</th>
+                <th class="px-4 py-3">Uptime</th>
+                <th class="px-4 py-3">Urgent Maintenance Trigger Reasons</th>
+                <th class="px-4 py-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody id="pm-queue-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+              <tr><td colspan="7" class="px-4 py-6 text-center text-slate-500">Loading priority queue...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TAB 2: ASSET MANAGEMENT & BINDING -->
+    <div id="tab-assets" class="tab-pane hidden space-y-6">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-base font-bold text-white">Managed Asset Inventory</h2>
+          <p class="text-xs text-slate-400">All registered and newly discovered Windows Agent workstations</p>
+        </div>
+        <div class="flex items-center space-x-2">
+          <input type="text" id="asset-search" oninput="debounceSearch()" placeholder="Search hostname, tag, serial, user..." class="bg-slate-900 border border-slate-700 text-xs text-white rounded-lg px-3 py-2 w-64 focus:outline-none focus:border-indigo-500">
+          <select id="asset-status-filter" onchange="loadAssets()" class="bg-slate-900 border border-slate-700 text-xs text-white rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500">
+            <option value="">All Statuses</option>
+            <option value="Unregistered">Unregistered</option>
+            <option value="Active">Active</option>
+            <option value="Repair">Repair</option>
+            <option value="Retired">Retired</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-950/60 text-slate-400 uppercase tracking-wider font-semibold border-b border-slate-800">
+              <tr>
+                <th class="px-4 py-3">Asset Tag</th>
+                <th class="px-4 py-3">Status</th>
+                <th class="px-4 py-3">Hostname</th>
+                <th class="px-4 py-3">Manufacturer / Model</th>
+                <th class="px-4 py-3">Serial Number</th>
+                <th class="px-4 py-3">Assigned User</th>
+                <th class="px-4 py-3">Location</th>
+                <th class="px-4 py-3">Last Seen</th>
+                <th class="px-4 py-3 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="assets-table-body" class="divide-y divide-slate-800/60 text-slate-300">
+              <tr><td colspan="9" class="px-4 py-6 text-center text-slate-500">Loading assets...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: MOBILE QR CODE SCANNER & ANNUAL AUDIT -->
+    <div id="tab-audit" class="tab-pane hidden space-y-6">
+      <div class="max-w-2xl mx-auto space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="qr-code" class="w-5 h-5 text-indigo-400"></i>
+            Physical Audit & QR Code Scanner
+          </h2>
+          <p class="text-xs text-slate-400">Point phone camera at asset sticker to verify location & inventory</p>
+        </div>
+
+        <!-- Camera Scanner Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
+          <div id="qr-reader" class="overflow-hidden rounded-lg bg-slate-950 border border-slate-800 min-h-[240px] flex items-center justify-center text-slate-500 text-xs">
+            <span>Camera viewfinder will appear here...</span>
+          </div>
+          <div class="flex gap-2">
+            <button onclick="startCameraScanner()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold py-2 px-3 rounded-lg flex items-center justify-center gap-2">
+              <i data-lucide="camera" class="w-4 h-4"></i>
+              Start Camera Scanner
+            </button>
+            <button onclick="stopCameraScanner()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 px-3 rounded-lg">
+              Stop
+            </button>
+          </div>
+          <!-- Manual Token Fallback -->
+          <div class="pt-2 border-t border-slate-800 flex gap-2">
+            <input type="text" id="manual-qr-input" placeholder="Or enter QR Token manually (e.g. 70658300...)" class="flex-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2 focus:outline-none focus:border-indigo-500">
+            <button onclick="lookupQrToken(document.getElementById('manual-qr-input').value)" class="bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-lg">
+              Lookup
+            </button>
+          </div>
+        </div>
+
+        <!-- Scanned Asset Result Panel -->
+        <div id="audit-result-panel" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <div class="flex items-start justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span id="audit-asset-status-badge" class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-emerald-500/20 text-emerald-400 uppercase">Active</span>
+              <h3 id="audit-asset-tag" class="text-base font-bold text-white mt-1">AST-2026-001</h3>
+              <p id="audit-asset-hostname" class="text-xs text-slate-400">DESKTOP-LENOVO</p>
+            </div>
+            <div id="audit-online-indicator" class="flex items-center gap-1.5 text-xs text-emerald-400">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Online Now
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div>
+              <span class="text-slate-400">Registered Location:</span>
+              <p id="audit-reg-location" class="font-medium text-white">Tower A, 4th Floor (IT Ops)</p>
+            </div>
+            <div>
+              <span class="text-slate-400">Assigned User:</span>
+              <p id="audit-assigned-user" class="font-medium text-white">Jane Doe</p>
+            </div>
+            <div>
+              <span class="text-slate-400">Serial Number:</span>
+              <p id="audit-serial-number" class="font-medium text-white">GM119Q7N</p>
+            </div>
+            <div>
+              <span class="text-slate-400">Monitors Connected:</span>
+              <p id="audit-monitors" class="font-medium text-white">LEN TCM-G5-BA (S/N: 1)</p>
+            </div>
+          </div>
+
+          <!-- Audit Action Form -->
+          <div class="pt-3 border-t border-slate-800 space-y-3">
+            <h4 class="text-xs font-semibold text-white">Physical Verification Confirmation</h4>
+            <div>
+              <label class="text-[11px] text-slate-400">Current Verified Location Room:</label>
+              <select id="audit-verify-location" class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+                <option value="">Select current inspected room...</option>
+              </select>
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Discrepancy Notes (Optional):</label>
+              <input type="text" id="audit-notes" placeholder="e.g. Found in meeting room instead of office..." class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+            </div>
+            <button onclick="submitAuditVerification()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2.5 rounded-lg flex items-center justify-center gap-2">
+              <i data-lucide="check-circle" class="w-4 h-4"></i>
+              Confirm Physical Audit Inspection
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: SMART PREVENTIVE MAINTENANCE (PM) WORKFLOW -->
+    <div id="tab-pm" class="tab-pane hidden space-y-6">
+      <div class="max-w-3xl mx-auto space-y-6">
+        <div>
+          <h2 class="text-base font-bold text-white flex items-center gap-2">
+            <i data-lucide="wrench" class="w-5 h-5 text-indigo-400"></i>
+            Preventive Maintenance (PM) Checklist & Digital Sign-off
+          </h2>
+          <p class="text-xs text-slate-400">Auto-prefilled with live Windows Agent diagnostics metrics</p>
+        </div>
+
+        <!-- Asset Selection for PM -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex gap-3 items-end">
+          <div class="flex-1">
+            <label class="text-xs text-slate-400 font-medium">Select Target Workstation to Service:</label>
+            <select id="pm-asset-selector" onchange="loadPmPreFill(this.value)" class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+              <option value="">Choose asset...</option>
+            </select>
+          </div>
+          <button onclick="loadPmPreFill(document.getElementById('pm-asset-selector').value)" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-4 py-2 rounded-lg">
+            Fetch Live Metrics
+          </button>
+        </div>
+
+        <!-- Live Diagnostics Card -->
+        <div id="pm-diagnostics-card" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <h3 class="text-xs font-semibold text-white flex items-center gap-2">
+              <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
+              Live Windows Agent Health Metrics (Auto-Captured)
+            </h3>
+            <span class="text-[11px] text-emerald-400">Verified via Agent</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
+              <span class="text-slate-400 text-[11px]">CPU & RAM</span>
+              <p id="pm-diag-cpu-ram" class="font-bold text-white mt-0.5">-</p>
+            </div>
+            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
+              <span class="text-slate-400 text-[11px]">Disk S.M.A.R.T.</span>
+              <p id="pm-diag-smart" class="font-bold text-emerald-400 mt-0.5">Healthy</p>
+            </div>
+            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
+              <span class="text-slate-400 text-[11px]">LAN Link Speed</span>
+              <p id="pm-diag-lan" class="font-bold text-white mt-0.5">1000 Mbps (Gigabit)</p>
+            </div>
+            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800">
+              <span class="text-slate-400 text-[11px]">System Uptime</span>
+              <p id="pm-diag-uptime" class="font-bold text-white mt-0.5">-</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Physical Maintenance Checklist -->
+        <div id="pm-checklist-card" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
+          <h3 class="text-xs font-semibold text-white">Physical Maintenance Checklist</h3>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <label class="flex items-center space-x-2.5 bg-slate-950/50 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <input type="checkbox" id="chk-fan" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
+              <span>Clean Case Dust & CPU Cooling Fan</span>
+            </label>
+            <label class="flex items-center space-x-2.5 bg-slate-950/50 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <input type="checkbox" id="chk-lan" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
+              <span>Inspect LAN Cable & RJ45 Connector</span>
+            </label>
+            <label class="flex items-center space-x-2.5 bg-slate-950/50 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <input type="checkbox" id="chk-ups" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
+              <span>Test UPS Battery Backup Retention</span>
+            </label>
+            <label class="flex items-center space-x-2.5 bg-slate-950/50 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <input type="checkbox" id="chk-monitor" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
+              <span>Clean Display Screen & Keyboards</span>
+            </label>
+            <label class="flex items-center space-x-2.5 bg-slate-950/50 p-2.5 rounded-lg border border-slate-800 cursor-pointer sm:col-span-2">
+              <input type="checkbox" id="chk-cables" class="rounded bg-slate-800 border-slate-700 text-indigo-600 focus:ring-0">
+              <span>Organize Cable Management & Power Sockets</span>
+            </label>
+          </div>
+
+          <div class="space-y-3 pt-2">
+            <div>
+              <label class="text-[11px] text-slate-400">Issues Found During Service:</label>
+              <textarea id="pm-issues" rows="2" placeholder="e.g. Case fan noisy, power cord slightly frayed..." class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg p-2.5"></textarea>
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Resolution & Corrective Actions:</label>
+              <textarea id="pm-resolution" rows="2" placeholder="e.g. Replaced RJ45 patch cord, dusted heatsink..." class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg p-2.5"></textarea>
+            </div>
+            <div>
+              <label class="text-[11px] text-slate-400">Overall PM Evaluation Result:</label>
+              <select id="pm-overall-result" class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2 font-semibold">
+                <option value="Pass">Pass - Workstation in Excellent Health</option>
+                <option value="Pass_With_Minor_Issue">Pass With Minor Issue</option>
+                <option value="Needs_Repair">Needs Repair / Parts Replacement Required</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- HTML5 Digital Signature Pad -->
+          <div class="pt-3 border-t border-slate-800 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-semibold text-white">Employee Digital Sign-off Signature:</label>
+              <button onclick="clearSignature()" class="text-[11px] text-rose-400 hover:text-rose-300">Clear Signature</button>
+            </div>
+            <div class="border border-slate-700 rounded-lg bg-white overflow-hidden">
+              <canvas id="signature-pad" class="sig-canvas w-full h-32 block bg-white cursor-crosshair"></canvas>
+            </div>
+            <input type="text" id="pm-signoff-name" placeholder="Employee Full Name..." class="w-full bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+          </div>
+
+          <button onclick="submitPmRecord()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold py-2.5 rounded-lg flex items-center justify-center gap-2">
+            <i data-lucide="check" class="w-4 h-4"></i>
+            Submit PM Record & Freeze Health Snapshot
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- Modals: Asset Binding & Print QR Sticker                                  -->
+  <!-- ========================================================================= -->
+
+  <!-- Bind Asset Modal -->
+  <div id="modal-bind" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl max-w-md w-full p-6 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="text-sm font-bold text-white flex items-center gap-2">
+          <i data-lucide="tag" class="w-4 h-4 text-indigo-400"></i>
+          Bind & Register Workstation
+        </h3>
+        <button onclick="closeModal('modal-bind')" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+
+      <input type="hidden" id="bind-asset-id">
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="text-slate-400">Discovered Hostname:</label>
+          <p id="bind-hostname" class="font-bold text-white">DESKTOP-XXX</p>
+        </div>
+        <div>
+          <label class="text-slate-400">Asset Tag ID (Barcode/Sticker): *</label>
+          <input type="text" id="bind-asset-tag" placeholder="e.g. AST-2026-0042" class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+        </div>
+        <div>
+          <label class="text-slate-400">Assigned Department / Location: *</label>
+          <select id="bind-location-id" class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+            <option value="">Select location room...</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-slate-400">Assigned Employee User:</label>
+          <input type="text" id="bind-assigned-user" placeholder="e.g. meetingroom" class="w-full mt-1 bg-slate-950 border border-slate-800 text-xs text-white rounded-lg px-3 py-2">
+        </div>
+      </div>
+
+      <div class="flex gap-2 pt-2">
+        <button onclick="closeModal('modal-bind')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 rounded-lg">Cancel</button>
+        <button onclick="submitAssetBinding()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold py-2 rounded-lg">Save & Activate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Sticker Printable Modal -->
+  <div id="modal-qr" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-xl max-w-sm w-full p-6 text-center space-y-4">
+      <h3 class="text-sm font-bold text-white">Asset QR Code Label</h3>
+      <!-- Printable Sticker Box -->
+      <div id="printable-sticker" class="bg-white text-slate-950 p-4 rounded-lg border-2 border-dashed border-slate-400 space-y-2">
+        <div class="text-[10px] uppercase font-black tracking-widest text-indigo-700">Enterprise IT Assets</div>
+        <div id="qr-code-display" class="flex justify-center p-2 bg-white">
+          <!-- QR image generated via public API for demonstration -->
+          <img id="qr-img" src="" alt="QR" class="w-32 h-32 mx-auto">
+        </div>
+        <div id="sticker-tag" class="text-sm font-black tracking-tight">AST-2026-0001</div>
+        <div id="sticker-host-serial" class="text-[10px] text-slate-600 font-mono">B1F601 | S/N: GM119Q7N</div>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="closeModal('modal-qr')" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 rounded-lg">Close</button>
+        <button onclick="window.print()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold py-2 rounded-lg flex items-center justify-center gap-1.5">
+          <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+          Print Label
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
+

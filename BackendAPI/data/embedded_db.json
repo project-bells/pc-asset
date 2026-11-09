@@ -1,0 +1,991 @@
+{
+  "departments": [
+    {
+      "id": "dept-01",
+      "code": "IT",
+      "name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+    },
+    {
+      "id": "dept-02",
+      "code": "FIN",
+      "name": "แผนกการเงินและบัญชี (Finance & Accounting)"
+    },
+    {
+      "id": "dept-03",
+      "code": "OPD",
+      "name": "แผนกผู้ป่วยนอก (OPD Clinic)"
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc-b1f6-01",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
+      "department_id": "dept-01",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+    },
+    {
+      "id": "loc-b1f6-02",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ศูนย์ควบคุมระบบ IT (NOC Room B1F602)",
+      "department_id": "dept-01",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+    },
+    {
+      "id": "loc-b1f1-01",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 1",
+      "room_name": "แผนกต้อนรับส่วนหน้า (Main Lobby B1F101)",
+      "department_id": "dept-03",
+      "department_name": "แผนกผู้ป่วยนอก (OPD Clinic)"
+    }
+  ],
+  "assets": [
+    {
+      "id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "asset_tag": "AIK-WS-2567-001",
+      "status": "Active",
+      "location_id": "loc-b1f6-01",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)",
+      "assigned_user": "AIKCHOL1\\meetingroom",
+      "purchase_date": "2024-05-15",
+      "warranty_expiry_date": "2027-05-15",
+      "qr_code_token": "QR-B1F601-GM119Q7N",
+      "hardware_uuid": "70658300-54B5-11F0-8AA1-445EB2A83C00",
+      "hostname": "B1F601",
+      "pc_serial_number": "GM119Q7N",
+      "manufacturer": "LENOVO",
+      "model": "12SKS3QV00",
+      "os_name": "Microsoft Windows 11 Pro",
+      "os_build": "26200",
+      "last_logged_in_user": "AIKCHOL1\\meetingroom",
+      "cpu_name": "Intel(R) Core(TM) i5-14400",
+      "cpu_cores": 10,
+      "ram_total_gb": 16,
+      "ip_address": "192.168.27.145",
+      "mac_address": "18:3D:2D:2D:3C:99",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-09T07:56:39.593Z",
+      "monitors_json": [
+        {
+          "manufacturer": "LEN",
+          "model": "LEN TCM-G5-BA",
+          "serialNumber": "1"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "fileSystem": "NTFS",
+          "totalSizeGb": 474.72,
+          "freeSpaceGb": 372.14
+        },
+        {
+          "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
+          "serialNumber": "E823_8FA6_BF53_0001_001B_448B_4D3D_EC1F.",
+          "mediaType": "SSD",
+          "healthStatus": "Healthy",
+          "operationalStatus": "OK"
+        }
+      ],
+      "edr_info_json": {
+        "installed": true,
+        "productName": "ESET Endpoint Antivirus / Security",
+        "engineVersion": "13.1.2036.0",
+        "realtimeProtection": true
+      },
+      "installed_software_json": [
+        {
+          "name": "7-Zip 23.01 (x64)",
+          "version": "23.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Adobe Acrobat (64-bit)",
+          "version": "26.003.22075",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "Copilot",
+          "version": "152.0.4191.34",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "ESET Endpoint Antivirus",
+          "version": "13.1.2036.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "ESET Management Agent",
+          "version": "13.2.1189.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "Foxit Reader",
+          "version": "7.3.0.118",
+          "publisher": "Foxit Software Inc."
+        },
+        {
+          "name": "Google Chrome",
+          "version": "156.0.8078.80",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Intel(R) Integrated Sensor Solution",
+          "version": "3.10.100.4594",
+          "publisher": "Intel Corporation"
+        },
+        {
+          "name": "Lenovo Smart Meeting",
+          "version": "4.2.0.0908",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Speech",
+          "version": "2.1.0.90",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Vantage Service",
+          "version": "5.1.2606.17",
+          "publisher": "Lenovo Group Ltd."
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "151.0.4129.93",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Office Professional Plus 2013",
+          "version": "15.0.4420.1017",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Power Query for Excel (x64)",
+          "version": "2.62.5222.701",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Mozilla Firefox (x64 en-US)",
+          "version": "151.0.1",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Mozilla Maintenance Service",
+          "version": "140.0.4",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Notepad++ (64-bit x64)",
+          "version": "8.7.3",
+          "publisher": "Notepad++ Team"
+        },
+        {
+          "name": "PDF24 Creator 11.13.1",
+          "version": "11.13.1",
+          "publisher": "PDF24.org"
+        },
+        {
+          "name": "Realtek Audio Driver",
+          "version": "6.0.9573.1",
+          "publisher": "Realtek Semiconductor Corp."
+        },
+        {
+          "name": "Synology Chat 1.2.3-232",
+          "version": "1.2.3-232",
+          "publisher": "Synology"
+        },
+        {
+          "name": "UltraVNC 1.0.8.2",
+          "version": "1.0.8.2",
+          "publisher": "1.0.8.2"
+        }
+      ],
+      "created_at": "2024-05-15T08:00:00Z",
+      "updated_at": "2026-11-09T07:56:39.593Z"
+    },
+    {
+      "id": "70658300-54b5-11f0-8aa1-445eb2a83c02",
+      "asset_tag": "AIK-WS-2567-002",
+      "status": "Active",
+      "location_id": "loc-b1f6-02",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ศูนย์ควบคุมระบบ IT (NOC Room B1F602)",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)",
+      "assigned_user": "AIKCHOL1\\it-admin",
+      "purchase_date": "2024-05-15",
+      "warranty_expiry_date": "2027-05-15",
+      "qr_code_token": "QR-B1F602-GM119Q8A",
+      "hardware_uuid": "70658300-54B5-11F0-8AA1-445EB2A83C02",
+      "hostname": "B1F602-ITNOC",
+      "pc_serial_number": "GM119Q8A",
+      "manufacturer": "LENOVO",
+      "model": "12SKS3QV00 (ThinkCentre Neo 50s Gen 4)",
+      "os_name": "Microsoft Windows 11 Pro",
+      "os_build": "26200",
+      "last_logged_in_user": "AIKCHOL1\\it-admin",
+      "cpu_name": "Intel(R) Core(TM) i5-14400",
+      "cpu_cores": 10,
+      "ram_total_gb": 16,
+      "ip_address": "192.168.27.146",
+      "mac_address": "18:3D:2D:2D:3C:9A",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-09T06:56:33.291Z",
+      "monitors_json": [
+        {
+          "manufacturer": "DELL",
+          "model": "P2422H",
+          "serialNumber": "CN-0N9F7D-74261"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "model": "WD PC SN740 512GB",
+          "totalGb": 475,
+          "freeGb": 290,
+          "freePercent": 61,
+          "smartStatus": "Healthy"
+        }
+      ],
+      "edr_info_json": {
+        "installed": true,
+        "productName": "ESET Endpoint Antivirus",
+        "realtimeProtection": true
+      },
+      "installed_software_json": [
+        {
+          "name": "Google Chrome",
+          "version": "156.0.8078.80",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Notepad++",
+          "version": "8.7.3",
+          "publisher": "Notepad++ Team"
+        }
+      ],
+      "created_at": "2024-05-15T08:00:00Z",
+      "updated_at": "2026-11-09T07:01:33.291Z"
+    },
+    {
+      "id": "70658300-54b5-11f0-8aa1-445eb2a83c99",
+      "asset_tag": null,
+      "status": "Unregistered",
+      "location_id": "loc-b1f1-01",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 1",
+      "room_name": "แผนกต้อนรับส่วนหน้า (Main Lobby B1F101)",
+      "department_name": "แผนกผู้ป่วยนอก (OPD Clinic)",
+      "assigned_user": "AIKCHOL1\\reception",
+      "purchase_date": null,
+      "warranty_expiry_date": null,
+      "qr_code_token": "QR-B1F101-NEW",
+      "hardware_uuid": "A1B2C3D4-E5F6-7890-ABCD-EF0123456789",
+      "hostname": "B1F101-RECEPT",
+      "pc_serial_number": "MJ0911XA",
+      "manufacturer": "HP",
+      "model": "HP ProDesk 400 G7 SFF",
+      "os_name": "Microsoft Windows 11 Pro",
+      "os_build": "22631.3007",
+      "last_logged_in_user": "AIKCHOL1\\reception",
+      "cpu_name": "12th Gen Intel(R) Core(TM) i5-12500",
+      "cpu_cores": 6,
+      "ram_total_gb": 16,
+      "ip_address": "192.168.27.188",
+      "mac_address": "70:85:C2:55:12:34",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-09T06:49:33.291Z",
+      "monitors_json": [
+        {
+          "manufacturer": "HP",
+          "model": "HP E24 G4",
+          "serialNumber": "CN41290XYZ"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "model": "KIOXIA NVMe 256GB",
+          "totalGb": 256,
+          "freeGb": 198,
+          "freePercent": 77,
+          "smartStatus": "Healthy"
+        }
+      ],
+      "edr_info_json": {
+        "installed": true,
+        "productName": "ESET Endpoint Antivirus",
+        "realtimeProtection": true
+      },
+      "installed_software_json": [
+        {
+          "name": "Google Chrome",
+          "version": "122.0.6261.129",
+          "publisher": "Google LLC"
+        }
+      ],
+      "created_at": "2026-11-09T06:01:33.291Z",
+      "updated_at": "2026-11-09T07:01:33.291Z"
+    },
+    {
+      "id": "62146880-54AF-11F0-8DD7-E8DB50E52E00",
+      "asset_tag": "IT-PC-69-002",
+      "status": "Active",
+      "location_id": "loc-b1f6-01",
+      "assigned_user": "AIKCHOL1\\MeetingRoom",
+      "purchase_date": "2026-11-09",
+      "warranty_expiry_date": "2029-11-09",
+      "qr_code_token": "QR-IT02-mw8z17ei",
+      "hardware_uuid": "62146880-54AF-11F0-8DD7-E8DB50E52E00",
+      "hostname": "IT02",
+      "pc_serial_number": "GM119Q5J",
+      "manufacturer": "LENOVO",
+      "model": "12SKS3QV00",
+      "os_name": "Microsoft Windows 11 Pro",
+      "os_build": "26200",
+      "last_logged_in_user": "AIKCHOL1\\MeetingRoom",
+      "cpu_name": "Intel(R) Core(TM) i5-14400",
+      "cpu_cores": 10,
+      "ram_total_gb": 15.64,
+      "ip_address": "192.168.27.146",
+      "mac_address": "18:3D:2D:4E:6C:32",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-09T08:01:40.425Z",
+      "monitors_json": [
+        {
+          "manufacturer": "LEN",
+          "model": "LEN TCM-G5-BA",
+          "serialNumber": "1"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "fileSystem": "NTFS",
+          "totalSizeGb": 474.72,
+          "freeSpaceGb": 366.02
+        },
+        {
+          "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
+          "serialNumber": "E823_8FA6_BF53_0001_001B_448B_4D3D_B018.",
+          "mediaType": "SSD",
+          "healthStatus": "Healthy",
+          "operationalStatus": "OK"
+        }
+      ],
+      "installed_software_json": [
+        {
+          "name": "7-Zip 23.01 (x64)",
+          "version": "23.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Adobe Acrobat (64-bit)",
+          "version": "26.003.22075",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "CMake",
+          "version": "4.4.5",
+          "publisher": "Kitware"
+        },
+        {
+          "name": "Foxit Reader",
+          "version": "7.3.0.118",
+          "publisher": "Foxit Software Inc."
+        },
+        {
+          "name": "Git",
+          "version": "2.56.0.4",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "156.0.8078.80",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Intel(R) Integrated Sensor Solution",
+          "version": "3.10.100.4594",
+          "publisher": "Intel Corporation"
+        },
+        {
+          "name": "Lenovo Smart Meeting",
+          "version": "4.2.0.0908",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Speech",
+          "version": "2.1.0.90",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Vantage Service",
+          "version": "5.1.2606.17",
+          "publisher": "Lenovo Group Ltd."
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "151.0.4129.93",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET SDK 10.0.403 (x64)",
+          "version": "10.4.326.52412",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Office Professional Plus 2013",
+          "version": "15.0.4420.1017",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Power Query for Excel (x64)",
+          "version": "2.62.5222.701",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2015-2022 Redistributable (x64) - 14.44.35211",
+          "version": "14.44.35211.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2015-2022 Redistributable (x86) - 14.44.35211",
+          "version": "14.44.35211.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Installer",
+          "version": "4.11.24.2075",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Mozilla Firefox (x64 en-US)",
+          "version": "153.0.1",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Mozilla Maintenance Service",
+          "version": "140.0.4",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Notepad++ (64-bit x64)",
+          "version": "8.7.3",
+          "publisher": "Notepad++ Team"
+        },
+        {
+          "name": "PDF24 Creator 11.13.1",
+          "version": "11.13.1",
+          "publisher": "PDF24.org"
+        },
+        {
+          "name": "Realtek Audio Driver",
+          "version": "6.0.9573.1",
+          "publisher": "Realtek Semiconductor Corp."
+        },
+        {
+          "name": "Synology Chat 1.2.3-232",
+          "version": "1.2.3-232",
+          "publisher": "Synology"
+        },
+        {
+          "name": "UltraVNC 1.0.8.2",
+          "version": "1.0.8.2",
+          "publisher": "1.0.8.2"
+        },
+        {
+          "name": "Visual Studio Build Tools 2022",
+          "version": "17.14.44",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "vs_CoreEditorFonts",
+          "version": "17.7.40001",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Windows SDK AddOn",
+          "version": "10.1.0.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Windows Software Development Kit - Windows 10.0.22621.5040",
+          "version": "10.1.22621.5040",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Windows Software Development Kit - Windows 10.0.26100.7705",
+          "version": "10.1.26100.7705",
+          "publisher": "Microsoft Corporation"
+        }
+      ],
+      "edr_info_json": null,
+      "created_at": "2026-11-09T08:00:17.082Z",
+      "updated_at": "2026-11-09T08:01:32.338Z",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+    },
+    {
+      "id": "78BEBD80-54B7-11F0-BA34-AD222F6C3500",
+      "asset_tag": "IT-PC-2026-3256",
+      "status": "Active",
+      "location_id": "loc-b1f6-01",
+      "assigned_user": "AIKCHOL1\\5403069",
+      "purchase_date": "2026-11-09",
+      "warranty_expiry_date": "2029-11-09",
+      "qr_code_token": "QR-B2ITD302-mw9035gj",
+      "hardware_uuid": "78BEBD80-54B7-11F0-BA34-AD222F6C3500",
+      "hostname": "B2ITD302",
+      "pc_serial_number": "GM119Q86",
+      "manufacturer": "LENOVO",
+      "model": "12SKS3QV00",
+      "os_name": "Microsoft Windows 11 Pro",
+      "os_build": "26200",
+      "last_logged_in_user": "AIKCHOL1\\5403069",
+      "cpu_name": "Intel(R) Core(TM) i5-14400",
+      "cpu_cores": 10,
+      "ram_total_gb": 16,
+      "ip_address": "172.16.84.15",
+      "mac_address": "5C:A6:E6:3A:04:D0",
+      "lan_speed_mbps": 400,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-09T08:29:47.494Z",
+      "monitors_json": [
+        {
+          "manufacturer": "LEN",
+          "model": "LEN TCM-G5-BA",
+          "serialNumber": "1"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "fileSystem": "NTFS",
+          "totalSizeGb": 474.72,
+          "freeSpaceGb": 230.86
+        },
+        {
+          "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
+          "serialNumber": "E823_8FA6_BF53_0001_001B_448B_4D30_DF41.",
+          "mediaType": "SSD",
+          "healthStatus": "Healthy",
+          "operationalStatus": "OK"
+        }
+      ],
+      "installed_software_json": [
+        {
+          "name": "7-Zip 25.01 (x64)",
+          "version": "25.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Adobe Acrobat (64-bit)",
+          "version": "26.003.22075",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "Advanced IP Scanner 2.5.1",
+          "version": "2.5.4594.1",
+          "publisher": "Famatech"
+        },
+        {
+          "name": "AnyDesk",
+          "version": "ad 9.0.12",
+          "publisher": "AnyDesk Software GmbH"
+        },
+        {
+          "name": "Chrome Remote Desktop Host",
+          "version": "157.0.8103.41",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Citrix XenCenter",
+          "version": "6.1.3",
+          "publisher": "Citrix Systems, Inc."
+        },
+        {
+          "name": "Copilot",
+          "version": "153.0.4234.48",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "DBeaver 25.3.1",
+          "version": "25.3.1",
+          "publisher": "DBeaver Corp"
+        },
+        {
+          "name": "draw.io 29.6.6",
+          "version": "29.6.6",
+          "publisher": "JGraph"
+        },
+        {
+          "name": "ESET Endpoint Security",
+          "version": "13.1.2036.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "ESET Management Agent",
+          "version": "13.3.1192.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "FortiClient VPN",
+          "version": "7.4.3.4726",
+          "publisher": "Fortinet Technologies Inc"
+        },
+        {
+          "name": "Foxit Reader",
+          "version": "7.3.0.118",
+          "publisher": "Foxit Software Inc."
+        },
+        {
+          "name": "Git",
+          "version": "2.52.0",
+          "publisher": "The Git Development Community"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "156.0.8078.81",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "HCWebControl",
+          "version": "1.1.1.0",
+          "publisher": "Hangzhou Hikvision Digital Technology Co., Ltd."
+        },
+        {
+          "name": "HP LaserJet Professional P1100-P1560-P1600 Series",
+          "version": "",
+          "publisher": ""
+        },
+        {
+          "name": "HPSSupply",
+          "version": "2.1.1.0000",
+          "publisher": "Hewlett Packard Development Company L.P."
+        },
+        {
+          "name": "Intel(R) Integrated Sensor Solution",
+          "version": "3.10.100.4594",
+          "publisher": "Intel Corporation"
+        },
+        {
+          "name": "IP Camera Viewer 4",
+          "version": "",
+          "publisher": "DeskShare Inc."
+        },
+        {
+          "name": "iVMS-4200",
+          "version": "3.14.2.4",
+          "publisher": "Hangzhou Hikvision Digital Technology Co., Ltd."
+        },
+        {
+          "name": "KeePass Password Safe 2.61.1",
+          "version": "2.61.1",
+          "publisher": "Dominik Reichl"
+        },
+        {
+          "name": "Lenovo Smart Meeting",
+          "version": "4.2.0.0908",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Speech",
+          "version": "2.1.0.90",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Vantage Service",
+          "version": "5.1.2606.17",
+          "publisher": "Lenovo Group Ltd."
+        },
+        {
+          "name": "LibreOffice 26.2.3.2",
+          "version": "26.2.3.2",
+          "publisher": "The Document Foundation"
+        },
+        {
+          "name": "LocalServiceComponents",
+          "version": "1.0.0.82",
+          "publisher": ""
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "156.0.4314.50",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft GameInput",
+          "version": "3.5.270.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft ODBC Driver 17 for SQL Server",
+          "version": "17.5.2.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft ODBC Driver 18 for SQL Server",
+          "version": "18.5.1.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Office Professional Plus 2013",
+          "version": "15.0.4569.1506",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft OLE DB Driver 19 for SQL Server",
+          "version": "19.4.1.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Teams Meeting Add-in for Microsoft Office",
+          "version": "1.26.27102",
+          "publisher": "Microsoft"
+        },
+        {
+          "name": "Microsoft Visual C++ 2008 Redistributable - x86 9.0.30729",
+          "version": "9.0.30729",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ v14 Redistributable (x64) - 14.51.36247",
+          "version": "14.51.36247.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ v14 Redistributable (x86) - 14.51.36247",
+          "version": "14.51.36247.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Installer",
+          "version": "4.0.2168.39045",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Windows Application Compatibility Fix Database",
+          "version": "",
+          "publisher": ""
+        },
+        {
+          "name": "Mozilla Firefox (x64 en-US)",
+          "version": "159.0.1",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Mozilla Maintenance Service",
+          "version": "140.0.4",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "MySQL Workbench 8.0 CE",
+          "version": "8.0.45",
+          "publisher": "Oracle Corporation"
+        },
+        {
+          "name": "Node.js",
+          "version": "24.12.0",
+          "publisher": "Node.js Foundation"
+        },
+        {
+          "name": "Notepad++ (64-bit x64)",
+          "version": "8.7.3",
+          "publisher": "Notepad++ Team"
+        },
+        {
+          "name": "OBS Studio",
+          "version": "32.2.2",
+          "publisher": "OBS Project"
+        },
+        {
+          "name": "PDF24 Creator 11.13.1",
+          "version": "11.13.1",
+          "publisher": "PDF24.org"
+        },
+        {
+          "name": "PuTTY release 0.83 (64-bit)",
+          "version": "0.83.0.0",
+          "publisher": "Simon Tatham"
+        },
+        {
+          "name": "Realtek Audio Driver",
+          "version": "6.0.9573.1",
+          "publisher": "Realtek Semiconductor Corp."
+        },
+        {
+          "name": "SADP",
+          "version": "3.1.4.7",
+          "publisher": "Hangzhou Hikvision Digital Technology Co., Ltd."
+        },
+        {
+          "name": "SQL Server Management Studio 22",
+          "version": "22.1.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Synology Chat 1.2.4-235",
+          "version": "1.2.4-235",
+          "publisher": "Synology"
+        },
+        {
+          "name": "UFR II Printer Driver Uninstaller",
+          "version": "6, 8, 0, 0",
+          "publisher": "Canon Inc."
+        },
+        {
+          "name": "UltraVNC 1.0.8.2",
+          "version": "1.0.8.2",
+          "publisher": "1.0.8.2"
+        },
+        {
+          "name": "VNC Enterprise Edition E4.5.4",
+          "version": "E4.5.4",
+          "publisher": "RealVNC Ltd."
+        },
+        {
+          "name": "VNC Mirror Driver 1.8.0",
+          "version": "1.8.0",
+          "publisher": "RealVNC Ltd."
+        },
+        {
+          "name": "VNC Printer Driver 1.6.0",
+          "version": "1.6.0",
+          "publisher": "RealVNC Ltd."
+        },
+        {
+          "name": "vs_CoreEditorFonts",
+          "version": "17.7.40001",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Web Components",
+          "version": "3.0.8.34",
+          "publisher": ""
+        },
+        {
+          "name": "Webex",
+          "version": "43.10.0.28042",
+          "publisher": "Cisco Systems, Inc"
+        },
+        {
+          "name": "WinPcap 4.1.3",
+          "version": "4.1.0.2980",
+          "publisher": "Riverbed Technology, Inc."
+        },
+        {
+          "name": "XAMPP",
+          "version": "8.2.12-0",
+          "publisher": "Apache Friends"
+        }
+      ],
+      "edr_info_json": null,
+      "created_at": "2026-11-09T08:29:47.491Z",
+      "updated_at": "2026-11-09T08:29:47.494Z",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+    }
+  ],
+  "changeLogs": [
+    {
+      "id": "log-aik-001",
+      "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "change_type": "MONITOR_SWAPPED",
+      "severity": "WARNING",
+      "old_value": {
+        "model": "Lenovo ThinkVision 27",
+        "serialNumber": "V309ABCD-99"
+      },
+      "new_value": {
+        "model": "LEN TCM-G5-BA",
+        "serialNumber": "1"
+      },
+      "description": "WARNING: Connected display Serial Number changed to 1 (LEN TCM-G5-BA). Please verify display cable connection in meeting room B1F601.",
+      "is_acknowledged": false,
+      "acknowledged_by": null,
+      "acknowledged_at": null,
+      "resolution_note": null,
+      "created_at": "2026-11-09T06:21:33.291Z",
+      "asset_tag": "AIK-WS-2567-001",
+      "hostname": "B1F601",
+      "assigned_user": "AIKCHOL1\\meetingroom",
+      "location": "อาคาร 1 ชั้น 6 (ห้องประชุมใหญ่ B1F601)"
+    }
+  ],
+  "auditCampaign": {
+    "id": "camp-aik-2569",
+    "name": "การตรวจนับทรัพย์สินไอทีประจำปี 2569 (Annual Stocktake Audit FY2569)",
+    "year": 2569,
+    "status": "IN_PROGRESS",
+    "startDate": "2026-10-01",
+    "endDate": "2026-12-31",
+    "totalAssets": 3,
+    "agentVerified": 2,
+    "qrScanned": 1,
+    "pending": 0,
+    "progressPercent": 100
+  },
+  "auditRecords": [
+    {
+      "id": "rec-01",
+      "campaign_id": "camp-aik-2569",
+      "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "verification_method": "AGENT_AUTO",
+      "verified_location_id": "loc-b1f6-01",
+      "is_location_matched": true,
+      "verified_by": "System-Auto-Heartbeat",
+      "verified_at": "2026-11-09T07:01:33.291Z"
+    }
+  ],
+  "pmSchedules": [
+    {
+      "id": "pm-b1f601",
+      "hostname": "B1F601",
+      "assetTag": "AIK-WS-2567-001",
+      "assignedUser": "AIKCHOL1\\meetingroom",
+      "location": "อาคาร 1 ชั้น 6 (ห้องประชุม B1F601)",
+      "frequencyMonths": 6,
+      "nextDueDate": "2026-11-16",
+      "daysRemaining": 7,
+      "isOverdue": false
+    },
+    {
+      "id": "pm-b1f602",
+      "hostname": "B1F602-ITNOC",
+      "assetTag": "AIK-WS-2567-002",
+      "assignedUser": "AIKCHOL1\\it-admin",
+      "location": "อาคาร 1 ชั้น 6 (ศูนย์ควบคุมระบบ IT)",
+      "frequencyMonths": 6,
+      "nextDueDate": "2026-11-06",
+      "daysRemaining": -3,
+      "isOverdue": true
+    }
+  ],
+  "pmRecords": []
+}

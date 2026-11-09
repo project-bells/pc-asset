@@ -1,0 +1,65 @@
+name: Build & Release Asset Monitoring Agent
+
+on:
+  push:
+    branches: [ main, master ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Compile & Package Windows x64 Agent
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET SDK 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore NuGet Packages
+      run: dotnet restore AssetMonitoringAgent.csproj
+
+    - name: Build Project
+      run: dotnet build AssetMonitoringAgent.csproj -c Release --no-restore
+
+    - name: Publish Single-File Self-Contained Binary
+      run: |
+        dotnet publish AssetMonitoringAgent.csproj `
+          -c Release `
+          -r win-x64 `
+          --self-contained true `
+          -p:PublishSingleFile=true `
+          -p:IncludeNativeLibrariesForSelfExtract=true `
+          -p:EnableCompressionInSingleFile=true `
+          -o release_output
+
+    - name: Archive Artifacts for Deployment
+      shell: pwsh
+      run: |
+        Compress-Archive -Path release_output/* -DestinationPath EnterpriseAssetAgent-win-x64.zip
+
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: EnterpriseAssetAgent-Binary
+        path: EnterpriseAssetAgent-win-x64.zip
+
+    - name: Create GitHub Release (On Tag Push)
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: EnterpriseAssetAgent-win-x64.zip
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
