@@ -72,6 +72,13 @@ export interface Asset {
   wifi_signal_percent: number | null;
   agent_version: string | null;
   last_seen_at: string | null;
+  os_version?: string | null;
+  os_ubr?: number | null;
+  latest_kb_id?: string | null;
+  installed_patches_json?: any[];
+  pending_reboot?: boolean;
+  last_windows_update?: string | null;
+  last_boot_time?: string | null;
   monitors_json: MonitorItem[] | null;
   disks_json: DiskItem[] | null;
   installed_software_json: InstalledSoftwareItem[] | null;
@@ -236,4 +243,118 @@ export interface AuditVerifyPayload {
   assetId: string;
   verifiedLocationId: string;
   discrepancyNote?: string;
+}
+
+// =============================================================================
+// Executive Analytics & Windows Patch Compliance Models
+// =============================================================================
+
+export interface InstalledPcDetail {
+  asset_id: string;
+  hostname: string;
+  asset_tag: string | null;
+  ip_address: string | null;
+  assigned_user: string | null;
+  room_name?: string;
+  department_name?: string;
+}
+
+export interface SoftwareSummaryItem {
+  software_category: string;
+  software_name: string;
+  software_version: string;
+  software_publisher: string;
+  installed_count: number;
+  installed_pcs: InstalledPcDetail[];
+}
+
+export interface SoftwareSummaryResponse {
+  filter: {
+    search: string | null;
+    category: string | null;
+  };
+  totalUniquePcs: number;
+  totalInstallations: number;
+  totalSoftwareTitles: number;
+  categories: string[];
+  software: SoftwareSummaryItem[];
+}
+
+export interface OsFamilyDistribution {
+  family: string;
+  machineCount: number;
+  percentage: number;
+}
+
+export interface OsDetailedDistribution {
+  os_family: string;
+  os_name: string;
+  os_version: string;
+  os_build: string;
+  machine_count: number;
+  percentage: number;
+  machines: any[];
+}
+
+export interface PatchAdvisoryItem {
+  asset_id: string;
+  hostname: string;
+  asset_tag: string | null;
+  ip_address: string | null;
+  building: string;
+  room_name: string;
+  department_name: string;
+  assigned_user: string | null;
+  os_name: string;
+  os_version: string;
+  os_build: string;
+  os_ubr: number | null;
+  latest_kb_id: string;
+  last_windows_update: string | null;
+  days_since_last_patch: number;
+  pending_reboot: boolean;
+  last_boot_time: string | null;
+  days_since_last_boot: number;
+  last_seen_at: string | null;
+  patch_status: 'CRITICAL_EOS' | 'HIGH_OUTDATED' | 'WARNING_REBOOT_REQUIRED' | 'COMPLIANT';
+  recommendation_th: string;
+  priority_order: number;
+}
+
+export interface PatchAdvisorySummary {
+  total: number;
+  criticalEos: number;
+  highOutdated: number;
+  warningReboot: number;
+  compliant: number;
+  complianceRatePercent: number;
+}
+
+export interface PatchAdvisoryResponse {
+  summary: PatchAdvisorySummary;
+  filter: {
+    status: string;
+  };
+  advisories: PatchAdvisoryItem[];
+}
+
+export interface ExecutiveAnalyticsSummary {
+  fleet: {
+    totalAssets: number;
+    activeAssets: number;
+    unregisteredAssets: number;
+    onlineNow: number;
+  };
+  osDistribution: {
+    byFamily: OsFamilyDistribution[];
+    detailedBreakdown: OsDetailedDistribution[];
+  };
+  patchCompliance: PatchAdvisorySummary;
+  softwareTotals: {
+    microsoftOfficePcs: number;
+    adobeCreativePcs: number;
+    securityAntivirusPcs: number;
+    remoteToolsPcs: number;
+    webBrowsersPcs: number;
+  };
 }

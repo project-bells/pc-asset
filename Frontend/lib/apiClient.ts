@@ -11,6 +11,9 @@ import {
   PmPreFillData,
   PmSubmitPayload,
   AuditVerifyPayload,
+  ExecutiveAnalyticsSummary,
+  SoftwareSummaryResponse,
+  PatchAdvisoryResponse,
 } from '@/types/asset';
 
 const getBaseUrl = (): string => {
@@ -548,6 +551,222 @@ class ApiClient {
           isOverdue: true,
         }
       ];
+    }
+  }
+
+  // ===========================================================================
+  // Executive Analytics, Software License Counting & Patch Advisory APIs
+  // ===========================================================================
+
+  async getExecutiveSummary(): Promise<ExecutiveAnalyticsSummary> {
+    try {
+      return await this.fetchJson<ExecutiveAnalyticsSummary>('/admin/analytics/executive-summary');
+    } catch {
+      return {
+        fleet: {
+          totalAssets: 4,
+          activeAssets: 3,
+          unregisteredAssets: 1,
+          onlineNow: 3,
+        },
+        osDistribution: {
+          byFamily: [
+            { family: 'Windows 11', machineCount: 3, percentage: 75.0 },
+            { family: 'Windows 10', machineCount: 1, percentage: 25.0 },
+          ],
+          detailedBreakdown: [
+            { os_family: 'Windows 11', os_name: 'Microsoft Windows 11 Pro', os_version: '24H2', os_build: '26200.5040', machine_count: 1, percentage: 25, machines: [] },
+            { os_family: 'Windows 11', os_name: 'Microsoft Windows 11 Enterprise', os_version: '23H2', os_build: '22631.4317', machine_count: 1, percentage: 25, machines: [] },
+            { os_family: 'Windows 11', os_name: 'Microsoft Windows 11 Pro', os_version: '23H2', os_build: '22631.3007', machine_count: 1, percentage: 25, machines: [] },
+            { os_family: 'Windows 10', os_name: 'Microsoft Windows 10 Pro', os_version: '22H2', os_build: '19045.4894', machine_count: 1, percentage: 25, machines: [] },
+          ],
+        },
+        patchCompliance: {
+          total: 4,
+          criticalEos: 1,
+          highOutdated: 1,
+          warningReboot: 1,
+          compliant: 1,
+          complianceRatePercent: 25.0,
+        },
+        softwareTotals: {
+          microsoftOfficePcs: 2,
+          adobeCreativePcs: 2,
+          securityAntivirusPcs: 4,
+          remoteToolsPcs: 2,
+          webBrowsersPcs: 4,
+        },
+      };
+    }
+  }
+
+  async getSoftwareSummary(params?: { search?: string; category?: string }): Promise<SoftwareSummaryResponse> {
+    try {
+      const qs = new URLSearchParams();
+      if (params?.search) qs.set('search', params.search);
+      if (params?.category) qs.set('category', params.category);
+      const url = `/admin/analytics/software${qs.toString() ? '?' + qs.toString() : ''}`;
+      return await this.fetchJson<SoftwareSummaryResponse>(url);
+    } catch {
+      return {
+        filter: {
+          search: params?.search || null,
+          category: params?.category || null,
+        },
+        totalUniquePcs: 2,
+        totalInstallations: 5,
+        totalSoftwareTitles: 4,
+        categories: [
+          'Adobe Creative & PDF',
+          'Development & IT Tools',
+          'Microsoft Office / 365',
+          'Remote Tools & Support',
+          'Security & Antivirus',
+          'Utilities & Collaboration',
+          'Web Browsers',
+        ],
+        software: [
+          {
+            software_category: 'Microsoft Office / 365',
+            software_name: 'Microsoft Office Professional Plus 2021',
+            software_version: '16.0.14332.20721',
+            software_publisher: 'Microsoft Corporation',
+            installed_count: 1,
+            installed_pcs: [
+              { asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c77', hostname: 'B1F603-FIN01', asset_tag: 'AIK-WS-2567-003', ip_address: '192.168.27.150', assigned_user: 'AIKCHOL1\\fin-officer', room_name: 'ห้องฝ่ายการเงิน', department_name: 'แผนกการเงินและบัญชี' }
+            ],
+          },
+          {
+            software_category: 'Microsoft Office / 365',
+            software_name: 'Microsoft Office Professional Plus 2013',
+            software_version: '15.0.4420.1017',
+            software_publisher: 'Microsoft Corporation',
+            installed_count: 1,
+            installed_pcs: [
+              { asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c00', hostname: 'B1F601', asset_tag: 'AIK-WS-2567-001', ip_address: '192.168.27.145', assigned_user: 'AIKCHOL1\\meetingroom', room_name: 'ห้องประชุมใหญ่', department_name: 'แผนกเทคโนโลยีสารสนเทศ' }
+            ],
+          },
+        ],
+      };
+    }
+  }
+
+  async getPatchAdvisory(status?: string): Promise<PatchAdvisoryResponse> {
+    try {
+      const url = status && status !== 'ALL' ? `/admin/analytics/patch-advisory?status=${status}` : '/admin/analytics/patch-advisory';
+      return await this.fetchJson<PatchAdvisoryResponse>(url);
+    } catch {
+      return {
+        summary: {
+          total: 4,
+          criticalEos: 1,
+          highOutdated: 1,
+          warningReboot: 1,
+          compliant: 1,
+          complianceRatePercent: 25.0,
+        },
+        filter: {
+          status: status || 'ALL',
+        },
+        advisories: [
+          {
+            asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c99',
+            hostname: 'B1F101-RECEPT',
+            asset_tag: 'Not Bound',
+            ip_address: '192.168.27.188',
+            building: 'อาคาร 1 (โรงพยาบาลเอกชล)',
+            room_name: 'แผนกต้อนรับส่วนหน้า (Main Lobby B1F101)',
+            department_name: 'แผนกผู้ป่วยนอก (OPD Clinic)',
+            assigned_user: 'AIKCHOL1\\reception',
+            os_name: 'Microsoft Windows 10 Pro',
+            os_version: '22H2',
+            os_build: '19045.4894',
+            os_ubr: 4894,
+            latest_kb_id: 'KB5043064',
+            last_windows_update: new Date(Date.now() - 20 * 86400000).toISOString(),
+            days_since_last_patch: 20,
+            pending_reboot: false,
+            last_boot_time: new Date(Date.now() - 4 * 86400000).toISOString(),
+            days_since_last_boot: 4,
+            last_seen_at: new Date().toISOString(),
+            patch_status: 'CRITICAL_EOS',
+            recommendation_th: 'ระบบปฏิบัติการ Windows 10 ใกล้สิ้นสุดระยะสนับสนุน (End-of-Support: ต.ค. 2025) แนะนำให้วางแผนจัดสรรงบประมาณอัปเกรดเครื่องเป็น Windows 11',
+            priority_order: 1,
+          },
+          {
+            asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c02',
+            hostname: 'B1F602-ITNOC',
+            asset_tag: 'AIK-WS-2567-002',
+            ip_address: '192.168.27.146',
+            building: 'อาคาร 1 (โรงพยาบาลเอกชล)',
+            room_name: 'ศูนย์ควบคุมระบบ IT (NOC Room B1F602)',
+            department_name: 'แผนกเทคโนโลยีสารสนเทศ (IT Department)',
+            assigned_user: 'AIKCHOL1\\it-admin',
+            os_name: 'Microsoft Windows 11 Pro',
+            os_version: '23H2',
+            os_build: '22631.3007',
+            os_ubr: 3007,
+            latest_kb_id: 'KB5034441',
+            last_windows_update: new Date(Date.now() - 65 * 86400000).toISOString(),
+            days_since_last_patch: 65,
+            pending_reboot: false,
+            last_boot_time: new Date(Date.now() - 8 * 86400000).toISOString(),
+            days_since_last_boot: 8,
+            last_seen_at: new Date().toISOString(),
+            patch_status: 'HIGH_OUTDATED',
+            recommendation_th: 'ไม่ได้ติดตั้ง Security Update มานานเกินกว่า 45 วัน แนะนำให้รัน Windows Update ติดตั้ง Cumulative Update ล่าสุด',
+            priority_order: 2,
+          },
+          {
+            asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c77',
+            hostname: 'B1F603-FIN01',
+            asset_tag: 'AIK-WS-2567-003',
+            ip_address: '192.168.27.150',
+            building: 'อาคาร 1 (โรงพยาบาลเอกชล)',
+            room_name: 'ห้องฝ่ายการเงิน (Finance Office B1F603)',
+            department_name: 'แผนกการเงินและบัญชี (Finance & Accounting)',
+            assigned_user: 'AIKCHOL1\\fin-officer',
+            os_name: 'Microsoft Windows 11 Enterprise',
+            os_version: '23H2',
+            os_build: '22631.4317',
+            os_ubr: 4317,
+            latest_kb_id: 'KB5044284',
+            last_windows_update: new Date(Date.now() - 2 * 86400000).toISOString(),
+            days_since_last_patch: 2,
+            pending_reboot: true,
+            last_boot_time: new Date(Date.now() - 35 * 86400000).toISOString(),
+            days_since_last_boot: 35,
+            last_seen_at: new Date().toISOString(),
+            patch_status: 'WARNING_REBOOT_REQUIRED',
+            recommendation_th: 'ติดตั้ง Security Patch สำเร็จแล้ว แต่รอรีสตาร์ทเครื่อง แนะนำให้ผู้ใช้งาน Restart PC เพื่อให้ Patch มีผลบังคับใช้',
+            priority_order: 3,
+          },
+          {
+            asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c00',
+            hostname: 'B1F601',
+            asset_tag: 'AIK-WS-2567-001',
+            ip_address: '192.168.27.145',
+            building: 'อาคาร 1 (โรงพยาบาลเอกชล)',
+            room_name: 'ห้องประชุมใหญ่ (Meeting Room B1F601)',
+            department_name: 'แผนกเทคโนโลยีสารสนเทศ (IT Department)',
+            assigned_user: 'AIKCHOL1\\meetingroom',
+            os_name: 'Microsoft Windows 11 Pro',
+            os_version: '24H2',
+            os_build: '26200.5040',
+            os_ubr: 5040,
+            latest_kb_id: 'KB5044273',
+            last_windows_update: new Date(Date.now() - 5 * 86400000).toISOString(),
+            days_since_last_patch: 5,
+            pending_reboot: false,
+            last_boot_time: new Date(Date.now() - 2 * 86400000).toISOString(),
+            days_since_last_boot: 2,
+            last_seen_at: new Date().toISOString(),
+            patch_status: 'COMPLIANT',
+            recommendation_th: 'เครื่องอยู่ในเกณฑ์มาตรฐานความปลอดภัย (Patch Compliance ปกติ)',
+            priority_order: 4,
+          },
+        ],
+      };
     }
   }
 }

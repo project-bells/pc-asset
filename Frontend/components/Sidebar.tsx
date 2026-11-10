@@ -13,6 +13,7 @@ import {
   UserCheck,
   LogOut,
   Laptop,
+  BarChart3,
 } from 'lucide-react';
 import { useAuth, UserRole } from '@/context/AuthContext';
 
@@ -22,6 +23,7 @@ export default function Sidebar() {
 
   const navItems = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'] },
+    { name: 'Executive Analytics', href: '/dashboard/executive', icon: BarChart3, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'] },
     { name: 'Hardware Alerts', href: '/alerts', icon: ShieldAlert, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'], badge: '3' },
     { name: 'Asset Inventory', href: '/assets', icon: Server, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'] },
     { name: 'Annual Audit', href: '/audit', icon: FileCheck, roles: ['ADMIN', 'TECHNICIAN'] },

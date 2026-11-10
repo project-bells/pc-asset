@@ -369,3 +369,4 @@ ORDER BY
 -- GRANT SELECT ON vw_software_inventory_summary TO app_reader;
 -- GRANT SELECT ON vw_os_distribution_summary TO app_reader;
 -- GRANT SELECT ON vw_windows_patch_advisory TO app_reader;
+

@@ -79,13 +79,23 @@ export default function DashboardPage() {
             Real-time endpoint telemetries, stocktake audit progress, and hardware health alerts.
           </p>
         </div>
-        <button
-          onClick={refreshAll}
-          className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors border border-slate-700 shadow-sm"
-        >
-          <RefreshCw className="w-3.5 h-3.5 text-indigo-400" />
-          <span>Refresh Data</span>
-        </button>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/dashboard/executive"
+            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg transition-colors shadow-sm shadow-indigo-500/20"
+          >
+            <ShieldCheck className="w-3.5 h-3.5" />
+            <span>Executive Analytics & Patch Portal</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+          <button
+            onClick={refreshAll}
+            className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors border border-slate-700 shadow-sm"
+          >
+            <RefreshCw className="w-3.5 h-3.5 text-indigo-400" />
+            <span>Refresh</span>
+          </button>
+        </div>
       </div>
 
       {/* KPI Cards (5 key metrics) */}
