@@ -369,8 +369,225 @@ export const db = {
       }
 
       // ==========================================
-      // 6. DASHBOARDS & VIEWS
+      // 6. DASHBOARDS & ANALYTICAL VIEWS
       // ==========================================
+      // View 1: Software Inventory Summary
+      if (lower.includes('vw_software_inventory_summary')) {
+        const swMap = new Map<string, {
+          software_category: string;
+          software_name: string;
+          software_version: string;
+          software_publisher: string;
+          pcsMap: Map<string, any>;
+        }>();
+
+        const categorize = (name: string): string => {
+          const n = (name || '').toLowerCase();
+          if (n.includes('office') || n.includes('word') || n.includes('excel') || n.includes('powerpoint') || n.includes('outlook') || n.includes('access') || n.includes('visio') || n.includes('project') || n.includes('microsoft 365')) return 'Microsoft Office / 365';
+          if (n.includes('adobe') || n.includes('acrobat') || n.includes('photoshop') || n.includes('illustrator') || n.includes('indesign')) return 'Adobe Creative & PDF';
+          if (n.includes('google chrome') || n.includes('firefox') || n.includes('microsoft edge') || n.includes('brave') || n.includes('opera')) return 'Web Browsers';
+          if (n.includes('anydesk') || n.includes('teamviewer') || n.includes('ultravnc') || n.includes('vnc') || n.includes('remote desktop') || n.includes('rustdesk') || n.includes('logmein')) return 'Remote Tools & Support';
+          if (n.includes('visual studio') || n.includes('vs code') || n.includes('git') || n.includes('node.js') || n.includes('python') || n.includes('docker') || n.includes('cmake') || n.includes('sdk')) return 'Development & IT Tools';
+          if (n.includes('eset') || n.includes('antivirus') || n.includes('endpoint security') || n.includes('crowdstrike') || n.includes('sentinelone') || n.includes('defender') || n.includes('kaspersky') || n.includes('trend micro')) return 'Security & Antivirus';
+          if (n.includes('synology chat') || n.includes('zoom') || n.includes('teams') || n.includes('line') || n.includes('7-zip') || n.includes('winrar') || n.includes('notepad++') || n.includes('pdf24') || n.includes('foxit')) return 'Utilities & Collaboration';
+          return 'General Software';
+        };
+
+        const activeAssets = storeData.assets.filter((a) => ['Active', 'Unregistered'].includes(a.status));
+        for (const asset of activeAssets) {
+          const swList = Array.isArray(asset.installed_software_json) ? asset.installed_software_json : [];
+          for (const item of swList) {
+            const name = (item.displayName || item.name || '').trim();
+            if (!name) continue;
+            const version = (item.displayVersion || item.version || 'Unknown').trim();
+            const publisher = (item.publisher || 'Unknown').trim();
+            const category = categorize(name);
+            const key = `${category}:::${name}:::${version}:::${publisher}`;
+
+            if (!swMap.has(key)) {
+              swMap.set(key, {
+                software_category: category,
+                software_name: name,
+                software_version: version,
+                software_publisher: publisher,
+                pcsMap: new Map()
+              });
+            }
+
+            swMap.get(key)!.pcsMap.set(asset.id, {
+              asset_id: asset.id,
+              hostname: asset.hostname,
+              asset_tag: asset.asset_tag,
+              ip_address: asset.ip_address,
+              assigned_user: asset.assigned_user,
+              room_name: asset.room_name || 'Main Office',
+              department_name: asset.department_name || 'General'
+            });
+          }
+        }
+
+        const rows = Array.from(swMap.values())
+          .map((entry) => ({
+            software_category: entry.software_category,
+            software_name: entry.software_name,
+            software_version: entry.software_version,
+            software_publisher: entry.software_publisher,
+            installed_count: entry.pcsMap.size,
+            installed_pcs: Array.from(entry.pcsMap.values())
+          }))
+          .sort((a, b) => b.installed_count - a.installed_count || a.software_name.localeCompare(b.software_name));
+
+        return {
+          rows: rows as unknown as T[],
+          command: 'SELECT',
+          rowCount: rows.length,
+          oid: 0,
+          fields: []
+        };
+      }
+
+      // View 2: OS Distribution Summary
+      if (lower.includes('vw_os_distribution_summary')) {
+        const activeAssets = storeData.assets.filter((a) => ['Active', 'Unregistered'].includes(a.status));
+        const totalFleet = activeAssets.length;
+        const osMap = new Map<string, {
+          os_family: string;
+          os_name: string;
+          os_version: string;
+          os_build: string;
+          machines: any[];
+        }>();
+
+        const getFamily = (osName: string): string => {
+          const n = (osName || '').toLowerCase();
+          if (n.includes('windows 11')) return 'Windows 11';
+          if (n.includes('windows 10')) return 'Windows 10';
+          if (n.includes('server')) return 'Windows Server';
+          if (n.includes('windows 7')) return 'Windows 7 (Legacy)';
+          if (n.includes('windows 8')) return 'Windows 8.1 (Legacy)';
+          if (n.includes('linux') || n.includes('ubuntu')) return 'Linux';
+          if (n.includes('mac')) return 'macOS';
+          return 'Other OS';
+        };
+
+        for (const asset of activeAssets) {
+          const osName = asset.os_name || 'Windows';
+          const osFamily = getFamily(osName);
+          const osVersion = asset.os_version || 'Unknown';
+          const osBuild = asset.os_build || 'Unknown';
+          const key = `${osFamily}:::${osName}:::${osVersion}:::${osBuild}`;
+
+          if (!osMap.has(key)) {
+            osMap.set(key, {
+              os_family: osFamily,
+              os_name: osName,
+              os_version: osVersion,
+              os_build: osBuild,
+              machines: []
+            });
+          }
+
+          osMap.get(key)!.machines.push({
+            asset_id: asset.id,
+            hostname: asset.hostname,
+            asset_tag: asset.asset_tag,
+            ip_address: asset.ip_address,
+            department_name: asset.department_name || 'General'
+          });
+        }
+
+        const rows = Array.from(osMap.values())
+          .map((entry) => ({
+            os_family: entry.os_family,
+            os_name: entry.os_name,
+            os_version: entry.os_version,
+            os_build: entry.os_build,
+            machine_count: entry.machines.length,
+            percentage: totalFleet > 0 ? Math.round((entry.machines.length * 10000 / totalFleet)) / 100 : 0,
+            machines: entry.machines
+          }))
+          .sort((a, b) => b.machine_count - a.machine_count);
+
+        return {
+          rows: rows as unknown as T[],
+          command: 'SELECT',
+          rowCount: rows.length,
+          oid: 0,
+          fields: []
+        };
+      }
+
+      // View 3: Windows Patch Advisory
+      if (lower.includes('vw_windows_patch_advisory')) {
+        const activeAssets = storeData.assets.filter((a) => ['Active', 'Unregistered'].includes(a.status));
+        const nowMs = Date.now();
+
+        const rows = activeAssets.map((a) => {
+          const lastUpdateMs = a.last_windows_update ? new Date(a.last_windows_update).getTime() : 0;
+          const daysSincePatch = lastUpdateMs > 0 ? Math.max(0, Math.floor((nowMs - lastUpdateMs) / 86400000)) : 999;
+
+          const lastBootMs = a.last_boot_time ? new Date(a.last_boot_time).getTime() : 0;
+          const daysSinceBoot = lastBootMs > 0 ? Math.max(0, Math.floor((nowMs - lastBootMs) / 86400000)) : 0;
+
+          const osLower = (a.os_name || '').toLowerCase();
+          let patch_status = 'COMPLIANT';
+          let recommendation_th = 'เครื่องอยู่ในเกณฑ์มาตรฐานความปลอดภัย (Patch Compliance ปกติ)';
+          let priority_order = 4;
+
+          if (osLower.includes('windows 10') || osLower.includes('windows 7') || osLower.includes('windows 8')) {
+            patch_status = 'CRITICAL_EOS';
+            priority_order = 1;
+            recommendation_th = osLower.includes('windows 10')
+              ? 'ระบบปฏิบัติการ Windows 10 ใกล้สิ้นสุดระยะสนับสนุน (End-of-Support: ต.ค. 2025) แนะนำให้วางแผนจัดสรรงบประมาณอัปเกรดเครื่องเป็น Windows 11'
+              : 'ระบบปฏิบัติการหมดระยะสนับสนุนแล้ว (End-of-Life) มีช่องโหว่ความปลอดภัยระดับร้ายแรง จำเป็นต้องอัปเกรด OS หรือเปลี่ยนอุปกรณ์ทันที';
+          } else if (lastUpdateMs === 0 || daysSincePatch > 45) {
+            patch_status = 'HIGH_OUTDATED';
+            priority_order = 2;
+            recommendation_th = lastUpdateMs === 0
+              ? 'ไม่พบประวัติการติดตั้ง Windows Update แนะนำให้เปิด Windows Update เพื่อดาวน์โหลดและติดตั้ง Security Baseline ทันที'
+              : 'ไม่ได้ติดตั้ง Security Update มานานเกินกว่า 45 วัน แนะนำให้รัน Windows Update ติดตั้ง Cumulative Update ล่าสุด';
+          } else if (a.pending_reboot || daysSinceBoot > 30) {
+            patch_status = 'WARNING_REBOOT_REQUIRED';
+            priority_order = 3;
+            recommendation_th = a.pending_reboot
+              ? 'ติดตั้ง Security Patch สำเร็จแล้ว แต่รอรีสตาร์ทเครื่อง แนะนำให้ผู้ใช้งาน Restart PC เพื่อให้ Patch มีผลบังคับใช้'
+              : 'เครื่องเปิดทำงานต่อเนื่องนานเกิน 30 วัน แนะนำให้รีสตาร์ทเครื่องเพื่อเคลียร์หน่วยความจำและบังคับใช้ Patch';
+          }
+
+          return {
+            asset_id: a.id,
+            hostname: a.hostname,
+            asset_tag: a.asset_tag,
+            ip_address: a.ip_address,
+            building: a.building || 'อาคาร 1',
+            room_name: a.room_name || 'Main Office',
+            department_name: a.department_name || 'General',
+            assigned_user: a.assigned_user,
+            os_name: a.os_name,
+            os_version: a.os_version || 'Unknown',
+            os_build: a.os_build || 'Unknown',
+            os_ubr: a.os_ubr || null,
+            latest_kb_id: a.latest_kb_id || 'None',
+            last_windows_update: a.last_windows_update || null,
+            days_since_last_patch: daysSincePatch,
+            pending_reboot: Boolean(a.pending_reboot),
+            last_boot_time: a.last_boot_time || null,
+            days_since_last_boot: daysSinceBoot,
+            last_seen_at: a.last_seen_at,
+            patch_status,
+            recommendation_th,
+            priority_order
+          };
+        }).sort((a, b) => a.priority_order - b.priority_order || b.days_since_last_patch - a.days_since_last_patch || a.hostname.localeCompare(b.hostname));
+
+        return {
+          rows: rows as unknown as T[],
+          command: 'SELECT',
+          rowCount: rows.length,
+          oid: 0,
+          fields: []
+        };
+      }
       if (lower.includes('vw_critical_hardware_changes')) {
         return {
           rows: storeData.changeLogs as unknown as T[],

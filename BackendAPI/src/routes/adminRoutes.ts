@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import express from 'express';
 import { AdminController } from '../controllers/adminController';
+import { AnalyticsController } from '../controllers/analyticsController';
 import {
   requireAuth,
   requireRole,
@@ -21,6 +22,11 @@ router.get('/assets', requireRole('VIEWER'), AdminController.listAssets);
 router.get('/reports/pm-priority-queue', requireRole('VIEWER'), AdminController.getPmPriorityQueue);
 router.get('/reports/unverified-audit', requireRole('VIEWER'), AdminController.getUnverifiedAuditAssets);
 router.get('/reports/critical-changes', requireRole('VIEWER'), AdminController.getCriticalHardwareChanges);
+
+// Executive Analytics, Software License Counting & Windows Patch Compliance Engine
+router.get('/analytics/executive-summary', requireRole('VIEWER'), AnalyticsController.getExecutiveSummary);
+router.get('/analytics/software', requireRole('VIEWER'), AnalyticsController.getSoftwareSummary);
+router.get('/analytics/patch-advisory', requireRole('VIEWER'), AnalyticsController.getPatchAdvisory);
 
 // Sensitive Mutations: Strictly restricted to ADMIN role
 router.patch(

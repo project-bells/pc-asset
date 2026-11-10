@@ -32,6 +32,13 @@ export interface EmbeddedAsset {
   wifi_signal_percent: number | null;
   agent_version: string | null;
   last_seen_at: string | null;
+  os_version?: string | null;
+  os_ubr?: number | null;
+  latest_kb_id?: string | null;
+  installed_patches_json?: any[];
+  pending_reboot?: boolean;
+  last_windows_update?: string | null;
+  last_boot_time?: string | null;
   monitors_json: any[];
   disks_json: any[];
   installed_software_json: any[];
@@ -107,7 +114,17 @@ const initialData: EmbeddedStoreData = {
       manufacturer: 'LENOVO',
       model: '12SKS3QV00 (ThinkCentre Neo 50s Gen 4)',
       os_name: 'Microsoft Windows 11 Pro',
-      os_build: '26200',
+      os_build: '26200.5040',
+      os_version: '24H2',
+      os_ubr: 5040,
+      latest_kb_id: 'KB5044273',
+      installed_patches_json: [
+        { kbId: 'KB5044273', description: '2026-10 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems', installedOn: '2026-10-15' },
+        { kbId: 'KB5044033', description: 'Security Update for Windows 11', installedOn: '2026-09-10' }
+      ],
+      pending_reboot: false,
+      last_windows_update: new Date(Date.now() - 5 * 86400000).toISOString(),
+      last_boot_time: new Date(Date.now() - 2 * 86400000).toISOString(),
       last_logged_in_user: 'AIKCHOL1\\meetingroom',
       cpu_name: 'Intel(R) Core(TM) i5-14400 (10 Cores, 16 Logical Processors)',
       cpu_cores: 10,
@@ -183,7 +200,16 @@ const initialData: EmbeddedStoreData = {
       manufacturer: 'LENOVO',
       model: '12SKS3QV00 (ThinkCentre Neo 50s Gen 4)',
       os_name: 'Microsoft Windows 11 Pro',
-      os_build: '26200',
+      os_build: '22631.3007',
+      os_version: '23H2',
+      os_ubr: 3007,
+      latest_kb_id: 'KB5034441',
+      installed_patches_json: [
+        { kbId: 'KB5034441', description: 'Windows Recovery Environment update for Windows 11', installedOn: '2026-08-15' }
+      ],
+      pending_reboot: false,
+      last_windows_update: new Date(Date.now() - 65 * 86400000).toISOString(),
+      last_boot_time: new Date(Date.now() - 8 * 86400000).toISOString(),
       last_logged_in_user: 'AIKCHOL1\\it-admin',
       cpu_name: 'Intel(R) Core(TM) i5-14400',
       cpu_cores: 10,
@@ -232,8 +258,17 @@ const initialData: EmbeddedStoreData = {
       pc_serial_number: 'MJ0911XA',
       manufacturer: 'HP',
       model: 'HP ProDesk 400 G7 SFF',
-      os_name: 'Microsoft Windows 11 Pro',
-      os_build: '22631.3007',
+      os_name: 'Microsoft Windows 10 Pro',
+      os_build: '19045.4894',
+      os_version: '22H2',
+      os_ubr: 4894,
+      latest_kb_id: 'KB5043064',
+      installed_patches_json: [
+        { kbId: 'KB5043064', description: 'Cumulative Update for Windows 10 Version 22H2', installedOn: '2026-09-20' }
+      ],
+      pending_reboot: false,
+      last_windows_update: new Date(Date.now() - 20 * 86400000).toISOString(),
+      last_boot_time: new Date(Date.now() - 4 * 86400000).toISOString(),
       last_logged_in_user: 'AIKCHOL1\\reception',
       cpu_name: '12th Gen Intel(R) Core(TM) i5-12500',
       cpu_cores: 6,
@@ -256,6 +291,67 @@ const initialData: EmbeddedStoreData = {
         { name: 'Google Chrome', version: '122.0.6261.129', publisher: 'Google LLC' }
       ],
       created_at: new Date(Date.now() - 3600000).toISOString(),
+      updated_at: new Date().toISOString()
+    },
+    {
+      // 4. FINANCE WORKSTATION (TEST CASE FOR REBOOT REQUIRED & SOFTWARE LICENSE DEDUPLICATION)
+      id: '70658300-54b5-11f0-8aa1-445eb2a83c77',
+      asset_tag: 'AIK-WS-2567-003',
+      status: 'Active',
+      location_id: 'loc-b1f6-01',
+      building: 'อาคาร 1 (โรงพยาบาลเอกชล)',
+      floor: 'ชั้น 6',
+      room_name: 'ห้องฝ่ายการเงิน (Finance Office B1F603)',
+      department_name: 'แผนกการเงินและบัญชี (Finance & Accounting)',
+      assigned_user: 'AIKCHOL1\\fin-officer',
+      purchase_date: '2024-06-01',
+      warranty_expiry_date: '2027-06-01',
+      qr_code_token: 'QR-B1F603-FIN01',
+      hardware_uuid: '70658300-54B5-11F0-8AA1-445EB2A83C77',
+      hostname: 'B1F603-FIN01',
+      pc_serial_number: 'MJ0988KL',
+      manufacturer: 'HP',
+      model: 'HP ProDesk 400 G7 SFF',
+      os_name: 'Microsoft Windows 11 Enterprise',
+      os_build: '22631.4317',
+      os_version: '23H2',
+      os_ubr: 4317,
+      latest_kb_id: 'KB5044284',
+      installed_patches_json: [
+        { kbId: 'KB5044284', description: '2026-10 Cumulative Update for Windows 11 Version 23H2', installedOn: '2026-10-28' }
+      ],
+      pending_reboot: true,
+      last_windows_update: new Date(Date.now() - 2 * 86400000).toISOString(),
+      last_boot_time: new Date(Date.now() - 35 * 86400000).toISOString(),
+      last_logged_in_user: 'AIKCHOL1\\fin-officer',
+      cpu_name: '12th Gen Intel(R) Core(TM) i5-12500',
+      cpu_cores: 6,
+      ram_total_gb: 16,
+      ip_address: '192.168.27.150',
+      mac_address: '70:85:C2:55:77:88',
+      lan_speed_mbps: 1000,
+      wifi_ssid: null,
+      wifi_signal_percent: null,
+      agent_version: '1.0.0.0',
+      last_seen_at: new Date(Date.now() - 3 * 60000).toISOString(),
+      monitors_json: [
+        { manufacturer: 'HP', model: 'HP E24 G4', serialNumber: 'CN41290FIN' }
+      ],
+      disks_json: [
+        { driveLetter: 'C:', model: 'KIOXIA NVMe 256GB', totalGb: 256, freeGb: 165, freePercent: 64, smartStatus: 'Healthy' }
+      ],
+      edr_info_json: { installed: true, productName: 'ESET Endpoint Antivirus', realtimeProtection: true },
+      installed_software_json: [
+        { name: 'Microsoft Office Professional Plus 2021', version: '16.0.14332.20721', publisher: 'Microsoft Corporation' },
+        { name: 'Microsoft Word 2021', version: '16.0.14332.20721', publisher: 'Microsoft Corporation' },
+        { name: 'Microsoft Excel 2021', version: '16.0.14332.20721', publisher: 'Microsoft Corporation' },
+        { name: 'Microsoft Visio Professional 2021', version: '16.0.14332.20721', publisher: 'Microsoft Corporation' },
+        { name: 'Adobe Acrobat Pro (64-bit)', version: '24.002.20895', publisher: 'Adobe' },
+        { name: 'Google Chrome', version: '156.0.8078.80', publisher: 'Google LLC' },
+        { name: 'ESET Endpoint Antivirus', version: '13.1.2036.0', publisher: 'ESET, spol. s r.o.' },
+        { name: '7-Zip 23.01 (x64)', version: '23.01', publisher: 'Igor Pavlov' }
+      ],
+      created_at: new Date(Date.now() - 7200000).toISOString(),
       updated_at: new Date().toISOString()
     }
   ],
@@ -342,7 +438,40 @@ class EmbeddedStore {
     try {
       if (fs.existsSync(STORE_PATH)) {
         const content = fs.readFileSync(STORE_PATH, 'utf-8');
-        return JSON.parse(content);
+        const parsed: EmbeddedStoreData = JSON.parse(content);
+        
+        // Ensure new demo workstations or missing patch fields are backfilled
+        initialData.assets.forEach((initAsset) => {
+          const found = parsed.assets.find((a) => a.id === initAsset.id || a.hostname === initAsset.hostname);
+          if (!found) {
+            parsed.assets.push(initAsset);
+          } else {
+            if (initAsset.hostname === 'B1F101-RECEPT') {
+              found.os_name = initAsset.os_name;
+              found.os_version = initAsset.os_version;
+              found.os_build = initAsset.os_build;
+            }
+            if (!found.os_version && initAsset.os_version) found.os_version = initAsset.os_version;
+            if (!found.os_ubr && initAsset.os_ubr) found.os_ubr = initAsset.os_ubr;
+            if (!found.latest_kb_id && initAsset.latest_kb_id) found.latest_kb_id = initAsset.latest_kb_id;
+            if (!found.installed_patches_json && initAsset.installed_patches_json) found.installed_patches_json = initAsset.installed_patches_json;
+            if (found.pending_reboot === undefined) found.pending_reboot = initAsset.pending_reboot ?? false;
+            if (!found.last_windows_update && initAsset.last_windows_update) found.last_windows_update = initAsset.last_windows_update;
+            if (!found.last_boot_time && initAsset.last_boot_time) found.last_boot_time = initAsset.last_boot_time;
+          }
+        });
+
+        // Ensure generic assets have reasonable defaults
+        parsed.assets.forEach((a) => {
+          if (!a.os_version) a.os_version = a.os_build?.startsWith('26') ? '24H2' : a.os_build?.startsWith('2263') ? '23H2' : '22H2';
+          if (!a.installed_patches_json) a.installed_patches_json = [];
+          if (a.pending_reboot === undefined) a.pending_reboot = false;
+          if (!a.last_windows_update) a.last_windows_update = new Date(Date.now() - 10 * 86400000).toISOString();
+          if (!a.last_boot_time) a.last_boot_time = new Date(Date.now() - 2 * 86400000).toISOString();
+        });
+
+        this.save(parsed);
+        return parsed;
       }
     } catch (e) {
       console.warn('[EmbeddedStore] Failed reading existing store, initializing defaults:', e);
@@ -382,6 +511,13 @@ class EmbeddedStore {
         model: incoming.model || existing.model,
         os_name: incoming.osName || existing.os_name,
         os_build: incoming.osBuild || existing.os_build,
+        os_version: incoming.osVersion || (incoming.osBuild?.startsWith('26') ? '24H2' : incoming.osBuild?.startsWith('2263') ? '23H2' : incoming.osBuild?.startsWith('2262') ? '22H2' : incoming.osBuild?.startsWith('1904') ? '22H2' : (existing.os_version || '23H2')),
+        os_ubr: incoming.osUbr || (incoming.osBuild && incoming.osBuild.includes('.') ? parseInt(incoming.osBuild.split('.')[1], 10) : (existing.os_ubr || null)),
+        latest_kb_id: incoming.latestKbId || existing.latest_kb_id || null,
+        installed_patches_json: incoming.installedPatches || existing.installed_patches_json || [],
+        pending_reboot: incoming.pendingReboot ?? existing.pending_reboot ?? false,
+        last_windows_update: incoming.lastWindowsUpdate || existing.last_windows_update || null,
+        last_boot_time: incoming.lastBootTime || existing.last_boot_time || null,
         last_logged_in_user: incoming.lastLoggedInUser || existing.last_logged_in_user,
         cpu_name: incoming.cpu?.name || existing.cpu_name,
         cpu_cores: incoming.cpu?.cores || existing.cpu_cores,
@@ -416,6 +552,13 @@ class EmbeddedStore {
         model: incoming.model || 'Standard PC',
         os_name: incoming.osName || 'Windows',
         os_build: incoming.osBuild || '',
+        os_version: incoming.osVersion || (incoming.osBuild?.startsWith('26') ? '24H2' : incoming.osBuild?.startsWith('2263') ? '23H2' : incoming.osBuild?.startsWith('2262') ? '22H2' : incoming.osBuild?.startsWith('1904') ? '22H2' : '23H2'),
+        os_ubr: incoming.osUbr || (incoming.osBuild && incoming.osBuild.includes('.') ? parseInt(incoming.osBuild.split('.')[1], 10) : null),
+        latest_kb_id: incoming.latestKbId || null,
+        installed_patches_json: incoming.installedPatches || [],
+        pending_reboot: incoming.pendingReboot || false,
+        last_windows_update: incoming.lastWindowsUpdate || new Date().toISOString(),
+        last_boot_time: incoming.lastBootTime || new Date(Date.now() - 86400000).toISOString(),
         last_logged_in_user: incoming.lastLoggedInUser || null,
         cpu_name: incoming.cpu?.name || 'x64 CPU',
         cpu_cores: incoming.cpu?.cores || 4,

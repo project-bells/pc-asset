@@ -210,7 +210,25 @@
         }
       ],
       "created_at": "2024-05-15T08:00:00Z",
-      "updated_at": "2026-11-09T07:56:39.593Z"
+      "updated_at": "2026-11-09T07:56:39.593Z",
+      "os_version": "24H2",
+      "os_ubr": 5040,
+      "latest_kb_id": "KB5044273",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5044273",
+          "description": "2026-10 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems",
+          "installedOn": "2026-10-15"
+        },
+        {
+          "kbId": "KB5044033",
+          "description": "Security Update for Windows 11",
+          "installedOn": "2026-09-10"
+        }
+      ],
+      "pending_reboot": false,
+      "last_windows_update": "2026-11-05T02:11:22.498Z",
+      "last_boot_time": "2026-11-08T02:11:22.499Z"
     },
     {
       "id": "70658300-54b5-11f0-8aa1-445eb2a83c02",
@@ -278,7 +296,20 @@
         }
       ],
       "created_at": "2024-05-15T08:00:00Z",
-      "updated_at": "2026-11-09T07:01:33.291Z"
+      "updated_at": "2026-11-09T07:01:33.291Z",
+      "os_version": "23H2",
+      "os_ubr": 3007,
+      "latest_kb_id": "KB5034441",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5034441",
+          "description": "Windows Recovery Environment update for Windows 11",
+          "installedOn": "2026-08-15"
+        }
+      ],
+      "pending_reboot": false,
+      "last_windows_update": "2026-09-06T02:11:22.499Z",
+      "last_boot_time": "2026-11-02T02:11:22.499Z"
     },
     {
       "id": "70658300-54b5-11f0-8aa1-445eb2a83c99",
@@ -298,8 +329,8 @@
       "pc_serial_number": "MJ0911XA",
       "manufacturer": "HP",
       "model": "HP ProDesk 400 G7 SFF",
-      "os_name": "Microsoft Windows 11 Pro",
-      "os_build": "22631.3007",
+      "os_name": "Microsoft Windows 10 Pro",
+      "os_build": "19045.4894",
       "last_logged_in_user": "AIKCHOL1\\reception",
       "cpu_name": "12th Gen Intel(R) Core(TM) i5-12500",
       "cpu_cores": 6,
@@ -341,7 +372,20 @@
         }
       ],
       "created_at": "2026-11-09T06:01:33.291Z",
-      "updated_at": "2026-11-09T07:01:33.291Z"
+      "updated_at": "2026-11-09T07:01:33.291Z",
+      "os_version": "22H2",
+      "os_ubr": 4894,
+      "latest_kb_id": "KB5043064",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5043064",
+          "description": "Cumulative Update for Windows 10 Version 22H2",
+          "installedOn": "2026-09-20"
+        }
+      ],
+      "pending_reboot": false,
+      "last_windows_update": "2026-10-21T02:11:22.499Z",
+      "last_boot_time": "2026-11-06T02:11:22.499Z"
     },
     {
       "id": "62146880-54AF-11F0-8DD7-E8DB50E52E00",
@@ -545,7 +589,12 @@
       "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
       "floor": "ชั้น 6",
       "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
-      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)",
+      "os_version": "24H2",
+      "installed_patches_json": [],
+      "pending_reboot": false,
+      "last_windows_update": "2026-10-31T02:11:22.500Z",
+      "last_boot_time": "2026-11-08T02:11:22.500Z"
     },
     {
       "id": "78BEBD80-54B7-11F0-BA34-AD222F6C3500",
@@ -909,7 +958,123 @@
       "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
       "floor": "ชั้น 6",
       "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
-      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)",
+      "os_version": "24H2",
+      "installed_patches_json": [],
+      "pending_reboot": false,
+      "last_windows_update": "2026-10-31T02:11:22.500Z",
+      "last_boot_time": "2026-11-08T02:11:22.500Z"
+    },
+    {
+      "id": "70658300-54b5-11f0-8aa1-445eb2a83c77",
+      "asset_tag": "AIK-WS-2567-003",
+      "status": "Active",
+      "location_id": "loc-b1f6-01",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องฝ่ายการเงิน (Finance Office B1F603)",
+      "department_name": "แผนกการเงินและบัญชี (Finance & Accounting)",
+      "assigned_user": "AIKCHOL1\\fin-officer",
+      "purchase_date": "2024-06-01",
+      "warranty_expiry_date": "2027-06-01",
+      "qr_code_token": "QR-B1F603-FIN01",
+      "hardware_uuid": "70658300-54B5-11F0-8AA1-445EB2A83C77",
+      "hostname": "B1F603-FIN01",
+      "pc_serial_number": "MJ0988KL",
+      "manufacturer": "HP",
+      "model": "HP ProDesk 400 G7 SFF",
+      "os_name": "Microsoft Windows 11 Enterprise",
+      "os_build": "22631.4317",
+      "os_version": "23H2",
+      "os_ubr": 4317,
+      "latest_kb_id": "KB5044284",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5044284",
+          "description": "2026-10 Cumulative Update for Windows 11 Version 23H2",
+          "installedOn": "2026-10-28"
+        }
+      ],
+      "pending_reboot": true,
+      "last_windows_update": "2026-11-08T02:11:22.499Z",
+      "last_boot_time": "2026-10-06T02:11:22.499Z",
+      "last_logged_in_user": "AIKCHOL1\\fin-officer",
+      "cpu_name": "12th Gen Intel(R) Core(TM) i5-12500",
+      "cpu_cores": 6,
+      "ram_total_gb": 16,
+      "ip_address": "192.168.27.150",
+      "mac_address": "70:85:C2:55:77:88",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-10T02:08:22.499Z",
+      "monitors_json": [
+        {
+          "manufacturer": "HP",
+          "model": "HP E24 G4",
+          "serialNumber": "CN41290FIN"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "model": "KIOXIA NVMe 256GB",
+          "totalGb": 256,
+          "freeGb": 165,
+          "freePercent": 64,
+          "smartStatus": "Healthy"
+        }
+      ],
+      "edr_info_json": {
+        "installed": true,
+        "productName": "ESET Endpoint Antivirus",
+        "realtimeProtection": true
+      },
+      "installed_software_json": [
+        {
+          "name": "Microsoft Office Professional Plus 2021",
+          "version": "16.0.14332.20721",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Word 2021",
+          "version": "16.0.14332.20721",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Excel 2021",
+          "version": "16.0.14332.20721",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visio Professional 2021",
+          "version": "16.0.14332.20721",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Adobe Acrobat Pro (64-bit)",
+          "version": "24.002.20895",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "Google Chrome",
+          "version": "156.0.8078.80",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "ESET Endpoint Antivirus",
+          "version": "13.1.2036.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "7-Zip 23.01 (x64)",
+          "version": "23.01",
+          "publisher": "Igor Pavlov"
+        }
+      ],
+      "created_at": "2026-11-10T00:11:22.499Z",
+      "updated_at": "2026-11-10T02:11:22.499Z"
     }
   ],
   "changeLogs": [
