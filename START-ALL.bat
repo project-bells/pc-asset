@@ -6,9 +6,9 @@ echo   Launching Enterprise IT Asset Guard Services
 echo =================================================================
 
 start "IT Asset Backend API (Port 5000)" cmd /k "%~dp0Run-Server.bat"
-timeout /t 3 /nobreak >nul
+ping 127.0.0.1 -n 4 >nul
 start "IT Asset Frontend Portal (Port 3000)" cmd /k "%~dp0Run-Frontend.bat"
-timeout /t 3 /nobreak >nul
+ping 127.0.0.1 -n 4 >nul
 
 start http://localhost:3000/assets
 echo.

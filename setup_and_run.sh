@@ -186,3 +186,4 @@ echo -e "  - View backend logs only   : ${CYAN}docker compose logs -f backend${N
 echo -e "  - Restart entire stack     : ${CYAN}docker compose restart${NC}"
 echo -e "  - Stop all services        : ${CYAN}docker compose down${NC}"
 echo -e "${CYAN}====================================================================${NC}\n"
+

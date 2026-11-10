@@ -137,7 +137,18 @@ export class RemoteController {
         accessMode,
         isOnline,
         expiresInSeconds: 60,
-        sessionRecording: recordingFilename
+        sessionRecording: recordingFilename,
+        session: {
+          connectionName: `${asset.hostname} (${asset.ip_address})`,
+          targetHostname: asset.hostname,
+          targetIp: asset.ip_address,
+          targetPort: vncPort,
+          accessMode,
+          expiresAt: new Date(Date.now() + 60000).toISOString(),
+          expiresInSeconds: 60,
+          launchUrl: launchResult.launchUrl,
+          directUrl: launchResult.launchUrl
+        }
       });
     } catch (err: any) {
       console.error('[RemoteController] createRemoteSession error:', err);
@@ -179,12 +190,22 @@ export class RemoteController {
       const logs = dataRes.rows || [];
       const total = parseInt(countRes.rows?.[0]?.total || logs.length.toString(), 10);
 
+      const totalPages = Math.ceil(total / limit) || 1;
+
       return res.status(200).json({
+        success: true,
         logs,
+        data: logs,
         total,
         page,
         limit,
-        totalPages: Math.ceil(total / limit)
+        totalPages,
+        pagination: {
+          page,
+          limit,
+          total,
+          totalPages
+        }
       });
     } catch (err: any) {
       console.error('[RemoteController] listRemoteAccessLogs error:', err);

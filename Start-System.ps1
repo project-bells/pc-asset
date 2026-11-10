@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Starts the Enterprise IT Asset Guard Backend API and Frontend Web Portal.
 .DESCRIPTION
@@ -26,7 +26,7 @@ $backendJob = Start-Process -FilePath $nodeExe -ArgumentList "dist/server.js" -W
 
 # 2. Start Frontend Web Portal
 Write-Host "[2/3] Starting Frontend Web Portal (Port 3000)..." -ForegroundColor Yellow
-$frontendJob = Start-Process -FilePath "cmd.exe" -ArgumentList "/c `"$npmCmd`" run start -- -p 3000" -WorkingDirectory $frontendDir -PassThru -WindowStyle Hidden
+$frontendJob = Start-Process -FilePath $nodeExe -ArgumentList ".next/standalone/server.js" -WorkingDirectory $frontendDir -PassThru -WindowStyle Hidden
 
 # Save PIDs to temporary file for Stop-System.ps1
 $pidsData = @{
@@ -53,6 +53,7 @@ Write-Host "  To stop all services, run: .\Stop-System.ps1                   " -
 Write-Host "=================================================================`n" -ForegroundColor Green
 
 # Optional: Open browser automatically
-Start-Process "http://localhost:3000"
+Start-Process "http://localhost:3000/assets"
+
 
 
