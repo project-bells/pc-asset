@@ -65,6 +65,14 @@ export class AgentController {
         const peripheralsJson = JSON.stringify(payload.peripherals || []);
         const softwareJson = JSON.stringify(payload.installedSoftware || []);
 
+        const osVersion = payload.system.osVersion || null;
+        const osUbr = payload.system.osUbr || null;
+        const latestKbId = payload.system.latestKbId || (payload.installedPatches?.[0]?.kbId) || null;
+        const patchesJson = JSON.stringify(payload.installedPatches || []);
+        const pendingReboot = Boolean(payload.pendingReboot);
+        const lastWindowsUpdate = payload.system.lastWindowsUpdate || (payload.installedPatches?.[0]?.installedOn) || null;
+        const lastBootTime = payload.system.lastBootTime || null;
+
         const inventoryHash = crypto
           .createHash('sha256')
           .update(JSON.stringify(payload))
@@ -77,14 +85,17 @@ export class AgentController {
             os_name, os_build, last_logged_in_user, cpu_model, ram_total_gb,
             ip_address, mac_address, link_speed_mbps,
             disks_json, monitors_json, peripherals_json, installed_software_json,
-            inventory_hash, status, qr_code_token, last_inventory_at, last_seen_at
+            inventory_hash, status, qr_code_token, last_inventory_at, last_seen_at,
+            os_version, os_ubr, latest_kb_id, installed_patches_json, pending_reboot,
+            last_windows_update, last_boot_time
           )
           VALUES (
             $1, $2, $3, $4, $5,
             $6, $7, $8, $9, $10,
             $11, $12, $13,
             $14::jsonb, $15::jsonb, $16::jsonb, $17::jsonb,
-            $18, 'Unregistered', encode(gen_random_bytes(16), 'hex'), clock_timestamp(), clock_timestamp()
+            $18, 'Unregistered', encode(gen_random_bytes(16), 'hex'), clock_timestamp(), clock_timestamp(),
+            $19, $20, $21, $22::jsonb, $23, $24, $25
           )
           ON CONFLICT (hardware_uuid) DO UPDATE SET
             hostname = EXCLUDED.hostname,
@@ -105,7 +116,14 @@ export class AgentController {
             installed_software_json = EXCLUDED.installed_software_json,
             inventory_hash = EXCLUDED.inventory_hash,
             last_inventory_at = clock_timestamp(),
-            last_seen_at = clock_timestamp()
+            last_seen_at = clock_timestamp(),
+            os_version = COALESCE(EXCLUDED.os_version, assets.os_version),
+            os_ubr = COALESCE(EXCLUDED.os_ubr, assets.os_ubr),
+            latest_kb_id = COALESCE(EXCLUDED.latest_kb_id, assets.latest_kb_id),
+            installed_patches_json = COALESCE(EXCLUDED.installed_patches_json, assets.installed_patches_json),
+            pending_reboot = EXCLUDED.pending_reboot,
+            last_windows_update = COALESCE(EXCLUDED.last_windows_update, assets.last_windows_update),
+            last_boot_time = COALESCE(EXCLUDED.last_boot_time, assets.last_boot_time)
           RETURNING id, status, qr_code_token;
         `;
 
@@ -127,7 +145,14 @@ export class AgentController {
           monitorsJson,
           peripheralsJson,
           softwareJson,
-          inventoryHash
+          inventoryHash,
+          osVersion,
+          osUbr,
+          latestKbId,
+          patchesJson,
+          pendingReboot,
+          lastWindowsUpdate,
+          lastBootTime
         ]);
 
         const assetId = upsertRes.rows[0].id;
@@ -177,6 +202,13 @@ export class AgentController {
           model: payload.system.model,
           osName: payload.system.osName,
           osBuild: payload.system.osBuild,
+          osVersion,
+          osUbr,
+          latestKbId,
+          installedPatches: payload.installedPatches,
+          pendingReboot,
+          lastWindowsUpdate,
+          lastBootTime,
           lastLoggedInUser: payload.system.currentLoggedInUser,
           cpu: { name: payload.cpu?.model, cores: payload.cpu?.physicalCores },
           ramTotalGb: totalRamGb,
@@ -234,15 +266,17 @@ export class AgentController {
         const updateAssetSql = `
           INSERT INTO assets (
             hardware_uuid, hostname, ip_address, mac_address, link_speed_mbps, 
-            ram_total_gb, last_seen_at
+            ram_total_gb, pending_reboot, last_boot_time, last_seen_at
           )
-          VALUES ($1, $2, $3, $4, $5, $6, clock_timestamp())
+          VALUES ($1, $2, $3, $4, $5, $6, COALESCE($7, false), $8, clock_timestamp())
           ON CONFLICT (hardware_uuid) DO UPDATE SET
             hostname = EXCLUDED.hostname,
             ip_address = COALESCE(EXCLUDED.ip_address, assets.ip_address),
             mac_address = COALESCE(EXCLUDED.mac_address, assets.mac_address),
             link_speed_mbps = EXCLUDED.link_speed_mbps,
             ram_total_gb = COALESCE(EXCLUDED.ram_total_gb, assets.ram_total_gb),
+            pending_reboot = COALESCE(EXCLUDED.pending_reboot, assets.pending_reboot),
+            last_boot_time = COALESCE(EXCLUDED.last_boot_time, assets.last_boot_time),
             last_seen_at = clock_timestamp()
           RETURNING id;
         `;
@@ -253,7 +287,9 @@ export class AgentController {
           ip,
           mac,
           linkSpeed,
-          payload.ramTotalGb
+          payload.ramTotalGb,
+          payload.pendingReboot ?? null,
+          payload.lastBootTime ?? null
         ]);
 
         const assetId = assetRes.rows[0].id;

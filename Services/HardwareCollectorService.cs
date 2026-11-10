@@ -46,6 +46,8 @@ public partial class HardwareCollectorService : IHardwareCollectorService
         var activeNetworks = GetActiveNetworkMetrics();
         var powerStatus = CollectPowerAndThermalMetrics();
         var topProcesses = GetTopResourceProcesses(5);
+        bool pendingReboot = CheckPendingReboot();
+        var (lastBootTime, uptimeDays) = GetSystemUptime();
 
         var payload = new TelemetryPayload(
             HardwareUuid: uuid,
@@ -58,7 +60,10 @@ public partial class HardwareCollectorService : IHardwareCollectorService
             Disks: logicalDisks,
             NetworkAdapters: activeNetworks,
             PowerStatus: powerStatus,
-            TopProcesses: topProcesses
+            TopProcesses: topProcesses,
+            PendingReboot: pendingReboot,
+            LastBootTime: lastBootTime?.ToUniversalTime().ToString("o"),
+            UptimeDays: uptimeDays
         );
 
         return Task.FromResult(payload);
@@ -80,9 +85,22 @@ public partial class HardwareCollectorService : IHardwareCollectorService
         var peripherals = CollectPeripherals();
         var software = CollectInstalledSoftware();
         var securityProducts = CollectSecurityProductStatus();
+        var patches = CollectWindowsPatches();
+        bool pendingReboot = CheckPendingReboot();
+        var (lastBootTime, uptimeDays) = GetSystemUptime();
+
+        string? latestKb = patches.FirstOrDefault()?.KbId;
+        string? lastUpdateDate = patches.FirstOrDefault()?.InstalledOn;
+
+        var enrichedSystem = systemInfo with
+        {
+            LatestKbId = latestKb,
+            LastWindowsUpdate = lastUpdateDate,
+            LastBootTime = lastBootTime?.ToUniversalTime().ToString("o")
+        };
 
         var payload = new FullInventoryPayload(
-            System: systemInfo,
+            System: enrichedSystem,
             Cpu: cpuInfo,
             MemoryModules: ramModules,
             LogicalDisks: logicalDisks,
@@ -91,7 +109,9 @@ public partial class HardwareCollectorService : IHardwareCollectorService
             Monitors: monitors,
             Peripherals: peripherals,
             InstalledSoftware: software,
-            SecurityProducts: securityProducts
+            SecurityProducts: securityProducts,
+            InstalledPatches: patches,
+            PendingReboot: pendingReboot
         );
 
         return Task.FromResult(payload);
@@ -167,6 +187,43 @@ public partial class HardwareCollectorService : IHardwareCollectorService
             _logger.LogWarning(ex, "Failed to query Win32_OperatingSystem identity.");
         }
 
+        int? osUbr = null;
+        string displayVersion = string.Empty;
+
+        try
+        {
+            using var cvKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+            if (cvKey != null)
+            {
+                displayVersion = cvKey.GetValue("DisplayVersion")?.ToString()?.Trim() ?? string.Empty;
+                if (string.IsNullOrEmpty(displayVersion))
+                {
+                    displayVersion = cvKey.GetValue("ReleaseId")?.ToString()?.Trim() ?? string.Empty;
+                }
+
+                var ubrObj = cvKey.GetValue("UBR");
+                if (ubrObj is int ubrVal)
+                {
+                    osUbr = ubrVal;
+                }
+                else if (ubrObj != null && int.TryParse(ubrObj.ToString(), out int parsedUbr))
+                {
+                    osUbr = parsedUbr;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogDebug(ex, "Failed to read Windows NT CurrentVersion registry values.");
+        }
+
+        string finalOsVersion = !string.IsNullOrEmpty(displayVersion) ? displayVersion : osVersion;
+        string finalOsBuild = osBuild;
+        if (osUbr.HasValue && !osBuild.Contains('.'))
+        {
+            finalOsBuild = $"{osBuild}.{osUbr.Value}";
+        }
+
         return new SystemIdentityInfo(
             HardwareUuid: uuid,
             BiosSerialNumber: biosSerial,
@@ -174,9 +231,10 @@ public partial class HardwareCollectorService : IHardwareCollectorService
             Model: model,
             Hostname: Environment.MachineName,
             OsName: osName,
-            OsVersion: osVersion,
-            OsBuild: osBuild,
-            CurrentLoggedInUser: loggedInUser
+            OsVersion: finalOsVersion,
+            OsBuild: finalOsBuild,
+            CurrentLoggedInUser: loggedInUser,
+            OsUbr: osUbr
         );
     }
 
@@ -1032,6 +1090,154 @@ public partial class HardwareCollectorService : IHardwareCollectorService
             _logger.LogWarning(ex, "Failed to collect process resource metrics.");
             return processList;
         }
+    }
+
+    #endregion
+
+    #region Windows Patch Management & Pending Reboot Detection
+
+    /// <summary>
+    /// Collects installed Windows Security & Cumulative Updates via WMI Win32_QuickFixEngineering.
+    /// </summary>
+    public List<WindowsPatchInfo> CollectWindowsPatches()
+    {
+        var list = new List<WindowsPatchInfo>();
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT HotFixID, Description, InstalledOn FROM Win32_QuickFixEngineering")
+            {
+                Options = DefaultWmiOptions
+            };
+            using var coll = searcher.Get();
+            foreach (ManagementObject obj in coll.Cast<ManagementObject>())
+            {
+                using (obj)
+                {
+                    string hotFixId = obj["HotFixID"]?.ToString()?.Trim() ?? string.Empty;
+                    if (string.IsNullOrEmpty(hotFixId) || hotFixId.Equals("File 1", StringComparison.OrdinalIgnoreCase))
+                        continue;
+
+                    string desc = obj["Description"]?.ToString()?.Trim() ?? "Update";
+                    string installedOnRaw = obj["InstalledOn"]?.ToString()?.Trim() ?? string.Empty;
+
+                    string formattedDate = string.Empty;
+                    if (!string.IsNullOrEmpty(installedOnRaw))
+                    {
+                        if (DateTime.TryParse(installedOnRaw, CultureInfo.InvariantCulture, DateTimeStyles.None, out var dt) ||
+                            DateTime.TryParse(installedOnRaw, CultureInfo.CurrentCulture, DateTimeStyles.None, out dt))
+                        {
+                            formattedDate = dt.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            formattedDate = installedOnRaw;
+                        }
+                    }
+
+                    string normalizedKb = hotFixId.StartsWith("KB", StringComparison.OrdinalIgnoreCase) 
+                        ? hotFixId.ToUpperInvariant() 
+                        : $"KB{hotFixId}";
+
+                    list.Add(new WindowsPatchInfo(
+                        KbId: normalizedKb,
+                        Description: desc,
+                        InstalledOn: formattedDate
+                    ));
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogWarning(ex, "Failed to query Win32_QuickFixEngineering for Windows patches.");
+        }
+
+        return list.OrderByDescending(p => p.InstalledOn).ToList();
+    }
+
+    /// <summary>
+    /// Checks standard Windows Registry locations for pending reboot flags (CBS, WindowsUpdate, Session Manager).
+    /// </summary>
+    public bool CheckPendingReboot()
+    {
+        try
+        {
+            // 1. Component-Based Servicing (CBS) Reboot Pending
+            using var cbsKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing\RebootPending");
+            if (cbsKey != null) return true;
+
+            // 2. Windows Update Auto-Update Reboot Required
+            using var wuKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update\RebootRequired");
+            if (wuKey != null) return true;
+
+            // 3. Pending File Rename Operations (Session Manager)
+            using var smKey = Registry.LocalMachine.OpenSubKey(@"SYSTEM\CurrentControlSet\Control\Session Manager");
+            if (smKey != null)
+            {
+                var val = smKey.GetValue("PendingFileRenameOperations");
+                if (val is string[] strArr && strArr.Length > 0)
+                {
+                    if (strArr.Any(s => !string.IsNullOrWhiteSpace(s)))
+                        return true;
+                }
+                else if (val is string s && !string.IsNullOrWhiteSpace(s))
+                {
+                    return true;
+                }
+            }
+
+            // 4. System Center / Intune Client Reboot Pending
+            using var ccmKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\SMS\Mobile Client\Reboot Management\RebootData");
+            if (ccmKey != null) return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogDebug(ex, "Could not evaluate pending reboot registry status.");
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Queries Win32_OperatingSystem.LastBootUpTime to compute exact uptime and boot timestamp.
+    /// </summary>
+    public (DateTime? LastBootTime, double UptimeDays) GetSystemUptime()
+    {
+        DateTime? lastBoot = null;
+        try
+        {
+            using var searcher = new ManagementObjectSearcher("SELECT LastBootUpTime FROM Win32_OperatingSystem")
+            {
+                Options = DefaultWmiOptions
+            };
+            using var coll = searcher.Get();
+            foreach (ManagementObject obj in coll.Cast<ManagementObject>())
+            {
+                using (obj)
+                {
+                    string raw = obj["LastBootUpTime"]?.ToString() ?? string.Empty;
+                    if (!string.IsNullOrEmpty(raw))
+                    {
+                        lastBoot = ManagementDateTimeConverter.ToDateTime(raw);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogDebug(ex, "Failed to query Win32_OperatingSystem.LastBootUpTime, using Environment.TickCount64 fallback.");
+        }
+
+        if (!lastBoot.HasValue)
+        {
+            var uptimeSpan = TimeSpan.FromMilliseconds(Environment.TickCount64);
+            lastBoot = DateTime.UtcNow - uptimeSpan;
+        }
+
+        double days = lastBoot.HasValue 
+            ? Math.Round((DateTime.UtcNow - lastBoot.Value.ToUniversalTime()).TotalDays, 2) 
+            : 0;
+
+        return (lastBoot, days);
     }
 
     #endregion

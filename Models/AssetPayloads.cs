@@ -15,7 +15,10 @@ public record TelemetryPayload(
     [property: JsonPropertyName("disks")] List<LogicalDiskMetric> Disks,
     [property: JsonPropertyName("networkAdapters")] List<NetworkStatusMetric> NetworkAdapters,
     [property: JsonPropertyName("powerStatus")] PowerStatusMetric? PowerStatus,
-    [property: JsonPropertyName("topProcesses")] List<ProcessResourceMetric> TopProcesses
+    [property: JsonPropertyName("topProcesses")] List<ProcessResourceMetric> TopProcesses,
+    [property: JsonPropertyName("pendingReboot")] bool PendingReboot = false,
+    [property: JsonPropertyName("lastBootTime")] string? LastBootTime = null,
+    [property: JsonPropertyName("uptimeDays")] double UptimeDays = 0
 );
 
 public record LogicalDiskMetric(
@@ -61,7 +64,15 @@ public record FullInventoryPayload(
     [property: JsonPropertyName("monitors")] List<MonitorEdidInfo> Monitors,
     [property: JsonPropertyName("peripherals")] List<PeripheralDeviceInfo> Peripherals,
     [property: JsonPropertyName("installedSoftware")] List<InstalledSoftwareInfo> InstalledSoftware,
-    [property: JsonPropertyName("securityProducts")] List<SecurityEndpointStatus> SecurityProducts
+    [property: JsonPropertyName("securityProducts")] List<SecurityEndpointStatus> SecurityProducts,
+    [property: JsonPropertyName("installedPatches")] List<WindowsPatchInfo>? InstalledPatches = null,
+    [property: JsonPropertyName("pendingReboot")] bool PendingReboot = false
+);
+
+public record WindowsPatchInfo(
+    [property: JsonPropertyName("kbId")] string KbId,
+    [property: JsonPropertyName("description")] string Description,
+    [property: JsonPropertyName("installedOn")] string InstalledOn
 );
 
 public record SystemIdentityInfo(
@@ -73,7 +84,11 @@ public record SystemIdentityInfo(
     [property: JsonPropertyName("osName")] string OsName,
     [property: JsonPropertyName("osVersion")] string OsVersion,
     [property: JsonPropertyName("osBuild")] string OsBuild,
-    [property: JsonPropertyName("currentLoggedInUser")] string CurrentLoggedInUser
+    [property: JsonPropertyName("currentLoggedInUser")] string CurrentLoggedInUser,
+    [property: JsonPropertyName("osUbr")] int? OsUbr = null,
+    [property: JsonPropertyName("latestKbId")] string? LatestKbId = null,
+    [property: JsonPropertyName("lastWindowsUpdate")] string? LastWindowsUpdate = null,
+    [property: JsonPropertyName("lastBootTime")] string? LastBootTime = null
 );
 
 public record CpuInfo(

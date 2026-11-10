@@ -11,5 +11,8 @@ public interface IHardwareCollectorService
     List<ProcessResourceMetric> GetTopResourceProcesses(int count = 5);
     PowerStatusMetric CollectPowerAndThermalMetrics();
     List<SecurityEndpointStatus> CollectSecurityProductStatus();
+    List<WindowsPatchInfo> CollectWindowsPatches();
+    bool CheckPendingReboot();
+    (DateTime? LastBootTime, double UptimeDays) GetSystemUptime();
 }
 

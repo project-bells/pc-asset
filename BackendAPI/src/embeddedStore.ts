@@ -593,6 +593,12 @@ class EmbeddedStore {
       if (payload.networkAdapters?.[0]?.ipv4Address) {
         asset.ip_address = payload.networkAdapters[0].ipv4Address;
       }
+      if (payload.pendingReboot !== undefined) {
+        asset.pending_reboot = Boolean(payload.pendingReboot);
+      }
+      if (payload.lastBootTime) {
+        asset.last_boot_time = payload.lastBootTime;
+      }
       this.save();
     }
   }

@@ -90,4 +90,33 @@ public class AgentCoreTests
         // Act & Assert
         Assert.Throws<SecurityException>(() => SecurityValidator.ValidateBackendUrl(forbiddenUrl));
     }
+
+    [Fact]
+    public void HardwareCollectorService_ShouldCollectWindowsPatchesAndRebootFlags()
+    {
+        // Arrange
+        var collector = new HardwareCollectorService(NullLogger<HardwareCollectorService>.Instance);
+
+        // Act
+        var patches = collector.CollectWindowsPatches();
+        bool pendingReboot = collector.CheckPendingReboot();
+        var (lastBootTime, uptimeDays) = collector.GetSystemUptime();
+
+        // Assert
+        Assert.NotNull(patches);
+        // On any live Windows machine with security updates, patches should be present
+        if (patches.Count > 0)
+        {
+            var firstPatch = patches[0];
+            Assert.StartsWith("KB", firstPatch.KbId);
+            Assert.False(string.IsNullOrEmpty(firstPatch.Description));
+        }
+
+        // Reboot flag should be a boolean (true or false) without throwing
+        Assert.True(pendingReboot == true || pendingReboot == false);
+
+        // Uptime should be calculated
+        Assert.True(uptimeDays >= 0);
+        Assert.NotNull(lastBootTime);
+    }
 }

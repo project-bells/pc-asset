@@ -70,7 +70,10 @@ export const TelemetryPayloadSchema = z.object({
   disks: z.array(DiskMetricSchema).max(30, 'Exceeded maximum volume count of 30.'),
   networkAdapters: z.array(NetworkMetricSchema).max(20, 'Exceeded maximum network adapter count of 20.'),
   powerStatus: PowerStatusSchema.optional().nullable(),
-  topProcesses: z.array(ProcessMetricSchema).max(50, 'Exceeded maximum process count of 50.').optional()
+  topProcesses: z.array(ProcessMetricSchema).max(50, 'Exceeded maximum process count of 50.').optional(),
+  pendingReboot: z.boolean().optional().nullable(),
+  lastBootTime: z.string().optional().nullable(),
+  uptimeDays: z.number().optional().nullable()
 }).strip();
 
 export const MonitorSchema = z.object({
@@ -121,7 +124,11 @@ export const FullInventoryPayloadSchema = z.object({
     osName: sanitizedString(0, 150),
     osVersion: sanitizedString(0, 50),
     osBuild: sanitizedString(0, 50),
-    currentLoggedInUser: sanitizedString(0, 150)
+    currentLoggedInUser: sanitizedString(0, 150),
+    osUbr: z.number().int().optional().nullable(),
+    latestKbId: sanitizedString(0, 50).optional().nullable(),
+    lastWindowsUpdate: z.string().optional().nullable(),
+    lastBootTime: z.string().optional().nullable()
   }).strip(),
   cpu: z.object({
     model: sanitizedString(1, 150),
@@ -153,7 +160,13 @@ export const FullInventoryPayloadSchema = z.object({
     isRealTimeProtectionEnabled: z.boolean(),
     areSignaturesUpToDate: z.boolean(),
     stateHex: sanitizedString(0, 50)
-  }).strip()).max(10).optional().nullable()
+  }).strip()).max(10).optional().nullable(),
+  installedPatches: z.array(z.object({
+    kbId: sanitizedString(1, 50),
+    description: sanitizedString(0, 200),
+    installedOn: sanitizedString(0, 50)
+  }).strip()).max(500).optional().nullable(),
+  pendingReboot: z.boolean().optional().nullable()
 }).strip();
 
 // =============================================================================

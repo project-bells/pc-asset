@@ -39,11 +39,13 @@ export const db = {
         let monitors: any[] = [];
         let peripherals: any[] = [];
         let software: any[] = [];
+        let patches: any[] = [];
 
         try { if (params?.[13]) disks = typeof params[13] === 'string' ? JSON.parse(params[13]) : params[13]; } catch {}
         try { if (params?.[14]) monitors = typeof params[14] === 'string' ? JSON.parse(params[14]) : params[14]; } catch {}
         try { if (params?.[15]) peripherals = typeof params[15] === 'string' ? JSON.parse(params[15]) : params[15]; } catch {}
         try { if (params?.[16]) software = typeof params[16] === 'string' ? JSON.parse(params[16]) : params[16]; } catch {}
+        try { if (params?.[21]) patches = typeof params[21] === 'string' ? JSON.parse(params[21]) : params[21]; } catch {}
 
         const saved = embeddedStore.upsertAsset({
           hardwareUuid: params?.[0],
@@ -62,7 +64,14 @@ export const db = {
           disks,
           monitors,
           peripherals,
-          installedSoftware: software
+          installedSoftware: software,
+          osVersion: params?.[18],
+          osUbr: params?.[19],
+          latestKbId: params?.[20],
+          installedPatches: patches,
+          pendingReboot: params?.[22],
+          lastWindowsUpdate: params?.[23],
+          lastBootTime: params?.[24]
         });
 
         return {
@@ -97,6 +106,8 @@ export const db = {
           if (params?.[3]) asset.mac_address = params[3];
           if (params?.[4]) asset.lan_speed_mbps = params[4];
           if (params?.[5]) asset.ram_total_gb = params[5];
+          if (params?.[6] !== undefined && params?.[6] !== null) asset.pending_reboot = Boolean(params[6]);
+          if (params?.[7]) asset.last_boot_time = params[7];
           embeddedStore.save();
         }
 
