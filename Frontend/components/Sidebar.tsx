@@ -14,6 +14,7 @@ import {
   LogOut,
   Laptop,
   BarChart3,
+  Video,
 } from 'lucide-react';
 import { useAuth, UserRole } from '@/context/AuthContext';
 
@@ -26,6 +27,7 @@ export default function Sidebar() {
     { name: 'Executive Analytics', href: '/dashboard/executive', icon: BarChart3, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'] },
     { name: 'Hardware Alerts', href: '/alerts', icon: ShieldAlert, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'], badge: '3' },
     { name: 'Asset Inventory', href: '/assets', icon: Server, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'] },
+    { name: 'Remote Audit Logs', href: '/audit-remote', icon: Video, roles: ['ADMIN', 'TECHNICIAN', 'VIEWER'] },
     { name: 'Annual Audit', href: '/audit', icon: FileCheck, roles: ['ADMIN', 'TECHNICIAN'] },
     { name: 'PM Schedules', href: '/pm', icon: Wrench, roles: ['ADMIN', 'TECHNICIAN'] },
     { name: 'Mobile QR Scan', href: '/scan', icon: QrCode, roles: ['ADMIN', 'TECHNICIAN'] },

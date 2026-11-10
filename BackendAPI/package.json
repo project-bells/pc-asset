@@ -8,7 +8,7 @@
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "lint": "tsc --noEmit",
-    "test": "tsx tests/securityAndApi.test.ts && tsx tests/analytics.test.ts"
+    "test": "tsx tests/securityAndApi.test.ts && tsx tests/analytics.test.ts && tsx tests/remoteGuacamole.test.ts"
   },
   "keywords": [
     "asset-management",

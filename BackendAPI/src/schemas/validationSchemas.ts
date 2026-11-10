@@ -210,3 +210,12 @@ export const PmSubmitSchema = z.object({
     .nullable()
 }).strip();
 
+// =============================================================================
+// Group D: Remote Access & Guacamole VNC Schemas
+// =============================================================================
+
+export const RemoteSessionLaunchSchema = z.object({
+  accessReason: sanitizedString(5, 500),
+  accessMode: z.enum(['VIEW_ONLY', 'FULL_CONTROL'])
+}).strip();
+

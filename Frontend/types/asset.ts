@@ -79,6 +79,8 @@ export interface Asset {
   pending_reboot?: boolean;
   last_windows_update?: string | null;
   last_boot_time?: string | null;
+  vnc_status?: 'READY' | 'SERVICE_STOPPED' | 'PORT_CLOSED' | 'UNKNOWN' | null;
+  vnc_port?: number | null;
   monitors_json: MonitorItem[] | null;
   disks_json: DiskItem[] | null;
   installed_software_json: InstalledSoftwareItem[] | null;
@@ -358,3 +360,55 @@ export interface ExecutiveAnalyticsSummary {
     webBrowsersPcs: number;
   };
 }
+
+export interface RemoteSessionLaunchPayload {
+  accessReason: string;
+  accessMode: 'VIEW_ONLY' | 'FULL_CONTROL';
+}
+
+export interface RemoteSessionLaunchResponse {
+  success: boolean;
+  message: string;
+  auditLogId: string;
+  session: {
+    connectionName: string;
+    targetHostname: string;
+    targetIp: string;
+    targetPort: number;
+    accessMode: 'VIEW_ONLY' | 'FULL_CONTROL';
+    expiresAt: string;
+    expiresInSeconds: number;
+    launchUrl: string;
+    directUrl: string;
+  };
+}
+
+export interface RemoteAccessLogItem {
+  id: string;
+  asset_id: string;
+  hostname: string;
+  target_ip: string;
+  technician_user_id: string;
+  technician_username: string;
+  access_mode: 'VIEW_ONLY' | 'FULL_CONTROL';
+  access_reason: string;
+  recording_filename: string;
+  client_source_ip: string;
+  created_at: string;
+  asset_tag?: string | null;
+  building?: string | null;
+  room_name?: string | null;
+  department_name?: string | null;
+}
+
+export interface RemoteAccessLogsResponse {
+  success: boolean;
+  data: RemoteAccessLogItem[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+

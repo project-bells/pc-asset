@@ -39,6 +39,9 @@ export interface EmbeddedAsset {
   pending_reboot?: boolean;
   last_windows_update?: string | null;
   last_boot_time?: string | null;
+  vnc_status?: 'READY' | 'SERVICE_STOPPED' | 'PORT_CLOSED' | 'UNKNOWN';
+  vnc_port?: number;
+  vnc_password_encrypted?: string | null;
   monitors_json: any[];
   disks_json: any[];
   installed_software_json: any[];
@@ -56,6 +59,7 @@ export interface EmbeddedStoreData {
   auditRecords: any[];
   pmSchedules: any[];
   pmRecords: any[];
+  remoteAccessLogs: any[];
 }
 
 const STORE_PATH = path.join(__dirname, '../data/embedded_db.json');
@@ -424,7 +428,22 @@ const initialData: EmbeddedStoreData = {
       isOverdue: true
     }
   ],
-  pmRecords: []
+  pmRecords: [],
+  remoteAccessLogs: [
+    {
+      id: 'rem-init-001',
+      asset_id: '70658300-54b5-11f0-8aa1-445eb2a83c00',
+      hostname: 'B1F601',
+      target_ip: '192.168.27.145',
+      technician_user_id: 'usr-admin-01',
+      technician_username: 'admin',
+      access_mode: 'FULL_CONTROL',
+      access_reason: 'แก้ไขปัญหาตามแจ้งซ่อม: ตรวจสอบการเชื่อมต่อจอภาพห้องประชุม Meeting Room',
+      recording_filename: 'rem-init-001_B1F601_20261110.guac',
+      client_source_ip: '192.168.27.100',
+      created_at: new Date(Date.now() - 45 * 60000).toISOString()
+    }
+  ]
 };
 
 class EmbeddedStore {
@@ -462,7 +481,12 @@ class EmbeddedStore {
         });
 
         // Ensure generic assets have reasonable defaults
+        if (!parsed.remoteAccessLogs) {
+          parsed.remoteAccessLogs = [...initialData.remoteAccessLogs];
+        }
         parsed.assets.forEach((a) => {
+          if (!a.vnc_status) a.vnc_status = 'READY';
+          if (!a.vnc_port) a.vnc_port = 5900;
           if (!a.os_version) a.os_version = a.os_build?.startsWith('26') ? '24H2' : a.os_build?.startsWith('2263') ? '23H2' : '22H2';
           if (!a.installed_patches_json) a.installed_patches_json = [];
           if (a.pending_reboot === undefined) a.pending_reboot = false;
@@ -642,6 +666,37 @@ class EmbeddedStore {
     log.resolution_note = note;
     this.save();
     return true;
+  }
+
+  // Remote Access Security Audit Logging
+  public addRemoteAccessLog(log: any) {
+    if (!this.data.remoteAccessLogs) this.data.remoteAccessLogs = [];
+    this.data.remoteAccessLogs.unshift(log);
+    this.save();
+  }
+
+  public getRemoteAccessLogs(search?: string): any[] {
+    let logs = this.data.remoteAccessLogs || [];
+    if (search && search.trim()) {
+      const term = search.trim().toLowerCase();
+      logs = logs.filter((l) =>
+        (l.hostname && l.hostname.toLowerCase().includes(term)) ||
+        (l.technician_username && l.technician_username.toLowerCase().includes(term)) ||
+        (l.target_ip && l.target_ip.includes(term)) ||
+        (l.access_reason && l.access_reason.toLowerCase().includes(term))
+      );
+    }
+    return logs.map((l) => {
+      const asset = this.data.assets.find((a) => a.id === l.asset_id);
+      return {
+        ...l,
+        asset_tag: asset?.asset_tag || 'Unregistered',
+        assigned_user: asset?.assigned_user || 'Unassigned',
+        building: asset?.building || 'อาคาร 1',
+        room_name: asset?.room_name || 'Main Office',
+        department_name: asset?.department_name || 'General'
+      };
+    });
   }
 }
 

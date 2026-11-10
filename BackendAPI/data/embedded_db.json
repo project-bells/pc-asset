@@ -62,7 +62,7 @@
       "manufacturer": "LENOVO",
       "model": "12SKS3QV00",
       "os_name": "Microsoft Windows 11 Pro",
-      "os_build": "26200",
+      "os_build": "26200.9168",
       "last_logged_in_user": "AIKCHOL1\\meetingroom",
       "cpu_name": "Intel(R) Core(TM) i5-14400",
       "cpu_cores": 10,
@@ -73,7 +73,7 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-09T07:56:39.593Z",
+      "last_seen_at": "2026-11-10T02:45:10.881Z",
       "monitors_json": [
         {
           "manufacturer": "LEN",
@@ -86,7 +86,7 @@
           "driveLetter": "C:",
           "fileSystem": "NTFS",
           "totalSizeGb": 474.72,
-          "freeSpaceGb": 372.14
+          "freeSpaceGb": 371.1
         },
         {
           "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
@@ -125,7 +125,7 @@
         },
         {
           "name": "ESET Management Agent",
-          "version": "13.2.1189.0",
+          "version": "13.3.1192.0",
           "publisher": "ESET, spol. s r.o."
         },
         {
@@ -210,25 +210,37 @@
         }
       ],
       "created_at": "2024-05-15T08:00:00Z",
-      "updated_at": "2026-11-09T07:56:39.593Z",
-      "os_version": "24H2",
-      "os_ubr": 5040,
-      "latest_kb_id": "KB5044273",
+      "updated_at": "2026-11-10T02:45:10.881Z",
+      "os_version": "25H2",
+      "os_ubr": 9168,
+      "latest_kb_id": "KB5120708",
       "installed_patches_json": [
         {
-          "kbId": "KB5044273",
-          "description": "2026-10 Cumulative Update for Windows 11 Version 24H2 for x64-based Systems",
-          "installedOn": "2026-10-15"
+          "kbId": "KB5120708",
+          "description": "Update",
+          "installedOn": "2569-08-18"
         },
         {
-          "kbId": "KB5044033",
-          "description": "Security Update for Windows 11",
-          "installedOn": "2026-09-10"
+          "kbId": "KB5121003",
+          "description": "Security Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5123304",
+          "description": "Security Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5054156",
+          "description": "Update",
+          "installedOn": "2569-01-28"
         }
       ],
-      "pending_reboot": false,
-      "last_windows_update": "2026-11-05T02:11:22.498Z",
-      "last_boot_time": "2026-11-08T02:11:22.499Z"
+      "pending_reboot": true,
+      "last_windows_update": "2569-08-18",
+      "last_boot_time": "2026-10-27T06:40:18.5000000Z",
+      "vnc_status": "READY",
+      "vnc_port": 5900
     },
     {
       "id": "70658300-54b5-11f0-8aa1-445eb2a83c02",
@@ -309,7 +321,9 @@
       ],
       "pending_reboot": false,
       "last_windows_update": "2026-09-06T02:11:22.499Z",
-      "last_boot_time": "2026-11-02T02:11:22.499Z"
+      "last_boot_time": "2026-11-02T02:11:22.499Z",
+      "vnc_status": "READY",
+      "vnc_port": 5900
     },
     {
       "id": "70658300-54b5-11f0-8aa1-445eb2a83c99",
@@ -385,7 +399,9 @@
       ],
       "pending_reboot": false,
       "last_windows_update": "2026-10-21T02:11:22.499Z",
-      "last_boot_time": "2026-11-06T02:11:22.499Z"
+      "last_boot_time": "2026-11-06T02:11:22.499Z",
+      "vnc_status": "READY",
+      "vnc_port": 5900
     },
     {
       "id": "62146880-54AF-11F0-8DD7-E8DB50E52E00",
@@ -406,14 +422,14 @@
       "last_logged_in_user": "AIKCHOL1\\MeetingRoom",
       "cpu_name": "Intel(R) Core(TM) i5-14400",
       "cpu_cores": 10,
-      "ram_total_gb": 15.64,
+      "ram_total_gb": 16,
       "ip_address": "192.168.27.146",
       "mac_address": "18:3D:2D:4E:6C:32",
       "lan_speed_mbps": 1000,
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-09T08:01:40.425Z",
+      "last_seen_at": "2026-11-10T02:54:50.985Z",
       "monitors_json": [
         {
           "manufacturer": "LEN",
@@ -426,7 +442,7 @@
           "driveLetter": "C:",
           "fileSystem": "NTFS",
           "totalSizeGb": 474.72,
-          "freeSpaceGb": 366.02
+          "freeSpaceGb": 366.05
         },
         {
           "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
@@ -585,16 +601,20 @@
       ],
       "edr_info_json": null,
       "created_at": "2026-11-09T08:00:17.082Z",
-      "updated_at": "2026-11-09T08:01:32.338Z",
+      "updated_at": "2026-11-10T02:54:50.985Z",
       "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
       "floor": "ชั้น 6",
       "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
       "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)",
-      "os_version": "24H2",
+      "os_version": "10.0.26200",
       "installed_patches_json": [],
       "pending_reboot": false,
       "last_windows_update": "2026-10-31T02:11:22.500Z",
-      "last_boot_time": "2026-11-08T02:11:22.500Z"
+      "last_boot_time": "2026-11-08T02:11:22.500Z",
+      "os_ubr": null,
+      "latest_kb_id": null,
+      "vnc_status": "READY",
+      "vnc_port": 5900
     },
     {
       "id": "78BEBD80-54B7-11F0-BA34-AD222F6C3500",
@@ -963,7 +983,9 @@
       "installed_patches_json": [],
       "pending_reboot": false,
       "last_windows_update": "2026-10-31T02:11:22.500Z",
-      "last_boot_time": "2026-11-08T02:11:22.500Z"
+      "last_boot_time": "2026-11-08T02:11:22.500Z",
+      "vnc_status": "READY",
+      "vnc_port": 5900
     },
     {
       "id": "70658300-54b5-11f0-8aa1-445eb2a83c77",
@@ -1074,7 +1096,9 @@
         }
       ],
       "created_at": "2026-11-10T00:11:22.499Z",
-      "updated_at": "2026-11-10T02:11:22.499Z"
+      "updated_at": "2026-11-10T02:11:22.499Z",
+      "vnc_status": "READY",
+      "vnc_port": 5900
     }
   ],
   "changeLogs": [
@@ -1092,10 +1116,10 @@
         "serialNumber": "1"
       },
       "description": "WARNING: Connected display Serial Number changed to 1 (LEN TCM-G5-BA). Please verify display cable connection in meeting room B1F601.",
-      "is_acknowledged": false,
-      "acknowledged_by": null,
-      "acknowledged_at": null,
-      "resolution_note": null,
+      "is_acknowledged": true,
+      "acknowledged_by": "admin",
+      "acknowledged_at": "2026-11-10T02:55:20.805Z",
+      "resolution_note": "Acknowledged via portal",
       "created_at": "2026-11-09T06:21:33.291Z",
       "asset_tag": "AIK-WS-2567-001",
       "hostname": "B1F601",
@@ -1152,5 +1176,46 @@
       "isOverdue": true
     }
   ],
-  "pmRecords": []
+  "pmRecords": [],
+  "remoteAccessLogs": [
+    {
+      "id": "rem-1794279376553-bc1125d6",
+      "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "hostname": "B1F601",
+      "target_ip": "192.168.27.145",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "แก้ไขปัญหาตามแจ้งซ่อม: ผู้ใช้งานแจ้งพิมพ์เอกสารไม่ออก",
+      "recording_filename": "rem-1794279376553-bc1125d6_B1F601_1794279376553.guac",
+      "client_source_ip": "::ffff:127.0.0.1",
+      "created_at": "2026-11-10T02:56:16.555Z"
+    },
+    {
+      "id": "rem-1794279358127-a19330b7",
+      "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "hostname": "B1F601",
+      "target_ip": "192.168.27.145",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "แก้ไขปัญหาตามแจ้งซ่อม: ผู้ใช้งานแจ้งพิมพ์เอกสารไม่ออก",
+      "recording_filename": "rem-1794279358127-a19330b7_B1F601_1794279358127.guac",
+      "client_source_ip": "::ffff:127.0.0.1",
+      "created_at": "2026-11-10T02:55:58.128Z"
+    },
+    {
+      "id": "rem-init-001",
+      "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "hostname": "B1F601",
+      "target_ip": "192.168.27.145",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "แก้ไขปัญหาตามแจ้งซ่อม: ตรวจสอบการเชื่อมต่อจอภาพห้องประชุม Meeting Room",
+      "recording_filename": "rem-init-001_B1F601_20261110.guac",
+      "client_source_ip": "192.168.27.100",
+      "created_at": "2026-11-10T02:10:58.020Z"
+    }
+  ]
 }

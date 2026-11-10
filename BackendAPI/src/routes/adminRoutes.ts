@@ -2,12 +2,13 @@ import { Router } from 'express';
 import express from 'express';
 import { AdminController } from '../controllers/adminController';
 import { AnalyticsController } from '../controllers/analyticsController';
+import { RemoteController } from '../controllers/remoteController';
 import {
   requireAuth,
   requireRole,
   validateBody
 } from '../middleware/securityMiddleware';
-import { BindAssetSchema } from '../schemas/validationSchemas';
+import { BindAssetSchema, RemoteSessionLaunchSchema } from '../schemas/validationSchemas';
 
 const router = Router();
 
@@ -27,6 +28,17 @@ router.get('/reports/critical-changes', requireRole('VIEWER'), AdminController.g
 router.get('/analytics/executive-summary', requireRole('VIEWER'), AnalyticsController.getExecutiveSummary);
 router.get('/analytics/software', requireRole('VIEWER'), AnalyticsController.getSoftwareSummary);
 router.get('/analytics/patch-advisory', requireRole('VIEWER'), AnalyticsController.getPatchAdvisory);
+
+// Remote Desktop & Guacamole VNC Integration
+router.post(
+  '/assets/:id/remote-session',
+  express.json({ limit: '32kb' }),
+  requireRole('TECHNICIAN'),
+  validateBody(RemoteSessionLaunchSchema),
+  RemoteController.createRemoteSession
+);
+
+router.get('/remote/logs', requireRole('VIEWER'), RemoteController.listRemoteAccessLogs);
 
 // Sensitive Mutations: Strictly restricted to ADMIN role
 router.patch(

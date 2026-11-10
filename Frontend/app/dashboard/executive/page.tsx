@@ -28,7 +28,9 @@ import {
   ShieldCheck,
   RotateCcw,
   Sparkles,
+  Monitor,
 } from 'lucide-react';
+import RemoteVncModal from '@/components/RemoteVncModal';
 import {
   ResponsiveContainer,
   PieChart,
@@ -108,6 +110,10 @@ export default function ExecutiveDashboardPage() {
   // Drawer State
   const [drawerAsset, setDrawerAsset] = useState<Asset | null>(null);
   const [drawerSearch, setDrawerSearch] = useState('');
+
+  // Remote VNC Modal State
+  const [vncAsset, setVncAsset] = useState<Asset | null>(null);
+  const [isVncModalOpen, setIsVncModalOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -1198,13 +1204,26 @@ export default function ExecutiveDashboardPage() {
 
                           {/* Actions */}
                           <td className="py-3.5 px-4 text-right">
-                            <button
-                              onClick={() => setDrawerAsset(asset)}
-                              className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
-                              title="Open Full Specifications & Software Drawer"
-                            >
-                              <ExternalLink className="w-4 h-4 text-indigo-400" />
-                            </button>
+                            <div className="flex items-center justify-end gap-1.5">
+                              <button
+                                onClick={() => {
+                                  setVncAsset(asset);
+                                  setIsVncModalOpen(true);
+                                }}
+                                className="px-2.5 py-1.5 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 border border-indigo-500/30 text-xs font-semibold flex items-center gap-1 transition-colors"
+                                title="เปิดรีโมท UltraVNC ผ่าน Guacamole Gateway"
+                              >
+                                <Monitor className="w-3.5 h-3.5 text-indigo-400" />
+                                <span className="hidden sm:inline">VNC</span>
+                              </button>
+                              <button
+                                onClick={() => setDrawerAsset(asset)}
+                                className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
+                                title="Open Full Specifications & Software Drawer"
+                              >
+                                <ExternalLink className="w-4 h-4 text-indigo-400" />
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       );
@@ -1521,6 +1540,29 @@ export default function ExecutiveDashboardPage() {
                   </div>
                 </div>
 
+                {/* Remote VNC Quick Action Bar inside Drawer */}
+                <div className="p-4 rounded-xl bg-indigo-950/40 border border-indigo-500/30 flex items-center justify-between">
+                  <div>
+                    <span className="font-semibold text-xs text-indigo-300 block flex items-center gap-1.5">
+                      <Monitor className="w-4 h-4 text-indigo-400" />
+                      UltraVNC Remote Assistance Gateway
+                    </span>
+                    <span className="text-[11px] text-slate-400">
+                      Target: {drawerAsset.ip_address || '127.0.0.1'} : {drawerAsset.vnc_port || 5900} • Encrypted HTML5 Session
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      setVncAsset(drawerAsset);
+                      setIsVncModalOpen(true);
+                    }}
+                    className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-600/30 transition-all cursor-pointer"
+                  >
+                    <Monitor className="w-3.5 h-3.5" />
+                    <span>Launch Remote VNC</span>
+                  </button>
+                </div>
+
                 {/* Installed Software List */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
@@ -1623,6 +1665,16 @@ export default function ExecutiveDashboardPage() {
           </div>
         </div>
       )}
+
+      {/* Remote VNC Modal */}
+      <RemoteVncModal
+        asset={vncAsset}
+        isOpen={isVncModalOpen}
+        onClose={() => {
+          setIsVncModalOpen(false);
+          setVncAsset(null);
+        }}
+      />
     </div>
   );
 }

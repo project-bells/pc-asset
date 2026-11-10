@@ -26,6 +26,7 @@ import {
 import { apiClient } from '@/lib/apiClient';
 import { Asset, AssetStatus, BindAssetPayload, LocationOption } from '@/types/asset';
 import { useAuth } from '@/context/AuthContext';
+import RemoteVncModal from '@/components/RemoteVncModal';
 
 function AssetsContent() {
   const searchParams = useSearchParams();
@@ -39,6 +40,8 @@ function AssetsContent() {
   const [statusFilter, setStatusFilter] = useState(initialStatus);
   const [selectedAssetForDetails, setSelectedAssetForDetails] = useState<Asset | null>(null);
   const [selectedAssetForBinding, setSelectedAssetForBinding] = useState<Asset | null>(null);
+  const [vncAsset, setVncAsset] = useState<Asset | null>(null);
+  const [isVncModalOpen, setIsVncModalOpen] = useState(false);
 
   // Binding Form States
   const [bindAssetTag, setBindAssetTag] = useState('');
@@ -319,6 +322,20 @@ function AssetsContent() {
                             >
                               <Tag className="w-3.5 h-3.5" />
                               <span>ลงทะเบียน (Bind Tag)</span>
+                            </button>
+                          )}
+                          {/* Remote VNC Launch Button */}
+                          {role !== 'VIEWER' && (
+                            <button
+                              onClick={() => {
+                                setVncAsset(asset);
+                                setIsVncModalOpen(true);
+                              }}
+                              className="px-2.5 py-1 text-xs font-semibold text-indigo-300 bg-indigo-500/15 hover:bg-indigo-500/25 rounded-lg transition-colors border border-indigo-500/30 flex items-center gap-1.5 shadow-sm shadow-indigo-500/10"
+                              title="เปิดรีโมทหน้าจอ UltraVNC ผ่าน Guacamole Gateway"
+                            >
+                              <Monitor className="w-3.5 h-3.5 text-indigo-400" />
+                              <span>Remote VNC</span>
                             </button>
                           )}
                           <button
@@ -620,6 +637,16 @@ function AssetsContent() {
           </div>
         </div>
       )}
+
+      {/* Remote VNC Modal */}
+      <RemoteVncModal
+        asset={vncAsset}
+        isOpen={isVncModalOpen}
+        onClose={() => {
+          setIsVncModalOpen(false);
+          setVncAsset(null);
+        }}
+      />
     </div>
   );
 }

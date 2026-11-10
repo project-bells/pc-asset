@@ -379,6 +379,45 @@ export const db = {
         };
       }
 
+      // Remote Access Security Audit Logging Insert
+      if (lower.includes('insert into remote_access_logs')) {
+        const logId = params?.[0] || 'rem-' + Date.now();
+        const newLog = {
+          id: logId,
+          asset_id: params?.[1],
+          hostname: params?.[2],
+          target_ip: params?.[3],
+          technician_user_id: params?.[4],
+          technician_username: params?.[5],
+          access_mode: params?.[6],
+          access_reason: params?.[7],
+          recording_filename: params?.[8],
+          client_source_ip: params?.[9] || '127.0.0.1',
+          created_at: new Date().toISOString()
+        };
+        embeddedStore.addRemoteAccessLog(newLog);
+
+        return {
+          rows: [{ id: logId }] as unknown as T[],
+          command: 'INSERT',
+          rowCount: 1,
+          oid: 0,
+          fields: []
+        };
+      }
+
+      // Remote Access Audit Logs Query
+      if (lower.includes('from remote_access_logs') || lower.includes('vw_remote_access_audit_logs')) {
+        const logs = embeddedStore.getRemoteAccessLogs();
+        return {
+          rows: logs as unknown as T[],
+          command: 'SELECT',
+          rowCount: logs.length,
+          oid: 0,
+          fields: []
+        };
+      }
+
       // ==========================================
       // 6. DASHBOARDS & ANALYTICAL VIEWS
       // ==========================================
