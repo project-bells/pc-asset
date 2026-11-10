@@ -187,3 +187,4 @@ runGuacamoleTests().catch((err) => {
   console.error('❌ Guacamole test error:', err);
   process.exit(1);
 });
+

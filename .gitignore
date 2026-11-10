@@ -21,10 +21,14 @@ dist/
 BackendAPI/dist/
 
 # Environment & Local Data
+.env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+nginx/ssl/*.crt
+nginx/ssl/*.key
+data/guac_recordings/*.guac
 
 # OS / Editor files
 .DS_Store

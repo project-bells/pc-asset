@@ -20,10 +20,18 @@ import {
 } from '@/types/asset';
 
 const getBaseUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
   if (typeof window !== 'undefined') {
+    // If accessed through Nginx reverse proxy (standard HTTP/HTTPS or no dev port 3000)
+    if (!window.location.port || window.location.port === '80' || window.location.port === '443') {
+      return `${window.location.origin}/api/v1`;
+    }
+    // Development fallback when Next.js dev server runs on 3000 and backend on 5000
     return `${window.location.protocol}//${window.location.hostname}:5000/api/v1`;
   }
-  return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+  return 'http://localhost:5000/api/v1';
 };
 
 const BASE_URL = 'http://localhost:5000/api/v1';

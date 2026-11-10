@@ -87,3 +87,4 @@ LEFT JOIN assets a ON r.asset_id = a.id
 LEFT JOIN locations l ON a.location_id = l.id
 LEFT JOIN departments d ON l.department_id = d.id
 ORDER BY r.created_at DESC;
+

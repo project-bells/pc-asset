@@ -69,7 +69,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 // =============================================================================
 // 4. Health & Diagnostics Endpoint
 // =============================================================================
-app.get('/health', async (req: Request, res: Response) => {
+const healthHandler = async (req: Request, res: Response) => {
   const isDbHealthy = await db.healthCheck();
   const statusCode = isDbHealthy ? 200 : 503;
 
@@ -80,7 +80,10 @@ app.get('/health', async (req: Request, res: Response) => {
     environment: process.env.NODE_ENV || 'production',
     version: '1.0.0'
   });
-});
+};
+
+app.get('/health', healthHandler);
+app.get('/api/v1/health', healthHandler);
 
 // =============================================================================
 // 5. API Route Groupings (Each route applies tailored payload limits & validation)
