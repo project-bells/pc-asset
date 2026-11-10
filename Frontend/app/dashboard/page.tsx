@@ -16,6 +16,9 @@ import {
   ArrowRight,
   ShieldCheck,
   RefreshCw,
+  Sparkles,
+  BarChart2,
+  Wifi,
 } from 'lucide-react';
 import { apiClient } from '@/lib/apiClient';
 import { SystemHygieneAlert } from '@/types/asset';
@@ -71,287 +74,260 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Top Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-2 border-b border-slate-800">
+      {/* Top Header with Glassmorphic Flair */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-4 border-b border-white/10">
         <div>
-          <h1 className="text-2xl font-bold text-slate-100 tracking-tight">Executive & Operations Dashboard</h1>
-          <p className="text-sm text-slate-400">
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-100">
+              Operations &amp; Security Overview
+            </h1>
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Live Telemetry
+            </span>
+          </div>
+          <p className="text-sm text-slate-400 mt-1">
             Real-time endpoint telemetries, stocktake audit progress, and hardware health alerts.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-3">
           <Link
             href="/dashboard/executive"
-            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg transition-colors shadow-sm shadow-indigo-500/20"
+            className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-500 hover:to-emerald-500 rounded-xl transition-all shadow-lg shadow-blue-600/20 border border-white/10"
           >
-            <ShieldCheck className="w-3.5 h-3.5" />
-            <span>Executive Analytics & Patch Portal</span>
+            <ShieldCheck className="w-4 h-4" />
+            <span>Executive Analytics &amp; Patch Portal</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
           <button
             onClick={refreshAll}
-            className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors border border-slate-700 shadow-sm"
+            className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-slate-300 bg-slate-900/60 hover:bg-slate-800/80 rounded-xl transition-all border border-white/10 backdrop-blur-md"
           >
-            <RefreshCw className="w-3.5 h-3.5 text-indigo-400" />
+            <RefreshCw className="w-3.5 h-3.5 text-cyan-400" />
             <span>Refresh</span>
           </button>
         </div>
       </div>
 
-      {/* KPI Cards (5 key metrics) */}
+      {/* KPI Cards (5 key metrics in Glassy Blue & Emerald Design) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        {/* Total Assets */}
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm relative overflow-hidden">
+        {/* Total Assets (Ocean Blue Glass) */}
+        <div className="p-4 rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 hover:border-blue-500/30 shadow-lg shadow-black/20 relative overflow-hidden group transition-all">
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Total Endpoints</span>
-            <Server className="w-4 h-4 text-indigo-400" />
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-300">Total Endpoints</span>
+            <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-110 transition-transform">
+              <Server className="w-4 h-4" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-slate-100 font-mono">
+          <div className="text-3xl font-extrabold text-slate-100 font-mono tracking-tight">
             {loadingKpis ? '...' : kpis?.totalAssets ?? 0}
           </div>
-          <p className="text-xs text-slate-500 mt-1">Managed Workstations & Laptops</p>
-          <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/5 rounded-full blur-xl pointer-events-none" />
+          <p className="text-[11px] text-slate-400 mt-1">Managed Workstations &amp; Laptops</p>
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-500/10 rounded-full blur-xl pointer-events-none" />
         </div>
 
-        {/* Online Now */}
-        <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm relative overflow-hidden">
+        {/* Online Now (Emerald Green Glass) */}
+        <div className="p-4 rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 hover:border-emerald-500/40 shadow-lg shadow-black/20 relative overflow-hidden group transition-all">
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Online Now</span>
-            <span className="flex h-2.5 w-2.5 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300">Online Now</span>
+            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 group-hover:scale-110 transition-transform flex items-center justify-center">
+              <Wifi className="w-4 h-4" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-emerald-400 font-mono">
-            {loadingKpis ? '...' : kpis?.onlineNow ?? 0}
+          <div className="text-3xl font-extrabold text-emerald-400 font-mono tracking-tight flex items-baseline gap-2">
+            <span>{loadingKpis ? '...' : kpis?.onlineNow ?? 0}</span>
+            <span className="text-xs font-sans font-medium text-emerald-300/80">Active</span>
           </div>
-          <p className="text-xs text-slate-500 mt-1">Reported within last 15 min</p>
-          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-xl pointer-events-none" />
+          <p className="text-[11px] text-slate-400 mt-1 flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping inline-block" />
+            <span>Seen within last 15 min</span>
+          </p>
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-emerald-500/15 rounded-full blur-xl pointer-events-none" />
         </div>
 
-        {/* Unregistered PCs */}
+        {/* Unregistered PCs (Amber Glass) */}
         <Link
           href="/assets?status=Unregistered"
-          className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-amber-500/50 shadow-sm transition-all relative overflow-hidden group"
+          className="p-4 rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 hover:border-amber-500/40 shadow-lg shadow-black/20 transition-all relative overflow-hidden group"
         >
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-amber-300">Unregistered</span>
-            <HelpCircle className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300">Unregistered</span>
+            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400 border border-amber-500/20 group-hover:scale-110 transition-transform">
+              <HelpCircle className="w-4 h-4" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-amber-400 font-mono">
+          <div className="text-3xl font-extrabold text-amber-400 font-mono tracking-tight">
             {loadingKpis ? '...' : kpis?.unregistered ?? 0}
           </div>
-          <p className="text-xs text-slate-500 mt-1 flex items-center justify-between">
+          <p className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
             <span>Awaiting Tag Binding</span>
-            <ArrowRight className="w-3 h-3 text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ArrowRight className="w-3.5 h-3.5 text-amber-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </p>
-          <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-amber-500/10 rounded-full blur-xl pointer-events-none" />
         </Link>
 
-        {/* Critical Alerts */}
+        {/* Critical Alerts (Rose Glass) */}
         <Link
           href="/alerts"
-          className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-rose-500/50 shadow-sm transition-all relative overflow-hidden group"
+          className="p-4 rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 hover:border-rose-500/40 shadow-lg shadow-black/20 transition-all relative overflow-hidden group"
         >
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-rose-300">Hardware Alerts</span>
-            <AlertTriangle className="w-4 h-4 text-rose-400 group-hover:scale-110 transition-transform" />
+            <span className="text-[11px] font-bold uppercase tracking-wider text-rose-300">Hardware Alerts</span>
+            <div className="p-2 rounded-xl bg-rose-500/10 text-rose-400 border border-rose-500/20 group-hover:scale-110 transition-transform">
+              <AlertTriangle className="w-4 h-4" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-rose-400 font-mono">
+          <div className="text-3xl font-extrabold text-rose-400 font-mono tracking-tight">
             {loadingKpis ? '...' : kpis?.criticalAlerts ?? 0}
           </div>
-          <p className="text-xs text-slate-500 mt-1 flex items-center justify-between">
+          <p className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
             <span>RAM/Display Tamper</span>
-            <ArrowRight className="w-3 h-3 text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <ArrowRight className="w-3.5 h-3.5 text-rose-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </p>
-          <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/5 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-rose-500/10 rounded-full blur-xl pointer-events-none" />
         </Link>
 
-        {/* Urgent PM */}
+        {/* Urgent PM (Cyan/Teal Glass) */}
         <Link
           href="/pm"
-          className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 hover:border-indigo-500/50 shadow-sm transition-all relative overflow-hidden group"
+          className="p-4 rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 hover:border-cyan-500/40 shadow-lg shadow-black/20 transition-all relative overflow-hidden group"
         >
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Urgent PM</span>
-            <Wrench className="w-4 h-4 text-cyan-400 group-hover:scale-110 transition-transform" />
+            <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300">Urgent PM</span>
+            <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 group-hover:scale-110 transition-transform">
+              <Wrench className="w-4 h-4" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-cyan-400 font-mono">
+          <div className="text-3xl font-extrabold text-cyan-400 font-mono tracking-tight">
             {loadingKpis ? '...' : kpis?.urgentPm ?? 0}
           </div>
-          <p className="text-xs text-slate-500 mt-1 flex items-center justify-between">
-            <span>Maintenance Queue</span>
-            <ArrowRight className="w-3 h-3 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+          <p className="text-[11px] text-slate-400 mt-1 flex items-center justify-between">
+            <span>Needs Maintenance</span>
+            <ArrowRight className="w-3.5 h-3.5 text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
           </p>
-          <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-full blur-xl pointer-events-none" />
+          <div className="absolute -top-6 -right-6 w-24 h-24 bg-cyan-500/10 rounded-full blur-xl pointer-events-none" />
         </Link>
       </div>
 
-      {/* Middle Section: Audit Progress Widget */}
-      <div className="p-5 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-          <div>
+      {/* Main Grid: Hygiene Alerts & Annual Stocktake Progress */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* System Hygiene Alerts (2 Cols) */}
+        <div className="lg:col-span-2 rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 p-5 shadow-xl relative overflow-hidden">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-indigo-400" />
-              <h2 className="text-base font-semibold text-slate-100">
-                {auditSummary?.name || 'Annual Stocktake Audit Campaign'}
-              </h2>
+              <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                <Activity className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm text-slate-100">Automated System Hygiene Alerts</h3>
+                <p className="text-xs text-slate-400">High uptime (&gt;30d), disk space &lt;15%, degraded LAN speed</p>
+              </div>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Dual-verification engine combining Windows Agent auto-checks with physical technician QR scans.
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-slate-400">Total Assets: {auditSummary?.totalAssets ?? 0}</span>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-              {auditSummary?.progressPercent ?? 0}% Complete
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-500/15 text-blue-300 border border-blue-500/30">
+              {hygieneAlerts?.length ?? 0} Issues
             </span>
           </div>
-        </div>
 
-        {/* Visual Multi-Segment Progress Bar */}
-        {auditSummary && (
-          <div className="space-y-3">
-            <div className="h-3 w-full bg-slate-800 rounded-full overflow-hidden flex">
-              {/* Agent Verified (Emerald) */}
-              <div
-                style={{
-                  width: `${(auditSummary.agentVerified / auditSummary.totalAssets) * 100}%`,
-                }}
-                className="bg-emerald-500 h-full transition-all duration-500"
-                title={`Agent Auto-Verified: ${auditSummary.agentVerified}`}
-              />
-              {/* QR Scanned (Indigo) */}
-              <div
-                style={{
-                  width: `${(auditSummary.qrScanned / auditSummary.totalAssets) * 100}%`,
-                }}
-                className="bg-indigo-500 h-full transition-all duration-500"
-                title={`Physical QR Scanned: ${auditSummary.qrScanned}`}
-              />
-              {/* Pending (Slate/Remaining) */}
-              <div
-                style={{
-                  width: `${(auditSummary.pending / auditSummary.totalAssets) * 100}%`,
-                }}
-                className="bg-slate-700/60 h-full transition-all duration-500"
-                title={`Pending Verification: ${auditSummary.pending}`}
-              />
-            </div>
-
-            {/* Legend */}
-            <div className="flex flex-wrap items-center gap-6 text-xs text-slate-400 pt-1">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <span>Agent Auto-Verified:</span>
-                <strong className="text-slate-200 font-mono">{auditSummary.agentVerified}</strong>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
-                <span>QR Physical Scan:</span>
-                <strong className="text-slate-200 font-mono">{auditSummary.qrScanned}</strong>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-slate-600"></span>
-                <span>Pending Verification:</span>
-                <strong className="text-slate-200 font-mono">{auditSummary.pending}</strong>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Bottom Section: System Hygiene Alerts Widget */}
-      <div className="rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm overflow-hidden">
-        <div className="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
-          <div>
-            <h2 className="text-base font-semibold text-slate-100 flex items-center gap-2">
-              <Activity className="w-5 h-5 text-amber-400" />
-              <span>System Hygiene & Operational Risk Monitor</span>
-            </h2>
-            <p className="text-xs text-slate-400 mt-0.5">
-              Automated triggers on Disk Space &lt;15%, S.M.A.R.T. failures, degraded NIC speed, or excessive uptime.
-            </p>
-          </div>
-          <span className="text-xs font-mono text-slate-400">
-            {hygieneAlerts?.length ?? 0} Endpoints Flagged
-          </span>
-        </div>
-
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead className="bg-slate-950/60 text-slate-400 font-semibold uppercase tracking-wider border-b border-slate-800">
-              <tr>
-                <th className="py-3 px-4">Endpoint / Tag</th>
-                <th className="py-3 px-4">Assigned User</th>
-                <th className="py-3 px-4">Issue Category</th>
-                <th className="py-3 px-4">Metric Value</th>
-                <th className="py-3 px-4">Description</th>
-                <th className="py-3 px-4 text-right">Action</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-slate-800/60">
-              {loadingHygiene ? (
-                <tr>
-                  <td colSpan={6} className="py-8 text-center text-slate-500">
-                    Scanning endpoint metrics...
-                  </td>
-                </tr>
-              ) : hygieneAlerts && hygieneAlerts.length > 0 ? (
-                hygieneAlerts.map((alert) => (
-                  <tr key={alert.assetId} className="hover:bg-slate-800/30 transition-colors">
-                    <td className="py-3 px-4">
-                      <div className="font-medium text-slate-200 font-mono">{alert.hostname}</div>
-                      <div className="text-[11px] text-slate-400">{alert.assetTag || 'Unregistered'}</div>
-                    </td>
-                    <td className="py-3 px-4 text-slate-300">
-                      {alert.assignedUser || <span className="text-slate-600">Unassigned</span>}
-                    </td>
-                    <td className="py-3 px-4">
-                      <div className="flex items-center gap-1.5 font-medium">
-                        {getHygieneIcon(alert.issueType)}
-                        <span className="text-slate-200">{alert.title}</span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-4">
-                      <span
-                        className={`px-2 py-0.5 rounded font-mono font-bold ${
-                          alert.severity === 'CRITICAL'
-                            ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
-                            : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                        }`}
-                      >
-                        {alert.metricValue}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-slate-300 max-w-md truncate" title={alert.detail}>
-                      {alert.detail}
-                    </td>
-                    <td className="py-3 px-4 text-right">
-                      <Link
-                        href={`/assets?search=${encodeURIComponent(alert.hostname)}`}
-                        className="text-xs text-indigo-400 hover:text-indigo-300 font-medium hover:underline"
-                      >
-                        Inspect PC
-                      </Link>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={6} className="py-8 text-center text-slate-500">
-                    <div className="flex flex-col items-center justify-center gap-1">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-                      <span>All endpoints comply with healthy operational thresholds.</span>
+          <div className="divide-y divide-white/5 space-y-1">
+            {loadingHygiene ? (
+              <div className="py-8 text-center text-xs text-slate-500 font-mono">Running automated diagnostics...</div>
+            ) : hygieneAlerts && hygieneAlerts.length > 0 ? (
+              hygieneAlerts.slice(0, 6).map((item, idx) => (
+                <div key={idx} className="py-2.5 flex items-center justify-between text-xs hover:bg-white/[0.03] px-2 rounded-xl transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="p-1.5 rounded-lg bg-slate-950/60 border border-white/10 shrink-0">
+                      {getHygieneIcon(item.issueType)}
                     </div>
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
+                    <div>
+                      <div className="font-semibold text-slate-200 flex items-center gap-2">
+                        <span>{item.hostname}</span>
+                        <span className="text-[11px] font-mono text-cyan-400 bg-cyan-950/40 px-1.5 py-0.2 rounded border border-cyan-500/20">
+                          {item.assetTag || 'Unregistered'}
+                        </span>
+                      </div>
+                      <p className="text-slate-400 text-[11px] mt-0.5">{item.detail}</p>
+                    </div>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-800 text-slate-300 border border-white/10 font-mono">
+                      {item.metricValue || item.assignedUser || 'Warning'}
+                    </span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="py-8 text-center text-xs text-emerald-400 flex flex-col items-center gap-2">
+                <CheckCircle2 className="w-8 h-8 opacity-80" />
+                <span>All workstations are running within optimal health thresholds.</span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Annual Audit & Preventive Maintenance Progress (1 Col) */}
+        <div className="space-y-6">
+          {/* Audit Progress Card */}
+          <div className="rounded-2xl bg-slate-900/50 backdrop-blur-xl border border-white/10 p-5 shadow-xl relative overflow-hidden">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-bold text-sm text-slate-100 flex items-center gap-2">
+                <BarChart2 className="w-4 h-4 text-emerald-400" />
+                Annual Stocktake 2026
+              </h3>
+              <span className="text-xs font-mono font-bold text-emerald-400">
+                {auditSummary?.progressPercent ?? 100}% Complete
+              </span>
+            </div>
+
+            <p className="text-xs text-slate-400 mb-3">
+              Physical inventory verification via mobile QR code scan.
+            </p>
+
+            {/* Progress Bar with Blue-to-Emerald Gradient */}
+            <div className="w-full h-3 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-white/10 mb-3">
+              <div
+                className="h-full rounded-full bg-gradient-to-r from-blue-500 to-emerald-400 transition-all duration-500 shadow-sm shadow-emerald-400/30"
+                style={{ width: `${Math.min(100, auditSummary?.progressPercent ?? 100)}%` }}
+              />
+            </div>
+
+            <div className="flex items-center justify-between text-xs text-slate-400 pt-2 border-t border-white/5">
+              <span>Status: <strong className="text-emerald-300">In Progress</strong></span>
+              <Link href="/audit" className="text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1">
+                <span>View Details</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            </div>
+          </div>
+
+          {/* Quick Remote Access Action Card */}
+          <div className="rounded-2xl bg-gradient-to-br from-blue-950/40 to-emerald-950/30 backdrop-blur-xl border border-blue-500/20 p-5 shadow-xl relative overflow-hidden">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="p-2 rounded-xl bg-blue-500/20 text-cyan-300 border border-blue-500/30">
+                <Sparkles className="w-4 h-4" />
+              </div>
+              <h3 className="font-bold text-sm text-slate-100">Apache Guacamole Gateway</h3>
+            </div>
+            <p className="text-xs text-slate-300/90 leading-relaxed mb-4">
+              Secure HTML5 UltraVNC remote support with ISO 27001 encrypted session recording.
+            </p>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/audit-remote"
+                className="flex-1 text-center py-2 px-3 rounded-xl bg-blue-600/80 hover:bg-blue-600 text-white font-semibold text-xs border border-white/10 shadow-sm transition-all"
+              >
+                Audit Logs
+              </Link>
+              <Link
+                href="/assets"
+                className="flex-1 text-center py-2 px-3 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 text-white font-semibold text-xs border border-white/10 shadow-sm transition-all"
+              >
+                Launch VNC
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-

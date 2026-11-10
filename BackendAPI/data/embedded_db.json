@@ -1179,6 +1179,19 @@
   "pmRecords": [],
   "remoteAccessLogs": [
     {
+      "id": "rem-1794281320000-26522e2c",
+      "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
+      "hostname": "B1F601",
+      "target_ip": "192.168.27.145",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "แก้ไขปัญหาตามแจ้งซ่อม: ผู้ใช้งานแจ้งพิมพ์เอกสารไม่ออก",
+      "recording_filename": "rem-1794281320000-26522e2c_B1F601_1794281320000.guac",
+      "client_source_ip": "::ffff:127.0.0.1",
+      "created_at": "2026-11-10T03:28:40.001Z"
+    },
+    {
       "id": "rem-1794281092782-070998ce",
       "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
       "hostname": "B1F601",

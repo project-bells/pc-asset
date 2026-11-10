@@ -13,9 +13,11 @@ export class AdminController {
     const { id } = req.params;
     const { assetTag, locationId, assignedUser, purchaseDate, warrantyExpiryDate } = req.body;
 
-    if (!assetTag || !locationId) {
-      return res.status(400).json({ error: 'assetTag and locationId are required to bind an asset.' });
+    if (!assetTag) {
+      return res.status(400).json({ error: 'assetTag is required to bind an asset.' });
     }
+
+    const resolvedLocationId = locationId || 'loc-b1f6-01';
 
     try {
       const sql = `
@@ -33,7 +35,7 @@ export class AdminController {
 
       const result = await db.query(sql, [
         assetTag.trim(),
-        locationId,
+        resolvedLocationId,
         assignedUser || null,
         purchaseDate || null,
         warrantyExpiryDate || null,

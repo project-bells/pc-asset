@@ -15,6 +15,7 @@ import {
   Laptop,
   BarChart3,
   Video,
+  Sparkles,
 } from 'lucide-react';
 import { useAuth, UserRole } from '@/context/AuthContext';
 
@@ -35,22 +36,25 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Desktop Sidebar (hidden on mobile) */}
-      <aside className="hidden md:flex flex-col w-64 border-r border-slate-800 bg-slate-900/90 backdrop-blur-md min-h-screen p-4 justify-between fixed left-0 top-0 bottom-0 z-30">
+      {/* Desktop Frosted Glass Sidebar */}
+      <aside className="hidden md:flex flex-col w-64 border-r border-white/10 bg-slate-950/65 backdrop-blur-2xl min-h-screen p-4 justify-between fixed left-0 top-0 bottom-0 z-30 shadow-2xl shadow-blue-950/40">
         <div>
-          {/* Logo & Header */}
+          {/* Logo & Header with Blue-Emerald Gradient */}
           <div className="flex items-center gap-3 px-2 py-3 mb-6">
-            <div className="p-2 bg-indigo-600 rounded-xl shadow-lg shadow-indigo-600/30 text-white">
-              <Laptop className="w-6 h-6" />
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-600 to-emerald-500 shadow-lg shadow-blue-500/25 text-white ring-1 ring-white/20">
+              <Laptop className="w-5 h-5" />
             </div>
             <div>
-              <h1 className="font-bold text-base tracking-wide text-slate-100">IT Asset Guard</h1>
-              <p className="text-xs text-slate-400 font-mono">Enterprise v1.2</p>
+              <div className="flex items-center gap-1.5">
+                <h1 className="font-bold text-base tracking-wide text-slate-100">IT Asset Guard</h1>
+                <Sparkles className="w-3 h-3 text-emerald-400" />
+              </div>
+              <p className="text-[11px] font-mono font-medium text-gradient-blue-emerald">Glassy v2.0 Enterprise</p>
             </div>
           </div>
 
-          {/* Navigation links */}
-          <nav className="space-y-1">
+          {/* Navigation Links with Glassy Highlight */}
+          <nav className="space-y-1.5">
             {navItems
               .filter((item) => item.roles.includes(role))
               .map((item) => {
@@ -60,18 +64,18 @@ export default function Sidebar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 ${
                       isActive
-                        ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20'
-                        : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                        ? 'bg-gradient-to-r from-blue-600/90 to-emerald-600/85 text-white shadow-lg shadow-blue-600/20 border border-white/20 backdrop-blur-xl'
+                        : 'text-slate-400 hover:text-cyan-200 hover:bg-white/[0.04] border border-transparent hover:border-white/5'
                     }`}
                   >
                     <div className="flex items-center gap-3">
-                      <Icon className="w-4 h-4" />
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
                       <span>{item.name}</span>
                     </div>
                     {item.badge && (
-                      <span className="px-2 py-0.5 text-xs font-semibold rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                      <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
                         {item.badge}
                       </span>
                     )}
@@ -82,30 +86,32 @@ export default function Sidebar() {
         </div>
 
         {/* User Profile & Role Switcher */}
-        <div className="pt-4 border-t border-slate-800">
-          <div className="flex items-center justify-between mb-2 px-1">
-            <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold">Active Role</span>
+        <div className="pt-4 border-t border-white/10 space-y-3">
+          <div className="flex items-center justify-between px-1">
+            <span className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Active Role</span>
             <span
-              className={`text-xs px-2 py-0.5 rounded font-mono font-bold ${
+              className={`text-[10px] px-2.5 py-0.5 rounded-full font-mono font-bold tracking-wide border ${
                 role === 'ADMIN'
-                  ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                  ? 'bg-blue-500/15 text-blue-300 border-blue-500/30 shadow-sm shadow-blue-500/20'
                   : role === 'TECHNICIAN'
-                  ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                  : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                  ? 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30 shadow-sm shadow-emerald-500/20'
+                  : 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30'
               }`}
             >
               {role}
             </span>
           </div>
 
-          {/* Role switcher buttons for pairing demo */}
-          <div className="grid grid-cols-3 gap-1 mb-4 bg-slate-950 p-1 rounded-lg border border-slate-800 text-[10px]">
+          {/* Role switcher buttons */}
+          <div className="grid grid-cols-3 gap-1 bg-slate-950/80 p-1 rounded-xl border border-white/10 text-[10px]">
             {(['ADMIN', 'TECHNICIAN', 'VIEWER'] as UserRole[]).map((r) => (
               <button
                 key={r}
                 onClick={() => loginAs(r)}
-                className={`py-1 rounded font-medium transition-all ${
-                  role === r ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-slate-200'
+                className={`py-1 rounded-lg font-medium transition-all ${
+                  role === r
+                    ? 'bg-gradient-to-r from-blue-600 to-emerald-600 text-white shadow-sm'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                 }`}
               >
                 {r.slice(0, 4)}
@@ -113,14 +119,15 @@ export default function Sidebar() {
             ))}
           </div>
 
-          <div className="flex items-center justify-between px-2 py-1.5 rounded-lg bg-slate-800/40 border border-slate-800">
+          {/* User Badge */}
+          <div className="flex items-center justify-between p-2 rounded-xl bg-slate-900/50 border border-white/5 backdrop-blur-md">
             <div className="flex items-center gap-2 overflow-hidden">
-              <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-slate-300 shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-emerald-500 flex items-center justify-center text-xs font-bold text-white shrink-0 shadow-sm">
                 {user?.fullName.charAt(0) || 'U'}
               </div>
               <div className="truncate text-xs">
-                <p className="font-medium text-slate-200 truncate">{user?.fullName || 'Technician'}</p>
-                <p className="text-slate-500 truncate text-[11px]">{user?.email}</p>
+                <p className="font-semibold text-slate-200 truncate">{user?.fullName || 'Technician'}</p>
+                <p className="text-slate-500 truncate text-[10px] font-mono">{user?.email}</p>
               </div>
             </div>
             <button
@@ -134,8 +141,8 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      {/* Mobile Bottom Navigation (visible on mobile only) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 z-50 px-2 py-1.5 flex justify-around items-center">
+      {/* Mobile Bottom Navigation (Glassy) */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-950/85 backdrop-blur-2xl border-t border-white/10 z-50 px-2 py-1.5 flex justify-around items-center">
         {navItems
           .filter((item) => item.roles.includes(role))
           .slice(0, 5)
@@ -146,8 +153,8 @@ export default function Sidebar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center py-1 px-2 rounded-lg text-[10px] font-medium transition-colors ${
-                  isActive ? 'text-indigo-400 font-semibold' : 'text-slate-400 hover:text-slate-200'
+                className={`flex flex-col items-center py-1 px-2 rounded-xl text-[10px] font-medium transition-colors ${
+                  isActive ? 'text-emerald-400 font-bold' : 'text-slate-400 hover:text-slate-200'
                 }`}
               >
                 <div className="relative">
@@ -164,4 +171,3 @@ export default function Sidebar() {
     </>
   );
 }
-

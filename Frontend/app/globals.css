@@ -4,39 +4,141 @@
 
 :root {
   --foreground-rgb: 241, 245, 249;
-  --background-start-rgb: 15, 23, 42;
+  --background-start-rgb: 10, 15, 29;
   --background-end-rgb: 2, 6, 23;
+  --primary-blue: #0284c7;
+  --primary-emerald: #10b981;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #030712;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(2, 132, 199, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 20%, rgba(16, 185, 129, 0.10) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
+  background-attachment: fixed;
 }
 
-/* Custom Scrollbar */
+/* =========================================================================
+   Glassmorphic UI Utilities (Frosted Glass with Blue & Emerald Glow)
+   ========================================================================= */
+
+@layer utilities {
+  /* Frosted Glass Panels */
+  .glass-panel {
+    background: rgba(15, 23, 42, 0.60);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+
+  .glass-panel-elevated {
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Frosted Interactive Cards */
+  .glass-card {
+    background: rgba(15, 23, 42, 0.50);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow: 0 4px 20px -2px rgba(2, 6, 23, 0.5);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    background: rgba(30, 41, 59, 0.65);
+    border-color: rgba(56, 189, 248, 0.25);
+    box-shadow: 0 10px 30px -5px rgba(2, 132, 199, 0.2), 0 0 15px rgba(16, 185, 129, 0.1);
+  }
+
+  .glass-card-emerald:hover {
+    border-color: rgba(52, 211, 153, 0.35);
+    box-shadow: 0 10px 30px -5px rgba(16, 185, 129, 0.25);
+  }
+
+  /* Frosted Glass Inputs */
+  .glass-input {
+    background: rgba(2, 6, 23, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    transition: all 0.2s ease;
+  }
+
+  .glass-input:focus {
+    border-color: rgba(56, 189, 248, 0.6);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.25), 0 0 15px rgba(2, 132, 199, 0.15);
+  }
+
+  /* Glass Pills & Chips */
+  .glass-pill {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Blue-Emerald Gradients */
+  .bg-gradient-blue-emerald {
+    background: linear-gradient(135deg, #0284c7 0%, #059669 100%);
+  }
+
+  .bg-gradient-blue-cyan {
+    background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  }
+
+  .bg-gradient-glass-active {
+    background: linear-gradient(135deg, rgba(2, 132, 199, 0.85) 0%, rgba(16, 185, 129, 0.75) 100%);
+    backdrop-filter: blur(12px);
+  }
+
+  .text-gradient-blue-emerald {
+    background: linear-gradient(135deg, #38bdf8 0%, #34d399 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gradient-emerald-cyan {
+    background: linear-gradient(135deg, #10b981 0%, #38bdf8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Glowing Accent Shadows */
+  .glow-blue {
+    box-shadow: 0 0 25px -3px rgba(2, 132, 199, 0.4);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 25px -3px rgba(16, 185, 129, 0.4);
+  }
+}
+
+/* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: rgba(3, 7, 18, 0.5);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: rgba(51, 65, 85, 0.6);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: rgba(2, 132, 199, 0.5);
 }
-

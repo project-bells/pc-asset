@@ -175,7 +175,7 @@ export const FullInventoryPayloadSchema = z.object({
 
 export const BindAssetSchema = z.object({
   assetTag: sanitizedString(1, 100),
-  locationId: sanitizedString(1, 100),
+  locationId: sanitizedString(1, 100).optional().default('loc-b1f6-01'),
   assignedUser: sanitizedString(0, 150).optional(),
   purchaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'purchaseDate must follow YYYY-MM-DD.').optional().nullable(),
   warrantyExpiryDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'warrantyExpiryDate must follow YYYY-MM-DD.').optional().nullable()

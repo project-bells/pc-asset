@@ -56,12 +56,12 @@ import {
 // Color Palettes for Enterprise Analytics
 const OS_COLORS: Record<string, string> = {
   'Windows 11': '#10b981', // Emerald 500
-  'Windows 10': '#f59e0b', // Amber 500
-  'Windows Server': '#6366f1', // Indigo 500
+  'Windows 10': '#0284c7', // Ocean Blue 600
+  'Windows Server': '#06b6d4', // Cyan 500
   'Windows 7 (Legacy)': '#ef4444', // Red 500
   'Windows 8.1 (Legacy)': '#f43f5e', // Rose 500
-  Linux: '#06b6d4', // Cyan 500
-  macOS: '#8b5cf6', // Purple 500
+  Linux: '#3b82f6', // Blue 500
+  macOS: '#14b8a6', // Teal 500
   'Other OS': '#64748b', // Slate 500
 };
 
@@ -262,9 +262,9 @@ export default function ExecutiveDashboardPage() {
       {/* --------------------------------------------------------------------- */}
       {/* 0. Top Header & Navigation Breadcrumb */}
       {/* --------------------------------------------------------------------- */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 text-xs font-mono text-indigo-400 mb-1">
+          <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 mb-1">
             <Link href="/dashboard" className="hover:underline">
               Operations
             </Link>
@@ -272,8 +272,8 @@ export default function ExecutiveDashboardPage() {
             <span className="text-slate-300 font-semibold">Executive Analytics & Patch Portal</span>
           </div>
           <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-100 tracking-tight flex items-center gap-2.5">
-            <ShieldCheck className="w-7 h-7 text-indigo-500" />
-            Executive Asset, Software & Patch Compliance
+            <ShieldCheck className="w-7 h-7 text-emerald-400" />
+            <span className="text-gradient-blue-emerald">Executive Asset, Software & Patch Compliance</span>
           </h1>
           <p className="text-sm text-slate-400 mt-0.5">
             Strategic decision metrics, software license deduplication counting, and Windows security patch advisories.
@@ -283,9 +283,9 @@ export default function ExecutiveDashboardPage() {
         <div className="flex items-center gap-2.5">
           <button
             onClick={refreshAll}
-            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-300 bg-slate-800/80 hover:bg-slate-700/80 rounded-xl transition-all border border-slate-700 shadow-sm"
+            className="flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-slate-200 glass-card hover:border-emerald-500/40 rounded-xl transition-all border border-white/10 shadow-sm"
           >
-            <RefreshCw className={`w-3.5 h-3.5 text-indigo-400 ${loadingExec ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 text-cyan-400 ${loadingExec ? 'animate-spin' : ''}`} />
             <span>Refresh All Data</span>
           </button>
         </div>
@@ -302,11 +302,11 @@ export default function ExecutiveDashboardPage() {
             setPcOsFilter('ALL');
             setPcSearch('');
           }}
-          className="group cursor-pointer p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-slate-900/50 border border-slate-800 hover:border-indigo-500/50 shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
+          className="group cursor-pointer p-5 rounded-2xl glass-card bg-slate-900/50 backdrop-blur-xl border border-white/10 hover:border-blue-500/50 hover:shadow-glow-blue shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
         >
           <div className="flex items-center justify-between text-slate-400 mb-3">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Total Workstations</span>
-            <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
               <Server className="w-4 h-4" />
             </div>
           </div>
@@ -317,12 +317,12 @@ export default function ExecutiveDashboardPage() {
             <span className="text-xs text-slate-400 font-medium">PCs Managed</span>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
             <span className="flex items-center gap-1.5 text-emerald-400 font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               {execSummary?.fleet.onlineNow ?? 3} Online Now
             </span>
-            <span className="text-slate-500 group-hover:text-indigo-400 transition-colors flex items-center gap-1">
+            <span className="text-slate-500 group-hover:text-cyan-400 transition-colors flex items-center gap-1">
               View All <ArrowUpRight className="w-3 h-3" />
             </span>
           </div>
@@ -334,7 +334,7 @@ export default function ExecutiveDashboardPage() {
             setActiveTab('assets');
             setPcOsFilter('WIN10');
           }}
-          className="group cursor-pointer p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-amber-950/20 border border-amber-500/30 hover:border-amber-500 shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
+          className="group cursor-pointer p-5 rounded-2xl glass-card bg-gradient-to-br from-slate-900/60 to-blue-950/30 border border-blue-500/30 hover:border-blue-400 hover:shadow-glow-blue shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
         >
           <div className="flex items-center justify-between text-amber-400 mb-3">
             <span className="text-xs font-semibold uppercase tracking-wider">Windows 10 Legacy Alert</span>
@@ -347,7 +347,7 @@ export default function ExecutiveDashboardPage() {
             <span className="text-xs font-semibold text-amber-300/80">PCs ({win10Percent}% of Fleet)</span>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
             <span className="text-rose-400/90 font-medium flex items-center gap-1">
               <Clock className="w-3 h-3 text-rose-400" />
               EOS Oct 2025 Risk
@@ -365,7 +365,7 @@ export default function ExecutiveDashboardPage() {
             setSoftwareSearch('Office');
             setSelectedCategory('Microsoft Office / 365');
           }}
-          className="group cursor-pointer p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-blue-950/20 border border-blue-500/30 hover:border-blue-500 shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
+          className="group cursor-pointer p-5 rounded-2xl glass-card bg-gradient-to-br from-slate-900/60 to-emerald-950/30 border border-emerald-500/30 hover:border-emerald-400 hover:shadow-glow-emerald shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
         >
           <div className="flex items-center justify-between text-blue-400 mb-3">
             <span className="text-xs font-semibold uppercase tracking-wider">Microsoft Office License</span>
@@ -380,7 +380,7 @@ export default function ExecutiveDashboardPage() {
             <span className="text-xs font-semibold text-blue-300/80">Unique PCs Active</span>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
             <span className="text-slate-400 font-medium truncate max-w-[150px]">
               2013 / 2021 / M365 Seats
             </span>
@@ -396,7 +396,7 @@ export default function ExecutiveDashboardPage() {
             setActiveTab('patch');
             setPatchStatusFilter('HIGH_OUTDATED');
           }}
-          className="group cursor-pointer p-5 rounded-2xl bg-gradient-to-br from-slate-900/90 to-rose-950/20 border border-rose-500/30 hover:border-rose-500 shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
+          className="group cursor-pointer p-5 rounded-2xl glass-card bg-gradient-to-br from-slate-900/60 to-rose-950/30 border border-rose-500/30 hover:border-rose-400 shadow-lg shadow-black/20 transition-all hover:scale-[1.01]"
         >
           <div className="flex items-center justify-between text-rose-400 mb-3">
             <span className="text-xs font-semibold uppercase tracking-wider">Patch Risk / Needs Update</span>
@@ -411,7 +411,7 @@ export default function ExecutiveDashboardPage() {
             <span className="text-xs font-semibold text-rose-300/80">Machines At Risk</span>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
             <span className="text-amber-400/90 font-medium">
               {execSummary?.patchCompliance.compliant ?? 0} Compliant ({execSummary?.patchCompliance.complianceRatePercent ?? 50}%)
             </span>
@@ -428,11 +428,11 @@ export default function ExecutiveDashboardPage() {
       {mounted && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* OS Family Donut Chart */}
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm flex flex-col justify-between">
+          <div className="glass-panel p-5 rounded-2xl border border-white/10 shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-1">
                 <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                  <Laptop className="w-4 h-4 text-indigo-400" />
+                  <Laptop className="w-4 h-4 text-cyan-400" />
                   Fleet Operating System Distribution
                 </h3>
               </div>
@@ -477,7 +477,7 @@ export default function ExecutiveDashboardPage() {
               </ResponsiveContainer>
             </div>
 
-            <div className="mt-2 pt-3 border-t border-slate-800 flex items-center justify-around text-xs text-slate-400">
+            <div className="mt-2 pt-3 border-t border-white/10 flex items-center justify-around text-xs text-slate-400">
               <span className="flex items-center gap-1.5">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
                 Win 11: <strong className="text-slate-200">{win11Count} PCs ({win11Percent}%)</strong>
@@ -490,7 +490,7 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           {/* Patch Security Compliance Chart */}
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm flex flex-col justify-between lg:col-span-2">
+          <div className="glass-panel p-5 rounded-2xl border border-white/10 shadow-xl flex flex-col justify-between lg:col-span-2">
             <div>
               <div className="flex items-center justify-between mb-1">
                 <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
@@ -537,7 +537,7 @@ export default function ExecutiveDashboardPage() {
               </ResponsiveContainer>
             </div>
 
-            <div className="mt-2 pt-3 border-t border-slate-800 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+            <div className="mt-2 pt-3 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
               <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center">
                 <span className="text-slate-400 block text-[10px] uppercase font-semibold">Compliant</span>
                 <span className="text-base font-bold text-emerald-400 font-mono">
@@ -570,19 +570,19 @@ export default function ExecutiveDashboardPage() {
       {/* --------------------------------------------------------------------- */}
       {/* 2. Primary Tabs Navigation */}
       {/* --------------------------------------------------------------------- */}
-      <div className="flex border-b border-slate-800 gap-1 sm:gap-2">
+      <div className="flex border-b border-white/10 gap-1 sm:gap-2">
         <button
           onClick={() => setActiveTab('software')}
           className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === 'software'
-              ? 'border-indigo-500 text-indigo-400 bg-indigo-500/5'
+              ? 'border-indigo-500 text-cyan-400 bg-indigo-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
           <Package className="w-4 h-4" />
           <span>Tab 1: Software License & Counter Engine</span>
           {softwareData?.totalUniquePcs !== undefined && (
-            <span className="px-2 py-0.5 text-xs rounded-full bg-indigo-500/20 text-indigo-300 font-mono">
+            <span className="px-2 py-0.5 text-xs rounded-full bg-cyan-500/20 text-cyan-300 font-mono">
               {softwareData.totalUniquePcs} PCs
             </span>
           )}
@@ -592,7 +592,7 @@ export default function ExecutiveDashboardPage() {
           onClick={() => setActiveTab('assets')}
           className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === 'assets'
-              ? 'border-indigo-500 text-indigo-400 bg-indigo-500/5'
+              ? 'border-indigo-500 text-cyan-400 bg-indigo-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -607,7 +607,7 @@ export default function ExecutiveDashboardPage() {
           onClick={() => setActiveTab('patch')}
           className={`flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-all ${
             activeTab === 'patch'
-              ? 'border-indigo-500 text-indigo-400 bg-indigo-500/5'
+              ? 'border-indigo-500 text-cyan-400 bg-indigo-500/5'
               : 'border-transparent text-slate-400 hover:text-slate-200'
           }`}
         >
@@ -627,7 +627,7 @@ export default function ExecutiveDashboardPage() {
       {activeTab === 'software' && (
         <div className="space-y-6">
           {/* Search Box & Quick Pills */}
-          <div className="p-6 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-md space-y-4">
+          <div className="p-6 rounded-2xl glass-panel border border-white/10 shadow-xl shadow-md space-y-4">
             <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
               <div className="relative flex-1">
                 <Search className="w-5 h-5 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -636,7 +636,7 @@ export default function ExecutiveDashboardPage() {
                   value={softwareSearch}
                   onChange={(e) => setSoftwareSearch(e.target.value)}
                   placeholder="Type any software keyword (e.g. Office, Chrome, AutoCAD, AnyDesk, LINE, ESET)..."
-                  className="w-full pl-11 pr-4 py-3 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 text-sm focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-indigo-500"
                 />
                 {softwareSearch && (
                   <button
@@ -653,7 +653,7 @@ export default function ExecutiveDashboardPage() {
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="w-full px-3.5 py-3 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-200 text-sm focus:outline-none focus:border-indigo-500"
+                  className="w-full px-3.5 py-3 glass-input rounded-xl text-slate-200 text-sm"
                 >
                   <option value="ALL">All Categories</option>
                   {(softwareData?.categories || []).map((cat) => (
@@ -696,7 +696,7 @@ export default function ExecutiveDashboardPage() {
             {/* Quick Filter Clickable Pills */}
             <div className="flex flex-wrap items-center gap-2 pt-2">
               <span className="text-xs text-slate-400 font-medium mr-1 flex items-center gap-1">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
                 Quick Filters:
               </span>
               {quickFilterPills.map((pill) => {
@@ -710,7 +710,7 @@ export default function ExecutiveDashboardPage() {
                     }}
                     className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                       isActive
-                        ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-semibold'
+                        ? 'bg-gradient-to-r from-blue-600 to-emerald-600 text-white shadow-md shadow-blue-600/30 font-bold'
                         : 'bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700'
                     }`}
                   >
@@ -722,15 +722,15 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           {/* Big Counter Badge (Deduplicated license seats) */}
-          <div className="p-6 rounded-2xl bg-gradient-to-r from-indigo-950/40 via-slate-900 to-slate-900 border border-indigo-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="p-6 rounded-2xl glass-card bg-gradient-to-r from-blue-950/50 via-slate-900/80 to-emerald-950/40 border border-emerald-500/30 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="space-y-1">
-              <div className="text-xs font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-2">
+              <div className="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Deduplicated License Seat Counter</span>
               </div>
               <div className="text-2xl lg:text-3xl font-extrabold text-slate-100">
                 พบการติดตั้งบนคอมพิวเตอร์จำนวน{' '}
-                <span className="text-indigo-400 font-mono underline decoration-indigo-500/50">
+                <span className="text-cyan-300 font-mono underline decoration-cyan-500/50 font-black">
                   {loadingSoftware ? '...' : softwareData?.totalUniquePcs ?? 0}
                 </span>{' '}
                 เครื่อง
@@ -745,15 +745,15 @@ export default function ExecutiveDashboardPage() {
             </div>
 
             <div className="flex items-center gap-3 shrink-0">
-              <div className="px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
+              <div className="px-4 py-2.5 rounded-xl bg-slate-950/80 border border-white/10 text-center">
                 <span className="text-[10px] uppercase font-semibold text-slate-400 block">Total Installations</span>
                 <span className="text-xl font-bold font-mono text-emerald-400">
                   {softwareData?.totalInstallations ?? 0}
                 </span>
               </div>
-              <div className="px-4 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-center">
+              <div className="px-4 py-2.5 rounded-xl bg-slate-950/80 border border-white/10 text-center">
                 <span className="text-[10px] uppercase font-semibold text-slate-400 block">Fleet Adoption</span>
-                <span className="text-xl font-bold font-mono text-indigo-400">
+                <span className="text-xl font-bold font-mono text-cyan-400">
                   {totalPcCount > 0 ? Math.round(((softwareData?.totalUniquePcs ?? 0) / totalPcCount) * 100) : 0}%
                 </span>
               </div>
@@ -761,15 +761,15 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           {/* Version Breakdown Table */}
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm space-y-3">
+          <div className="p-5 rounded-2xl glass-panel border border-white/10 shadow-xl shadow-sm space-y-3">
             <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
-              <Layers className="w-4 h-4 text-indigo-400" />
+              <Layers className="w-4 h-4 text-cyan-400" />
               Edition & Version Breakdown ({softwareData?.software.length ?? 0} Titles Detected)
             </h3>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-300">
-                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-slate-800">
+                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-white/10">
                   <tr>
                     <th className="py-2.5 px-4">Software Name</th>
                     <th className="py-2.5 px-4">Category</th>
@@ -795,7 +795,7 @@ export default function ExecutiveDashboardPage() {
                     softwareData?.software.map((item, idx) => (
                       <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
                         <td className="py-3 px-4 font-semibold text-slate-100 flex items-center gap-2">
-                          <Package className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
+                          <Package className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                           <span>{item.software_name}</span>
                         </td>
                         <td className="py-3 px-4">
@@ -819,7 +819,7 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           {/* Drill-down PC List */}
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm space-y-3">
+          <div className="p-5 rounded-2xl glass-panel border border-white/10 shadow-xl shadow-sm space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-slate-200 flex items-center gap-2">
                 <Laptop className="w-4 h-4 text-emerald-400" />
@@ -832,7 +832,7 @@ export default function ExecutiveDashboardPage() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-300">
-                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-slate-800">
+                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-white/10">
                   <tr>
                     <th className="py-2.5 px-4">Hostname & Tag</th>
                     <th className="py-2.5 px-4">IP Address</th>
@@ -883,7 +883,7 @@ export default function ExecutiveDashboardPage() {
                           <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
                             <td className="py-3 px-4">
                               <div className="font-bold text-slate-100">{item.pc.hostname}</div>
-                              <div className="text-[11px] font-mono text-indigo-400">
+                              <div className="text-[11px] font-mono text-cyan-400">
                                 {item.pc.asset_tag || 'Not Bound'}
                               </div>
                             </td>
@@ -947,7 +947,7 @@ export default function ExecutiveDashboardPage() {
                                 className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 transition-colors inline-flex items-center gap-1.5"
                               >
                                 <span>Inspect PC</span>
-                                <ChevronRight className="w-3.5 h-3.5 text-indigo-400" />
+                                <ChevronRight className="w-3.5 h-3.5 text-cyan-400" />
                               </button>
                             </td>
                           </tr>
@@ -968,7 +968,7 @@ export default function ExecutiveDashboardPage() {
       {activeTab === 'assets' && (
         <div className="space-y-4">
           {/* Controls Bar */}
-          <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl glass-panel border border-white/10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="relative w-full sm:w-80">
               <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
               <input
@@ -976,13 +976,13 @@ export default function ExecutiveDashboardPage() {
                 value={pcSearch}
                 onChange={(e) => setPcSearch(e.target.value)}
                 placeholder="Search hostname, tag, IP, user, model..."
-                className="w-full pl-10 pr-4 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-100 placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500"
+                className="w-full pl-10 pr-4 py-2 glass-input rounded-xl text-slate-100 placeholder-slate-500 text-xs"
               />
             </div>
 
             <div className="flex items-center gap-2 w-full sm:w-auto overflow-x-auto">
               <span className="text-xs text-slate-400 font-medium mr-1 flex items-center gap-1 shrink-0">
-                <Filter className="w-3 h-3 text-indigo-400" />
+                <Filter className="w-3 h-3 text-cyan-400" />
                 OS Filter:
               </span>
               <button
@@ -1054,10 +1054,10 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           {/* Master Table */}
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm overflow-hidden">
+          <div className="p-5 rounded-2xl glass-panel border border-white/10 shadow-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-300">
-                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-slate-800">
+                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-white/10">
                   <tr>
                     <th className="py-3 px-4">Endpoint / Hostname</th>
                     <th className="py-3 px-4">Network &amp; LAN Speed</th>
@@ -1103,7 +1103,7 @@ export default function ExecutiveDashboardPage() {
                               />
                               <div>
                                 <span className="font-bold text-slate-100 text-sm block">{asset.hostname}</span>
-                                <span className="font-mono text-[11px] text-indigo-400 block">
+                                <span className="font-mono text-[11px] text-cyan-400 block">
                                   {asset.asset_tag || 'Not Bound'}
                                 </span>
                               </div>
@@ -1195,7 +1195,7 @@ export default function ExecutiveDashboardPage() {
                           <td className="py-3.5 px-4">
                             <button
                               onClick={() => setDrawerAsset(asset)}
-                              className="px-3 py-1.5 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 transition-all font-semibold flex items-center gap-1.5 group"
+                              className="px-3 py-1.5 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 transition-all font-semibold flex items-center gap-1.5 group"
                             >
                               <Package className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                               <span>{softwareCount} Programs</span>
@@ -1210,10 +1210,10 @@ export default function ExecutiveDashboardPage() {
                                   setVncAsset(asset);
                                   setIsVncModalOpen(true);
                                 }}
-                                className="px-2.5 py-1.5 rounded-lg bg-indigo-500/15 hover:bg-indigo-500/25 text-indigo-300 border border-indigo-500/30 text-xs font-semibold flex items-center gap-1 transition-colors"
+                                className="px-2.5 py-1.5 rounded-lg bg-cyan-500/15 hover:bg-indigo-500/25 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1 transition-colors"
                                 title="เปิดรีโมท UltraVNC ผ่าน Guacamole Gateway"
                               >
-                                <Monitor className="w-3.5 h-3.5 text-indigo-400" />
+                                <Monitor className="w-3.5 h-3.5 text-cyan-400" />
                                 <span className="hidden sm:inline">VNC</span>
                               </button>
                               <button
@@ -1221,7 +1221,7 @@ export default function ExecutiveDashboardPage() {
                                 className="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors"
                                 title="Open Full Specifications & Software Drawer"
                               >
-                                <ExternalLink className="w-4 h-4 text-indigo-400" />
+                                <ExternalLink className="w-4 h-4 text-cyan-400" />
                               </button>
                             </div>
                           </td>
@@ -1242,10 +1242,10 @@ export default function ExecutiveDashboardPage() {
       {activeTab === 'patch' && (
         <div className="space-y-4">
           {/* Status Filter Tabs & CSV Export */}
-          <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="p-4 rounded-2xl glass-panel border border-white/10 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto">
               <span className="text-xs text-slate-400 font-medium mr-1 flex items-center gap-1 shrink-0">
-                <Filter className="w-3 h-3 text-indigo-400" />
+                <Filter className="w-3 h-3 text-cyan-400" />
                 Security Status:
               </span>
               <button
@@ -1342,10 +1342,10 @@ export default function ExecutiveDashboardPage() {
           </div>
 
           {/* Patch Advisory Table */}
-          <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-sm overflow-hidden">
+          <div className="p-5 rounded-2xl glass-panel border border-white/10 shadow-xl shadow-sm overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs text-slate-300">
-                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-slate-800">
+                <thead className="text-[11px] uppercase font-semibold text-slate-400 bg-slate-950/60 border-y border-white/10">
                   <tr>
                     <th className="py-3 px-4">Endpoint / Hostname</th>
                     <th className="py-3 px-4">IP &amp; Location</th>
@@ -1377,7 +1377,7 @@ export default function ExecutiveDashboardPage() {
                           {/* Hostname & Tag */}
                           <td className="py-3.5 px-4">
                             <div className="font-bold text-slate-100 text-sm">{adv.hostname}</div>
-                            <div className="font-mono text-[11px] text-indigo-400">
+                            <div className="font-mono text-[11px] text-cyan-400">
                               {adv.asset_tag || 'Not Bound'}
                             </div>
                             <div className="text-[11px] text-slate-400 mt-0.5">{adv.assigned_user || 'Unassigned'}</div>
@@ -1403,7 +1403,7 @@ export default function ExecutiveDashboardPage() {
 
                           {/* Latest KB */}
                           <td className="py-3.5 px-4 font-mono">
-                            <span className="px-2 py-1 rounded bg-slate-800 text-indigo-300 font-bold border border-slate-700">
+                            <span className="px-2 py-1 rounded bg-slate-800 text-cyan-300 font-bold border border-slate-700">
                               {adv.latest_kb_id || 'None'}
                             </span>
                           </td>
@@ -1477,14 +1477,14 @@ export default function ExecutiveDashboardPage() {
           />
 
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-2xl bg-slate-900 border-l border-slate-800 shadow-2xl flex flex-col justify-between">
+            <div className="w-screen max-w-2xl bg-slate-950/95 backdrop-blur-2xl border-l border-white/15 shadow-2xl flex flex-col justify-between">
               {/* Drawer Header */}
-              <div className="p-6 border-b border-slate-800 flex items-start justify-between bg-slate-950/60">
+              <div className="p-6 border-b border-white/10 flex items-start justify-between bg-slate-950/60">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                     <h2 className="text-xl font-bold text-slate-100">{drawerAsset.hostname}</h2>
-                    <span className="px-2 py-0.5 rounded text-xs font-mono bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold">
+                    <span className="px-2 py-0.5 rounded text-xs font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-bold">
                       {drawerAsset.asset_tag || 'Unregistered'}
                     </span>
                   </div>
@@ -1510,28 +1510,28 @@ export default function ExecutiveDashboardPage() {
               <div className="p-6 overflow-y-auto space-y-6 flex-1">
                 {/* Hardware Specs Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10">
                     <span className="text-slate-500 block text-[10px] uppercase font-semibold">CPU Processor</span>
                     <span className="text-slate-200 font-medium line-clamp-2 mt-0.5" title={drawerAsset.cpu_name}>
                       {drawerAsset.cpu_name}
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10">
                     <span className="text-slate-500 block text-[10px] uppercase font-semibold">Physical Memory</span>
                     <span className="text-slate-200 font-bold font-mono text-sm mt-0.5">
                       {drawerAsset.ram_total_gb} GB RAM
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10">
                     <span className="text-slate-500 block text-[10px] uppercase font-semibold">OS Release</span>
                     <span className="text-slate-200 font-medium mt-0.5 block truncate">
                       {drawerAsset.os_name}
                     </span>
-                    <span className="text-[10px] text-indigo-400 font-mono">
+                    <span className="text-[10px] text-cyan-400 font-mono">
                       Ver {drawerAsset.os_version || '23H2'}
                     </span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-950/80 border border-white/10">
                     <span className="text-slate-500 block text-[10px] uppercase font-semibold">Storage Drive C:</span>
                     <span className="text-slate-200 font-bold font-mono text-sm mt-0.5">
                       {drawerAsset.disks_json?.[0]?.freeGb ?? '373'} GB Free
@@ -1541,10 +1541,10 @@ export default function ExecutiveDashboardPage() {
                 </div>
 
                 {/* Remote VNC Quick Action Bar inside Drawer */}
-                <div className="p-4 rounded-xl bg-indigo-950/40 border border-indigo-500/30 flex items-center justify-between">
+                <div className="p-4 rounded-xl bg-indigo-950/40 border border-cyan-500/30 flex items-center justify-between">
                   <div>
-                    <span className="font-semibold text-xs text-indigo-300 block flex items-center gap-1.5">
-                      <Monitor className="w-4 h-4 text-indigo-400" />
+                    <span className="font-semibold text-xs text-cyan-300 block flex items-center gap-1.5">
+                      <Monitor className="w-4 h-4 text-cyan-400" />
                       UltraVNC Remote Assistance Gateway
                     </span>
                     <span className="text-[11px] text-slate-400">
@@ -1556,7 +1556,7 @@ export default function ExecutiveDashboardPage() {
                       setVncAsset(drawerAsset);
                       setIsVncModalOpen(true);
                     }}
-                    className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-600/30 transition-all cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-blue-600/30 hover:shadow-glow-blue transition-all cursor-pointer"
                   >
                     <Monitor className="w-3.5 h-3.5" />
                     <span>Launch Remote VNC</span>
@@ -1567,7 +1567,7 @@ export default function ExecutiveDashboardPage() {
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                      <Package className="w-4 h-4 text-indigo-400" />
+                      <Package className="w-4 h-4 text-cyan-400" />
                       Installed Programs &amp; Applications (
                       {(drawerAsset.installed_software_json || []).length})
                     </h3>
@@ -1580,11 +1580,11 @@ export default function ExecutiveDashboardPage() {
                       value={drawerSearch}
                       onChange={(e) => setDrawerSearch(e.target.value)}
                       placeholder="Search program name or publisher inside this PC..."
-                      className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-200 placeholder-slate-500 text-xs focus:outline-none focus:border-indigo-500"
+                      className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700/80 rounded-xl text-slate-200 placeholder-slate-500 text-xs focus:outline-none focus:border-emerald-500"
                     />
                   </div>
 
-                  <div className="max-h-72 overflow-y-auto rounded-xl border border-slate-800 divide-y divide-slate-800/60 bg-slate-950/40">
+                  <div className="max-h-72 overflow-y-auto rounded-xl border border-white/10 divide-y divide-slate-800/60 bg-slate-950/40">
                     {(() => {
                       const list = (drawerAsset.installed_software_json || []).filter((item: any) => {
                         if (!drawerSearch.trim()) return true;
@@ -1626,7 +1626,7 @@ export default function ExecutiveDashboardPage() {
                     Installed Windows Security Patches &amp; Cumulative Updates
                   </h3>
 
-                  <div className="rounded-xl border border-slate-800 divide-y divide-slate-800/60 bg-slate-950/40">
+                  <div className="rounded-xl border border-white/10 divide-y divide-slate-800/60 bg-slate-950/40">
                     {(() => {
                       const patches = drawerAsset.installed_patches_json || [
                         { kbId: drawerAsset.latest_kb_id || 'KB5044273', description: 'Cumulative Update for Windows 11', installedOn: '2026-10-15' },
@@ -1636,7 +1636,7 @@ export default function ExecutiveDashboardPage() {
                       return patches.map((patch: any, idx: number) => (
                         <div key={idx} className="p-3 flex items-center justify-between text-xs hover:bg-slate-800/40">
                           <div>
-                            <span className="font-bold font-mono text-indigo-400 block">{patch.kbId}</span>
+                            <span className="font-bold font-mono text-cyan-400 block">{patch.kbId}</span>
                             <span className="text-[11px] text-slate-400">{patch.description}</span>
                           </div>
                           <span className="text-slate-400 font-mono text-[11px]">
@@ -1650,7 +1650,7 @@ export default function ExecutiveDashboardPage() {
               </div>
 
               {/* Drawer Footer */}
-              <div className="p-4 border-t border-slate-800 bg-slate-950/80 flex items-center justify-between">
+              <div className="p-4 border-t border-white/10 bg-slate-950/80 flex items-center justify-between">
                 <span className="text-xs text-slate-500 font-mono">
                   Agent ID: {drawerAsset.id.slice(0, 18)}...
                 </span>
