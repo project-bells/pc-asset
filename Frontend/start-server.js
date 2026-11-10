@@ -11,3 +11,4 @@ if (!fs.existsSync(standaloneServer)) {
 
 console.log('🚀 Starting Enterprise IT Asset Guard Web Portal (Port 3000)...');
 require(standaloneServer);
+

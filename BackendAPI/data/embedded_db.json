@@ -429,7 +429,7 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T04:20:06.472Z",
+      "last_seen_at": "2026-11-10T06:30:06.164Z",
       "monitors_json": [
         {
           "manufacturer": "LEN",
@@ -1265,7 +1265,7 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T04:21:56.112Z",
+      "last_seen_at": "2026-11-10T06:31:56.589Z",
       "monitors_json": [
         {
           "manufacturer": "DEL",
@@ -1652,7 +1652,7 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T04:23:20.738Z",
+      "last_seen_at": "2026-11-10T06:33:20.507Z",
       "monitors_json": [
         {
           "manufacturer": "LEN",
@@ -1922,6 +1922,19 @@
   ],
   "pmRecords": [],
   "remoteAccessLogs": [
+    {
+      "id": "rem-1794284826432-8379768b",
+      "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "hostname": "B2ITD321",
+      "target_ip": "191.1.9.15",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "ทำ PM / ตรวจสอบระบบรอบสัปดาห์",
+      "recording_filename": "rem-1794284826432-8379768b_B2ITD321_1794284826432.guac",
+      "client_source_ip": "::1",
+      "created_at": "2026-11-10T04:27:06.434Z"
+    },
     {
       "id": "rem-1794284206550-24f7517f",
       "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",

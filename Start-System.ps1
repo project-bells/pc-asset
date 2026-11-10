@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
     Starts the Enterprise IT Asset Guard Backend API and Frontend Web Portal.
 .DESCRIPTION
