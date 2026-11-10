@@ -418,7 +418,7 @@
       "manufacturer": "LENOVO",
       "model": "12SKS3QV00",
       "os_name": "Microsoft Windows 11 Pro",
-      "os_build": "26200",
+      "os_build": "26200.9168",
       "last_logged_in_user": "AIKCHOL1\\MeetingRoom",
       "cpu_name": "Intel(R) Core(TM) i5-14400",
       "cpu_cores": 10,
@@ -429,7 +429,7 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T02:54:50.985Z",
+      "last_seen_at": "2026-11-10T04:01:24.442Z",
       "monitors_json": [
         {
           "manufacturer": "LEN",
@@ -442,7 +442,7 @@
           "driveLetter": "C:",
           "fileSystem": "NTFS",
           "totalSizeGb": 474.72,
-          "freeSpaceGb": 366.05
+          "freeSpaceGb": 365.96
         },
         {
           "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
@@ -601,18 +601,39 @@
       ],
       "edr_info_json": null,
       "created_at": "2026-11-09T08:00:17.082Z",
-      "updated_at": "2026-11-10T02:54:50.985Z",
+      "updated_at": "2026-11-10T04:01:24.442Z",
       "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
       "floor": "ชั้น 6",
       "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
       "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)",
-      "os_version": "10.0.26200",
-      "installed_patches_json": [],
-      "pending_reboot": false,
-      "last_windows_update": "2026-10-31T02:11:22.500Z",
-      "last_boot_time": "2026-11-08T02:11:22.500Z",
-      "os_ubr": null,
-      "latest_kb_id": null,
+      "os_version": "25H2",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5120708",
+          "description": "Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5121003",
+          "description": "Security Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5123304",
+          "description": "Security Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5054156",
+          "description": "Update",
+          "installedOn": "2569-07-13"
+        }
+      ],
+      "pending_reboot": true,
+      "last_windows_update": "2569-08-18",
+      "last_boot_time": "2026-08-19T01:23:51.2447330Z",
+      "os_ubr": 9168,
+      "latest_kb_id": "KB5120708",
       "vnc_status": "READY",
       "vnc_port": 5900
     },
@@ -1099,9 +1120,549 @@
       "updated_at": "2026-11-10T02:11:22.499Z",
       "vnc_status": "READY",
       "vnc_port": 5900
+    },
+    {
+      "id": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "asset_tag": null,
+      "status": "Unregistered",
+      "location_id": null,
+      "assigned_user": null,
+      "purchase_date": null,
+      "warranty_expiry_date": null,
+      "qr_code_token": "QR-B2ITD321-mwa5lwxk",
+      "hardware_uuid": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "hostname": "B2ITD321",
+      "pc_serial_number": "7NW0XG3",
+      "manufacturer": "Dell Inc.",
+      "model": "OptiPlex 3080",
+      "os_name": "Microsoft Windows 10 Pro",
+      "os_build": "19045.6456",
+      "os_version": "22H2",
+      "os_ubr": 6456,
+      "latest_kb_id": "KB5126256",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5126256",
+          "description": "Security Update",
+          "installedOn": "2026-09-09"
+        },
+        {
+          "kbId": "KB5075039",
+          "description": "Security Update",
+          "installedOn": "2026-03-04"
+        },
+        {
+          "kbId": "KB5072653",
+          "description": "Security Update",
+          "installedOn": "2025-11-18"
+        },
+        {
+          "kbId": "KB5066130",
+          "description": "Update",
+          "installedOn": "2025-11-05"
+        },
+        {
+          "kbId": "KB5033052",
+          "description": "Update",
+          "installedOn": "2025-11-05"
+        },
+        {
+          "kbId": "KB5066791",
+          "description": "Security Update",
+          "installedOn": "2025-11-05"
+        },
+        {
+          "kbId": "KB5066790",
+          "description": "Security Update",
+          "installedOn": "2025-11-05"
+        },
+        {
+          "kbId": "KB5031539",
+          "description": "Update",
+          "installedOn": "2023-10-22"
+        },
+        {
+          "kbId": "KB5027122",
+          "description": "Update",
+          "installedOn": "2023-06-29"
+        },
+        {
+          "kbId": "KB5011048",
+          "description": "Update",
+          "installedOn": "2023-06-29"
+        },
+        {
+          "kbId": "KB5015684",
+          "description": "Update",
+          "installedOn": "2023-06-29"
+        },
+        {
+          "kbId": "KB5026879",
+          "description": "Update",
+          "installedOn": "2023-06-29"
+        },
+        {
+          "kbId": "KB5000736",
+          "description": "Update",
+          "installedOn": "2023-06-28"
+        },
+        {
+          "kbId": "KB5003791",
+          "description": "Update",
+          "installedOn": "2023-06-28"
+        },
+        {
+          "kbId": "KB5014032",
+          "description": "Security Update",
+          "installedOn": "2023-06-28"
+        },
+        {
+          "kbId": "KB5007273",
+          "description": "Update",
+          "installedOn": "2022-01-13"
+        },
+        {
+          "kbId": "KB4562830",
+          "description": "Update",
+          "installedOn": "2021-10-23"
+        },
+        {
+          "kbId": "KB5005699",
+          "description": "Security Update",
+          "installedOn": "2021-10-22"
+        },
+        {
+          "kbId": "KB4598481",
+          "description": "Security Update",
+          "installedOn": "2021-08-23"
+        },
+        {
+          "kbId": "KB4534170",
+          "description": "Update",
+          "installedOn": "2020-04-20"
+        },
+        {
+          "kbId": "KB4537759",
+          "description": "Security Update",
+          "installedOn": "2020-04-20"
+        },
+        {
+          "kbId": "KB4545706",
+          "description": "Security Update",
+          "installedOn": "2020-04-20"
+        }
+      ],
+      "pending_reboot": true,
+      "last_windows_update": "2026-09-09",
+      "last_boot_time": "2026-09-26T06:41:06.5000000Z",
+      "last_logged_in_user": "B2ITD321\\Dell",
+      "cpu_name": "Intel(R) Core(TM) i5-10505 CPU @ 3.20GHz",
+      "cpu_cores": 6,
+      "ram_total_gb": 7.75,
+      "ip_address": "191.1.9.15",
+      "mac_address": "70:B5:E8:7A:50:B3",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-10T04:01:56.083Z",
+      "monitors_json": [
+        {
+          "manufacturer": "DEL",
+          "model": "DELL E1715S",
+          "serialNumber": "YMF4D86D0B3U"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "fileSystem": "NTFS",
+          "totalSizeGb": 235.89,
+          "freeSpaceGb": 107.77
+        },
+        {
+          "friendlyName": "NVMe PC SN730 NVMe WDC 256GB",
+          "serialNumber": "E823_8FA6_BF53_0001_001B_448B_48CE_26C9.",
+          "mediaType": "SSD",
+          "healthStatus": "Healthy",
+          "operationalStatus": "OK"
+        }
+      ],
+      "installed_software_json": [
+        {
+          "name": "Active Directory Authentication Library for SQL Server",
+          "version": "14.0.1000.169",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Adobe Acrobat (64-bit)",
+          "version": "26.003.22075",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "Copilot",
+          "version": "153.0.4234.48",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Dell Command | Update for Windows 10",
+          "version": "4.2.1",
+          "publisher": "Dell Inc."
+        },
+        {
+          "name": "Dell Digital Delivery Services",
+          "version": "5.0.82.0",
+          "publisher": "Dell Inc."
+        },
+        {
+          "name": "Dell SupportAssist",
+          "version": "5.2.5.2983",
+          "publisher": "Dell Inc."
+        },
+        {
+          "name": "Dell SupportAssist OS Recovery Plugin for Dell Update",
+          "version": "5.5.16.3",
+          "publisher": "Dell Inc."
+        },
+        {
+          "name": "Dell SupportAssist Remediation",
+          "version": "5.5.0.16046",
+          "publisher": "Dell Inc."
+        },
+        {
+          "name": "Enterprise Manager Client",
+          "version": "15.1.10.89",
+          "publisher": "Dell"
+        },
+        {
+          "name": "ESET Endpoint Antivirus",
+          "version": "13.0.2044.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "ESET Management Agent",
+          "version": "13.3.1192.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "Google Chrome",
+          "version": "156.0.8078.80",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "HP LaserJet 1020 Series",
+          "version": "",
+          "publisher": ""
+        },
+        {
+          "name": "HP LaserJet Pro M11-M13 Series",
+          "version": "",
+          "publisher": ""
+        },
+        {
+          "name": "HP LaserJet Professional P1100-P1560-P1600 Series",
+          "version": "",
+          "publisher": ""
+        },
+        {
+          "name": "HPSSupply",
+          "version": "2.1.1.0000",
+          "publisher": "Hewlett Packard Development Company L.P."
+        },
+        {
+          "name": "Intel(R) Management Engine Components",
+          "version": "2117.15.0.2272",
+          "publisher": "Intel Corporation"
+        },
+        {
+          "name": "Microsoft .NET Framework 4.5 Multi-Targeting Pack",
+          "version": "4.5.50710",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET Framework 4.5.1 Multi-Targeting Pack",
+          "version": "4.5.50932",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET Framework 4.5.1 Multi-Targeting Pack (ENU)",
+          "version": "4.5.50932",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET Framework 4.5.1 SDK",
+          "version": "4.5.51641",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET Framework 4.5.2 Multi-Targeting Pack",
+          "version": "4.5.51209",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET Framework 4.5.2 Multi-Targeting Pack (ENU)",
+          "version": "4.5.51209",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft .NET Runtime - 6.0.20 (x64)",
+          "version": "6.0.20.32620",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "153.0.4234.48",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Help Viewer 2.2",
+          "version": "2.2.23107",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft ODBC Driver 13 for SQL Server",
+          "version": "14.0.1000.169",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server 2012 Native Client",
+          "version": "11.3.6540.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server 2014 Management Objects",
+          "version": "12.0.2000.8",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server 2017",
+          "version": "",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server 2017 Policies",
+          "version": "14.0.1000.169",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server 2017 T-SQL Language Service",
+          "version": "14.0.17289.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server Compact 3.5 SP2 ENU",
+          "version": "3.5.8080.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server Compact 3.5 SP2 x64 ENU",
+          "version": "3.5.8080.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server Data-Tier Application Framework (x86)",
+          "version": "14.0.4127.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft SQL Server Management Studio - 17.9.1",
+          "version": "14.0.17289.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft System CLR Types for SQL Server 2014",
+          "version": "12.0.2402.11",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft System CLR Types for SQL Server 2017",
+          "version": "14.0.1000.169",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Update Health Tools",
+          "version": "3.74.0.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2010  x64 Redistributable - 10.0.30319",
+          "version": "10.0.30319",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2010  x86 Redistributable - 10.0.30319",
+          "version": "10.0.30319",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2012 Redistributable (x86) - 11.0.50727",
+          "version": "11.0.50727.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.21005",
+          "version": "12.0.21005.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2013 Redistributable (x86) - 12.0.21005",
+          "version": "12.0.21005.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2015 Redistributable (x64) - 14.0.24215",
+          "version": "14.0.24215.1",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual C++ 2015 Redistributable (x86) - 14.0.23026",
+          "version": "14.0.23026.0",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio 2015 Shell (Isolated)",
+          "version": "14.0.23107.10",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Tools for Applications 2015",
+          "version": "14.0.23829",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Visual Studio Tools for Applications 2015 Language Support",
+          "version": "14.0.23107.20",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Windows Desktop Runtime - 8.0.19 (x64)",
+          "version": "8.0.19.35118",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Windows Desktop Runtime 10.0.11 (x64)",
+          "version": "10.0.11.50000",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Mozilla Firefox (x64 en-US)",
+          "version": "159.0.1",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Mozilla Maintenance Service",
+          "version": "93.0",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "OBS Studio",
+          "version": "32.1.1",
+          "publisher": "OBS Project"
+        },
+        {
+          "name": "PDF24 Creator 9.2.2",
+          "version": "9.2.2",
+          "publisher": "PDF24.org"
+        },
+        {
+          "name": "PDFCreator",
+          "version": "4.4.0",
+          "publisher": "pdfforge GmbH"
+        },
+        {
+          "name": "PuTTY release 0.76 (64-bit)",
+          "version": "0.76.0.0",
+          "publisher": "Simon Tatham"
+        },
+        {
+          "name": "UFR II Printer Driver Uninstaller",
+          "version": "6, 8, 0, 0",
+          "publisher": "Canon Inc."
+        },
+        {
+          "name": "UltraVNC 1.0.8.2",
+          "version": "1.0.8.2",
+          "publisher": "1.0.8.2"
+        },
+        {
+          "name": "WPS Office 2016 Professional Full (10.8.2.6621)",
+          "version": "10.8.2.6621",
+          "publisher": "Kingsoft Corp."
+        }
+      ],
+      "edr_info_json": null,
+      "created_at": "2026-11-10T03:52:07.160Z",
+      "updated_at": "2026-11-10T03:54:35.197Z"
+    },
+    {
+      "id": "051BB100-54B5-11F0-BC6F-B757EFE72E00",
+      "asset_tag": null,
+      "status": "Unregistered",
+      "location_id": null,
+      "assigned_user": null,
+      "purchase_date": null,
+      "warranty_expiry_date": null,
+      "qr_code_token": "QR-B1F603-mwa60l6z",
+      "hardware_uuid": "051BB100-54B5-11F0-BC6F-B757EFE72E00",
+      "hostname": "B1F603",
+      "pc_serial_number": "UNKNOWN_SN",
+      "manufacturer": "OEM",
+      "model": "Standard PC",
+      "os_name": "Windows",
+      "os_build": "",
+      "os_version": "23H2",
+      "os_ubr": null,
+      "latest_kb_id": null,
+      "installed_patches_json": [],
+      "pending_reboot": false,
+      "last_windows_update": "2026-11-10T04:03:31.787Z",
+      "last_boot_time": "2026-11-10T01:58:07.5000000Z",
+      "last_logged_in_user": null,
+      "cpu_name": "x64 CPU",
+      "cpu_cores": 4,
+      "ram_total_gb": 15.64,
+      "ip_address": "192.168.27.143",
+      "mac_address": "18:3D:2D:2D:42:89",
+      "lan_speed_mbps": 1000,
+      "wifi_ssid": null,
+      "wifi_signal_percent": null,
+      "agent_version": "1.0.0.0",
+      "last_seen_at": "2026-11-10T04:03:31.789Z",
+      "monitors_json": [],
+      "disks_json": [],
+      "installed_software_json": [],
+      "edr_info_json": null,
+      "created_at": "2026-11-10T04:03:31.787Z",
+      "updated_at": "2026-11-10T04:03:31.787Z"
     }
   ],
   "changeLogs": [
+    {
+      "id": "chg-1794282875192-s0my",
+      "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "change_type": "MONITOR_SWAPPED",
+      "severity": "WARNING",
+      "previous_value": "{\"previousMonitors\":[],\"missingSerials\":[]}",
+      "new_value": "{\"currentMonitors\":[{\"manufacturer\":\"DEL\",\"model\":\"DELL E1715S\",\"serialNumber\":\"YMF4D86D0B3U\"}],\"newSerials\":[\"YMF4D86D0B3U\"],\"note\":\"Display peripheral hardware configuration changed\"}",
+      "detected_at": "2026-11-10T03:54:35.192Z",
+      "is_acknowledged": false,
+      "acknowledged_by": null,
+      "acknowledged_at": null,
+      "resolution_note": null
+    },
+    {
+      "id": "chg-1794282875190-loz5",
+      "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "change_type": "SERIAL_MISMATCH",
+      "severity": "CRITICAL",
+      "previous_value": "{\"biosSerialNumber\":\"UNKNOWN_SN\"}",
+      "new_value": "{\"biosSerialNumber\":\"7NW0XG3\",\"note\":\"Motherboard replaced or UUID spoofing detected\"}",
+      "detected_at": "2026-11-10T03:54:35.190Z",
+      "is_acknowledged": false,
+      "acknowledged_by": null,
+      "acknowledged_at": null,
+      "resolution_note": null
+    },
     {
       "id": "log-aik-001",
       "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
