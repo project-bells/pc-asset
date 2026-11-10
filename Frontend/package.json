@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build && node copy-standalone-assets.js",
-    "start": "node .next/standalone/server.js",
+    "start": "node start-server.js",
     "lint": "next lint"
   },
   "dependencies": {

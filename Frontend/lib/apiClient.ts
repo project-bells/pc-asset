@@ -846,16 +846,20 @@ class ApiClient {
         success: true,
         message: 'Direct Guacamole session prepared (fallback mode)',
         auditLogId: `rem-${Date.now()}-fallback`,
+        guacamoleReachable: false,
+        vncPassword: 'Hospital@2026',
         session: {
           connectionName: `Session-${assetId.slice(0, 8)}`,
           targetHostname: 'AIK-WS-2567-001',
           targetIp: '192.168.27.145',
           targetPort: 5900,
+          vncPassword: 'Hospital@2026',
           accessMode: payload.accessMode,
           expiresAt: new Date(Date.now() + 60000).toISOString(),
           expiresInSeconds: 60,
           launchUrl: `http://localhost:8080/guacamole/#/?data=DEMO_FALLBACK_TOKEN`,
           directUrl: `http://localhost:8080/guacamole/#/?data=DEMO_FALLBACK_TOKEN`,
+          guacamoleReachable: false,
         },
       };
     }

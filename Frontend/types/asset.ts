@@ -370,16 +370,20 @@ export interface RemoteSessionLaunchResponse {
   success: boolean;
   message: string;
   auditLogId: string;
+  guacamoleReachable?: boolean;
+  vncPassword?: string;
   session: {
     connectionName: string;
     targetHostname: string;
     targetIp: string;
     targetPort: number;
+    vncPassword?: string;
     accessMode: 'VIEW_ONLY' | 'FULL_CONTROL';
     expiresAt: string;
     expiresInSeconds: number;
     launchUrl: string;
     directUrl: string;
+    guacamoleReachable?: boolean;
   };
 }
 

@@ -196,7 +196,7 @@ export class GuacamoleCryptoService {
     encryptedBase64: string,
     targetHostname: string,
     targetIp: string
-  ): Promise<{ launchUrl: string; authToken?: string; directTokenParam: string }> {
+  ): Promise<{ launchUrl: string; authToken?: string; directTokenParam: string; guacamoleReachable: boolean }> {
     const connectionKey = `${targetHostname} (${targetIp})`;
     const guacPublicUrl = config.guacamole.publicUrl.replace(/\/$/, '');
     const directTokenParam = encodeURIComponent(encryptedBase64);
@@ -204,7 +204,7 @@ export class GuacamoleCryptoService {
     try {
       // Optional: Exchange with Guacamole server if available
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const timeoutId = setTimeout(() => controller.abort(), 1500);
 
       const response = await fetch(`${config.guacamole.internalUrl.replace(/\/$/, '')}/api/tokens`, {
         method: 'POST',
@@ -220,24 +220,24 @@ export class GuacamoleCryptoService {
       if (response.ok) {
         const data = await response.json() as any;
         if (data.authToken) {
-          const clientIdentifier = encodeURIComponent(btoa(`${connectionKey}\0c\0json`));
           return {
             launchUrl: `${guacPublicUrl}/#/?token=${data.authToken}`,
             authToken: data.authToken,
-            directTokenParam
+            directTokenParam,
+            guacamoleReachable: true
           };
         }
       }
     } catch {
-      // If Guacamole is starting or separate container, fallback to direct JSON data parameter launch URL
+      // If Guacamole is offline or starting
     }
 
     // Direct token launch URL handled natively by guacamole-auth-json
-    // The web browser submits or renders Guacamole with the auth token in hash
     const launchUrl = `${guacPublicUrl}/#/?data=${directTokenParam}`;
     return {
       launchUrl,
-      directTokenParam
+      directTokenParam,
+      guacamoleReachable: false
     };
   }
 }

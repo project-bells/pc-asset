@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import { db } from '../db';
 import { GuacamoleCryptoService } from '../services/guacamoleCryptoService';
 import { logAdminAudit } from '../middleware/securityMiddleware';
+import { config } from '../config';
 
 export class RemoteController {
   /**
@@ -134,8 +135,10 @@ export class RemoteController {
         targetHostname: asset.hostname,
         targetIp: asset.ip_address,
         vncPort,
+        vncPassword: vncPassword || config.guacamole.defaultVncPassword,
         accessMode,
         isOnline,
+        guacamoleReachable: launchResult.guacamoleReachable,
         expiresInSeconds: 60,
         sessionRecording: recordingFilename,
         session: {
@@ -143,11 +146,13 @@ export class RemoteController {
           targetHostname: asset.hostname,
           targetIp: asset.ip_address,
           targetPort: vncPort,
+          vncPassword: vncPassword || config.guacamole.defaultVncPassword,
           accessMode,
           expiresAt: new Date(Date.now() + 60000).toISOString(),
           expiresInSeconds: 60,
           launchUrl: launchResult.launchUrl,
-          directUrl: launchResult.launchUrl
+          directUrl: launchResult.launchUrl,
+          guacamoleReachable: launchResult.guacamoleReachable
         }
       });
     } catch (err: any) {

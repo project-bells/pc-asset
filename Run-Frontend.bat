@@ -5,6 +5,6 @@ set "PORT=3000"
 set "HOSTNAME=0.0.0.0"
 cd /d "C:\Users\meetingroom\Desktop\Programs-iBell\Frontend"
 echo Starting Frontend Web Portal on port 3000...
-node .next/standalone/server.js
+node start-server.js
 pause
 

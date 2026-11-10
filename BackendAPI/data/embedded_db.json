@@ -422,14 +422,14 @@
       "last_logged_in_user": "AIKCHOL1\\MeetingRoom",
       "cpu_name": "Intel(R) Core(TM) i5-14400",
       "cpu_cores": 10,
-      "ram_total_gb": 16,
+      "ram_total_gb": 15.64,
       "ip_address": "192.168.27.146",
       "mac_address": "18:3D:2D:4E:6C:32",
       "lan_speed_mbps": 1000,
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T04:01:24.442Z",
+      "last_seen_at": "2026-11-10T04:20:06.472Z",
       "monitors_json": [
         {
           "manufacturer": "LEN",
@@ -1123,12 +1123,12 @@
     },
     {
       "id": "4C4C4544-004E-5710-8030-B7C04F584733",
-      "asset_tag": null,
-      "status": "Unregistered",
-      "location_id": null,
-      "assigned_user": null,
-      "purchase_date": null,
-      "warranty_expiry_date": null,
+      "asset_tag": "IT-PC-2026-1192",
+      "status": "Active",
+      "location_id": "loc-b1f6-01",
+      "assigned_user": "B2ITD321\\Dell",
+      "purchase_date": "2026-11-10",
+      "warranty_expiry_date": "2029-11-10",
       "qr_code_token": "QR-B2ITD321-mwa5lwxk",
       "hardware_uuid": "4C4C4544-004E-5710-8030-B7C04F584733",
       "hostname": "B2ITD321",
@@ -1265,7 +1265,7 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T04:01:56.083Z",
+      "last_seen_at": "2026-11-10T04:21:56.112Z",
       "monitors_json": [
         {
           "manufacturer": "DEL",
@@ -1592,34 +1592,59 @@
       ],
       "edr_info_json": null,
       "created_at": "2026-11-10T03:52:07.160Z",
-      "updated_at": "2026-11-10T03:54:35.197Z"
+      "updated_at": "2026-11-10T03:54:35.197Z",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
     },
     {
       "id": "051BB100-54B5-11F0-BC6F-B757EFE72E00",
-      "asset_tag": null,
-      "status": "Unregistered",
-      "location_id": null,
-      "assigned_user": null,
-      "purchase_date": null,
-      "warranty_expiry_date": null,
+      "asset_tag": "IT-PC-2026-9769",
+      "status": "Active",
+      "location_id": "loc-b1f6-01",
+      "assigned_user": "AIKCHOL1\\meetingroom",
+      "purchase_date": "2026-11-10",
+      "warranty_expiry_date": "2029-11-10",
       "qr_code_token": "QR-B1F603-mwa60l6z",
       "hardware_uuid": "051BB100-54B5-11F0-BC6F-B757EFE72E00",
       "hostname": "B1F603",
-      "pc_serial_number": "UNKNOWN_SN",
-      "manufacturer": "OEM",
-      "model": "Standard PC",
-      "os_name": "Windows",
-      "os_build": "",
-      "os_version": "23H2",
-      "os_ubr": null,
-      "latest_kb_id": null,
-      "installed_patches_json": [],
+      "pc_serial_number": "GM119Q7G",
+      "manufacturer": "LENOVO",
+      "model": "12SKS3QV00",
+      "os_name": "Microsoft Windows 11 Pro",
+      "os_build": "26200.9168",
+      "os_version": "25H2",
+      "os_ubr": 9168,
+      "latest_kb_id": "KB5120708",
+      "installed_patches_json": [
+        {
+          "kbId": "KB5120708",
+          "description": "Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5121003",
+          "description": "Security Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5123304",
+          "description": "Security Update",
+          "installedOn": "2569-08-18"
+        },
+        {
+          "kbId": "KB5054156",
+          "description": "Update",
+          "installedOn": "2569-08-09"
+        }
+      ],
       "pending_reboot": false,
-      "last_windows_update": "2026-11-10T04:03:31.787Z",
+      "last_windows_update": "2569-08-18",
       "last_boot_time": "2026-11-10T01:58:07.5000000Z",
-      "last_logged_in_user": null,
-      "cpu_name": "x64 CPU",
-      "cpu_cores": 4,
+      "last_logged_in_user": "AIKCHOL1\\meetingroom",
+      "cpu_name": "Intel(R) Core(TM) i5-14400",
+      "cpu_cores": 10,
       "ram_total_gb": 15.64,
       "ip_address": "192.168.27.143",
       "mac_address": "18:3D:2D:2D:42:89",
@@ -1627,16 +1652,174 @@
       "wifi_ssid": null,
       "wifi_signal_percent": null,
       "agent_version": "1.0.0.0",
-      "last_seen_at": "2026-11-10T04:03:31.789Z",
-      "monitors_json": [],
-      "disks_json": [],
-      "installed_software_json": [],
+      "last_seen_at": "2026-11-10T04:23:20.738Z",
+      "monitors_json": [
+        {
+          "manufacturer": "LEN",
+          "model": "LEN TCM-G5-BA",
+          "serialNumber": "1"
+        }
+      ],
+      "disks_json": [
+        {
+          "driveLetter": "C:",
+          "fileSystem": "NTFS",
+          "totalSizeGb": 474.72,
+          "freeSpaceGb": 389.69
+        },
+        {
+          "friendlyName": "WD PC SN740 SDDQNQD-512G-1201",
+          "serialNumber": "E823_8FA6_BF53_0001_001B_448B_4D3D_67D1.",
+          "mediaType": "SSD",
+          "healthStatus": "Healthy",
+          "operationalStatus": "OK"
+        }
+      ],
+      "installed_software_json": [
+        {
+          "name": "7-Zip 23.01 (x64)",
+          "version": "23.01",
+          "publisher": "Igor Pavlov"
+        },
+        {
+          "name": "Adobe Acrobat (64-bit)",
+          "version": "26.003.22075",
+          "publisher": "Adobe"
+        },
+        {
+          "name": "Bonjour",
+          "version": "3.0.0.10",
+          "publisher": "Apple Inc."
+        },
+        {
+          "name": "Copilot",
+          "version": "152.0.4191.34",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "ESET Endpoint Antivirus",
+          "version": "13.1.2036.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "ESET Management Agent",
+          "version": "13.3.1192.0",
+          "publisher": "ESET, spol. s r.o."
+        },
+        {
+          "name": "EZCast",
+          "version": "3.0.0.22",
+          "publisher": "Actions-Micro"
+        },
+        {
+          "name": "Foxit Reader",
+          "version": "7.3.0.118",
+          "publisher": "Foxit Software Inc."
+        },
+        {
+          "name": "Google Chrome",
+          "version": "157.0.8103.38",
+          "publisher": "Google LLC"
+        },
+        {
+          "name": "Intel(R) Integrated Sensor Solution",
+          "version": "3.10.100.4594",
+          "publisher": "Intel Corporation"
+        },
+        {
+          "name": "Lenovo Smart Meeting",
+          "version": "4.2.0.0908",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Speech",
+          "version": "2.1.0.90",
+          "publisher": "Lenovo"
+        },
+        {
+          "name": "Lenovo Vantage Service",
+          "version": "5.1.2606.17",
+          "publisher": "Lenovo Group Ltd."
+        },
+        {
+          "name": "Microsoft Edge",
+          "version": "151.0.4129.93",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Office Professional Plus 2013",
+          "version": "15.0.4420.1017",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Microsoft Power Query for Excel (x64)",
+          "version": "2.62.5222.701",
+          "publisher": "Microsoft Corporation"
+        },
+        {
+          "name": "Mozilla Firefox (x64 en-US)",
+          "version": "159.0.1",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Mozilla Maintenance Service",
+          "version": "140.0.4",
+          "publisher": "Mozilla"
+        },
+        {
+          "name": "Notepad++ (64-bit x64)",
+          "version": "8.7.3",
+          "publisher": "Notepad++ Team"
+        },
+        {
+          "name": "OBS Studio",
+          "version": "33.0.1",
+          "publisher": "OBS Project"
+        },
+        {
+          "name": "PDF24 Creator 11.13.1",
+          "version": "11.13.1",
+          "publisher": "PDF24.org"
+        },
+        {
+          "name": "Realtek Audio Driver",
+          "version": "6.0.9573.1",
+          "publisher": "Realtek Semiconductor Corp."
+        },
+        {
+          "name": "Synology Chat 1.2.3-232",
+          "version": "1.2.3-232",
+          "publisher": "Synology"
+        },
+        {
+          "name": "UltraVNC 1.0.8.2",
+          "version": "1.0.8.2",
+          "publisher": "1.0.8.2"
+        }
+      ],
       "edr_info_json": null,
       "created_at": "2026-11-10T04:03:31.787Z",
-      "updated_at": "2026-11-10T04:03:31.787Z"
+      "updated_at": "2026-11-10T04:05:09.583Z",
+      "building": "อาคาร 1 (โรงพยาบาลเอกชล)",
+      "floor": "ชั้น 6",
+      "room_name": "ห้องประชุมใหญ่ (Meeting Room B1F601)",
+      "department_name": "แผนกเทคโนโลยีสารสนเทศ (IT Department)"
     }
   ],
   "changeLogs": [
+    {
+      "id": "chg-1794283509576-2aah",
+      "asset_id": "051BB100-54B5-11F0-BC6F-B757EFE72E00",
+      "change_type": "SERIAL_MISMATCH",
+      "severity": "CRITICAL",
+      "previous_value": "{\"biosSerialNumber\":\"UNKNOWN_SN\"}",
+      "new_value": "{\"biosSerialNumber\":\"GM119Q7G\",\"note\":\"Motherboard replaced or UUID spoofing detected\"}",
+      "detected_at": "2026-11-10T04:05:09.576Z",
+      "is_acknowledged": false,
+      "acknowledged_by": null,
+      "acknowledged_at": null,
+      "resolution_note": null
+    },
     {
       "id": "chg-1794282875192-s0my",
       "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",
@@ -1739,6 +1922,71 @@
   ],
   "pmRecords": [],
   "remoteAccessLogs": [
+    {
+      "id": "rem-1794284206550-24f7517f",
+      "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "hostname": "B2ITD321",
+      "target_ip": "191.1.9.15",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "ทำ PM / ตรวจสอบระบบรอบสัปดาห์",
+      "recording_filename": "rem-1794284206550-24f7517f_B2ITD321_1794284206550.guac",
+      "client_source_ip": "::1",
+      "created_at": "2026-11-10T04:16:46.552Z"
+    },
+    {
+      "id": "rem-1794283720102-18300a46",
+      "asset_id": "62146880-54AF-11F0-8DD7-E8DB50E52E00",
+      "hostname": "IT02",
+      "target_ip": "192.168.27.146",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "ทำ PM / ตรวจสอบระบบรอบสัปดาห์",
+      "recording_filename": "rem-1794283720102-18300a46_IT02_1794283720102.guac",
+      "client_source_ip": "::1",
+      "created_at": "2026-11-10T04:08:40.104Z"
+    },
+    {
+      "id": "rem-1794283604129-150835be",
+      "asset_id": "62146880-54AF-11F0-8DD7-E8DB50E52E00",
+      "hostname": "IT02",
+      "target_ip": "192.168.27.146",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "แก้ไขปัญหาตามแจ้งซ่อม (Helpdesk Support)",
+      "recording_filename": "rem-1794283604129-150835be_IT02_1794283604129.guac",
+      "client_source_ip": "::1",
+      "created_at": "2026-11-10T04:06:44.131Z"
+    },
+    {
+      "id": "rem-1794283576377-e004e8b5",
+      "asset_id": "4C4C4544-004E-5710-8030-B7C04F584733",
+      "hostname": "B2ITD321",
+      "target_ip": "191.1.9.15",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "ทดสอบ",
+      "recording_filename": "rem-1794283576377-e004e8b5_B2ITD321_1794283576377.guac",
+      "client_source_ip": "::1",
+      "created_at": "2026-11-10T04:06:16.380Z"
+    },
+    {
+      "id": "rem-1794283556999-7e22d379",
+      "asset_id": "051BB100-54B5-11F0-BC6F-B757EFE72E00",
+      "hostname": "B1F603",
+      "target_ip": "192.168.27.143",
+      "technician_user_id": "usr-admin-01",
+      "technician_username": "admin",
+      "access_mode": "FULL_CONTROL",
+      "access_reason": "ทดสอบ",
+      "recording_filename": "rem-1794283556999-7e22d379_B1F603_1794283556999.guac",
+      "client_source_ip": "::1",
+      "created_at": "2026-11-10T04:05:57.002Z"
+    },
     {
       "id": "rem-1794281320000-26522e2c",
       "asset_id": "70658300-54b5-11f0-8aa1-445eb2a83c00",
